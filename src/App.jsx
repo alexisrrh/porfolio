@@ -1,13 +1,16 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { AppRoutes } from "./routes/AppRoutes";
 
- function App() {
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-950 text-white">
-      <h1 className="text-4xl font-bold">Plantilla lista</h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Navbar />
+      <AppRoutes />
+      <Footer />
+    </BrowserRouter>
+  );
 }
-
 
 export default App;
