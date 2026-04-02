@@ -1,5 +1,5 @@
 import react from 'react'
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="w-full bg-gray-800 text-white">
@@ -12,18 +12,15 @@ const Navbar = () => {
 
         {/* LINKS */}
         <div className="hidden md:flex gap-6">
-          <a href="#" className="px-3 py-2 rounded-md bg-gray-900">
+          <Link to="/" className="px-3 py-2 rounded-md bg-gray-900">
             Inicio
-          </a>
-          <a href="#" className="px-3 py-2 rounded-md hover:bg-white/10">
-            Historia
-          </a>
-          <a href="#" className="px-3 py-2 rounded-md hover:bg-white/10">
-            Horario
-          </a>
-          <a href="#" className="px-3 py-2 rounded-md hover:bg-white/10">
-            Contacto
-          </a>
+          </Link>
+          <Link to="/categorias" className="px-3 py-2 rounded-md hover:bg-white/10">
+           Categorias
+          </Link>
+          <Link to="/favoritos" className="px-3 py-2 rounded-md hover:bg-white/10">
+            Favoritos
+          </Link>
         </div>
 
         {/* BOTÓN MÓVIL */}
