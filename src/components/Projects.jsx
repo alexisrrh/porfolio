@@ -17,7 +17,28 @@ import miscitasImg from "../assets/odontologia/mis-citas.png";
 import presupuestoImg from "../assets/odontologia/presupuesto.png";
 import tratamientosImg from "../assets/odontologia/tratamientos.png";
 
+import panaderiaImg from "../assets/panaderia/panaderia1.png";
+import panaderia2Img from "../assets/panaderia/panaderia2.png";
+import panaderia3Img from "../assets/panaderia/panaderia3.png";
+import panaderia4Img from "../assets/panaderia/panaderia4.png";
+import panaderia5Img from "../assets/panaderia/panaderia5.png";
+
 const projects = [
+  {
+    title: "Panadería Ipanema",
+    description:
+      "Web profesional para una panadería artesanal, enfocada en conversión de clientes mediante diseño atractivo, navegación clara y contacto directo con WhatsApp.",
+    tech: ["React", "Tailwind", "React Router"],
+    demo: "https://TU-LINK-VERCEL.vercel.app",
+    code: "https://github.com/TU-USUARIO/panaderia-ipanema",
+    images: [
+      panaderiaImg,
+      panaderia2Img,
+      panaderia3Img,
+      panaderia4Img,
+      panaderia5Img,
+    ],
+  },
   {
     title: "App tipo Netflix",
     description:
@@ -66,7 +87,7 @@ function ProjectCard({ project }) {
   return (
     <article className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-xl transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-red-500/40">
       {project.images?.length ? (
-        <div className="relative h-72 md:h-80 overflow-hidden">
+        <div className="relative h-72 overflow-hidden md:h-80">
           <img
             src={project.images[currentImage]}
             alt={project.title}
@@ -87,7 +108,7 @@ function ProjectCard({ project }) {
           </div>
         </div>
       ) : (
-        <div className="h-72 md:h-80 bg-gradient-to-br from-red-600/20 via-zinc-900 to-blue-600/20" />
+        <div className="h-72 bg-gradient-to-br from-red-600/20 via-zinc-900 to-blue-600/20 md:h-80" />
       )}
 
       <div className="p-6">
