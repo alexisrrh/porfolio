@@ -29,8 +29,8 @@ const projects = [
     description:
       "Web profesional para una panadería artesanal, enfocada en conversión de clientes mediante diseño atractivo, navegación clara y contacto directo con WhatsApp.",
     tech: ["React", "Tailwind", "React Router"],
-    demo: "https://TU-LINK-VERCEL.vercel.app",
-    code: "https://github.com/TU-USUARIO/panaderia-ipanema",
+    demo: "https://panaderia-peach.vercel.app/",
+    code: "https://github.com/alexisrrh/panaderia-web.git",
     images: [
       panaderiaImg,
       panaderia2Img,
