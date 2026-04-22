@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import homeImg from "../assets/home.png";
-import searchImg from "../assets/busqueda.png";
-import favImg from "../assets/favoritos.png";
+import favoritosImg from "../assets/favoritos.png";
+import imagenImg from "../assets/imagen.png";
 import trailerImg from "../assets/trailer.png";
 
 import agendarImg from "../assets/odontologia/agendarImg.png";
@@ -25,7 +25,7 @@ const projects = [
     tech: ["React", "Tailwind", "TMDB API", "Context API"],
     demo: "https://vhsflix.vercel.app",
     code: "https://github.com/alexisrrh/proyecto-Peliculas",
-    images: [homeImg, searchImg, favImg, trailerImg],
+    images: [homeImg, favoritosImg, imagenImg, trailerImg],
   },
   {
     title: "Sistema odontológico",
