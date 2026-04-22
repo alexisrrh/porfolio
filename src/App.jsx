@@ -1,16 +1,18 @@
-import { BrowserRouter } from "react-router-dom";
-import  Navbar  from "./componentes/Navbar";
-import  Footer  from "./componentes/Footer";
-import { AppRoutes } from "./routes/AppRoutes";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Services from "./components/Services";
+import Contact from "./components/Contact";
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
-      
-      <AppRoutes />
-      <Footer />
-    </BrowserRouter>
+      <Hero />
+      <Projects />
+      <Services />
+      <Contact />
+    </div>
   );
 }
 
