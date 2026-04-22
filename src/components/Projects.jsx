@@ -64,14 +64,16 @@ function ProjectCard({ project }) {
   }, [project.images]);
 
   return (
-    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-xl transition duration-300 hover:-translate-y-2 hover:border-red-500/30">
+    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-xl transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-red-500/40">
       {project.images?.length ? (
-        <div className="relative h-56 overflow-hidden">
+        <div className="relative h-72 md:h-80 overflow-hidden">
           <img
             src={project.images[currentImage]}
             alt={project.title}
-            className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-110"
           />
+
+          <div className="absolute inset-0 bg-white/0 transition duration-500 group-hover:bg-white/10" />
 
           <div className="absolute inset-x-0 bottom-0 flex justify-center gap-2 pb-4">
             {project.images.map((_, index) => (
@@ -85,7 +87,7 @@ function ProjectCard({ project }) {
           </div>
         </div>
       ) : (
-        <div className="h-56 bg-gradient-to-br from-red-600/20 via-zinc-900 to-blue-600/20" />
+        <div className="h-72 md:h-80 bg-gradient-to-br from-red-600/20 via-zinc-900 to-blue-600/20" />
       )}
 
       <div className="p-6">
@@ -104,7 +106,7 @@ function ProjectCard({ project }) {
           ))}
         </div>
 
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={project.demo}
             target="_blank"
