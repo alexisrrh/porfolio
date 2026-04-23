@@ -19,7 +19,7 @@ export default function Services() {
       <div className="mx-auto max-w-6xl">
 
         <div className="mb-12 text-center">
-          <p className="text-red-400 uppercase text-sm tracking-widest">
+          <p className="text-red-400 uppercase text-md tracking-widest">
             Servicios
           </p>
           <h2 className="text-3xl md:text-4xl font-bold mt-3">
@@ -27,7 +27,7 @@ export default function Services() {
           </h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3 text-center">
           {services.map((item) => (
             <div
               key={item.title}

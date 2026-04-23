@@ -25,21 +25,6 @@ import panaderia5Img from "../assets/panaderia/panaderia5.png";
 
 const projects = [
   {
-    title: "Panadería Ipanema",
-    description:
-      "Web profesional para una panadería artesanal, enfocada en conversión de clientes mediante diseño atractivo, navegación clara y contacto directo con WhatsApp.",
-    tech: ["React", "Tailwind", "React Router"],
-    demo: "https://panaderia-peach.vercel.app/",
-    code: "https://github.com/alexisrrh/panaderia-web.git",
-    images: [
-      panaderiaImg,
-      panaderia2Img,
-      panaderia3Img,
-      panaderia4Img,
-      panaderia5Img,
-    ],
-  },
-  {
     title: "App tipo Netflix",
     description:
       "Plataforma web inspirada en streaming con búsqueda de películas, consumo de API externa y una interfaz visual moderna.",
@@ -69,6 +54,21 @@ const projects = [
       homeHorariosImg,
     ],
   },
+  {
+    title: "Panadería Ipanema",
+    description:
+      "Web profesional para una panadería artesanal, enfocada en conversión de clientes mediante diseño atractivo, navegación clara y contacto directo con WhatsApp.",
+    tech: ["React", "Tailwind", "React Router"],
+    demo: "https://panaderia-peach.vercel.app/",
+    code: "https://github.com/alexisrrh/panaderia-web.git",
+    images: [
+      panaderiaImg,
+      panaderia2Img,
+      panaderia3Img,
+      panaderia4Img,
+      panaderia5Img,
+    ],
+  },
 ];
 
 function ProjectCard({ project }) {
@@ -85,7 +85,7 @@ function ProjectCard({ project }) {
   }, [project.images]);
 
   return (
-    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-xl transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-red-500/40">
+    <article className="group overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 text-center shadow-xl transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-red-500/40">
       {project.images?.length ? (
         <div className="relative h-72 overflow-hidden md:h-80">
           <img
@@ -111,12 +111,12 @@ function ProjectCard({ project }) {
         <div className="h-72 bg-gradient-to-br from-red-600/20 via-zinc-900 to-blue-600/20 md:h-80" />
       )}
 
-      <div className="p-6">
+      <div className="p-6 text-center">
         <h3 className="text-2xl font-bold text-white">{project.title}</h3>
 
         <p className="mt-4 leading-7 text-gray-400">{project.description}</p>
 
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap justify-center gap-2">
           {project.tech.map((item) => (
             <span
               key={item}
@@ -127,7 +127,7 @@ function ProjectCard({ project }) {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <a
             href={project.demo}
             target="_blank"
@@ -155,14 +155,14 @@ export default function Projects() {
   return (
     <section id="projects" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12">
-          <p className="text-sm uppercase tracking-[0.2em] text-red-400 text-center">
+        <div className="mb-12 text-center">
+          <p className="text-center text-sm uppercase tracking-[0.2em] text-red-400">
             Portfolio
           </p>
-          <h2 className="mt-3 text-3xl font-bold md:text-4xl text-center">
+          <h2 className="mt-3 text-center text-3xl font-bold md:text-4xl">
             Proyectos destacados
           </h2>
-          <p className="mt-3 text-sm font-bold md:text-2xl text-center">
+          <p className="mt-3 text-center text-sm font-bold md:text-2xl">
             Estos proyectos muestran mi experiencia creando interfaces reales,
             conectando datos externos y resolviendo necesidades concretas.
           </p>
