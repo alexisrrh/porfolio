@@ -7,7 +7,7 @@ export default function Hero() {
 
       <div className="relative max-w-4xl mx-auto">
 
-        <p className="text-red-400 uppercase text-sm tracking-widest">
+        <p className="text-yellow-600 uppercase text-3xl tracking-widest">
           Frontend Developer
         </p>
 

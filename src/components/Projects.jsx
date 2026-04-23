@@ -156,13 +156,13 @@ export default function Projects() {
     <section id="projects" className="px-6 py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12">
-          <p className="text-sm uppercase tracking-[0.2em] text-red-400">
+          <p className="text-sm uppercase tracking-[0.2em] text-red-400 text-center">
             Portfolio
           </p>
-          <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold md:text-4xl text-center">
             Proyectos destacados
           </h2>
-          <p className="mt-4 max-w-2xl text-gray-400">
+          <p className="mt-3 text-sm font-bold md:text-2xl text-center">
             Estos proyectos muestran mi experiencia creando interfaces reales,
             conectando datos externos y resolviendo necesidades concretas.
           </p>
