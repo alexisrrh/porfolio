@@ -8,14 +8,14 @@ import trailerImg from "../assets/trailer.png";
 import agendarImg from "../assets/odontologia/agendarImg.png";
 import calendarioImg from "../assets/odontologia/calendario-citas.png";
 import dashboardImg from "../assets/odontologia/dashboard.png";
-import home1Img from "../assets/odontologia/home-3.png";
-import homecomentariosImg from "../assets/odontologia/home-comentarios.png";
-import homeFotosImg from "../assets/odontologia/home-fotos.png";
+import home4 from "../assets/odontologia/home4.png";
+import home1 from "../assets/odontologia/home1.png";
+import home3 from "../assets/odontologia/home3.png";
 import homeHorariosImg from "../assets/odontologia/home-horarios.png";
 import loginImg from "../assets/odontologia/login.png";
-import miscitasImg from "../assets/odontologia/mis-citas.png";
-import presupuestoImg from "../assets/odontologia/presupuesto.png";
-import tratamientosImg from "../assets/odontologia/tratamientos.png";
+
+import home2 from "../assets/odontologia/home2.png";
+
 import priteca1Img from "../assets/priteca/priteca.png";
 import priteca2Img from "../assets/priteca/priteca1.png"
 import priteca3Img from "../assets/priteca/priteca2.png"
@@ -44,17 +44,15 @@ const projects = [
     tech: ["React", "Supabase", "Tailwind", "React Router"],
     demo: "https://consultorio-odontologico-lac.vercel.app",
     code: "https://github.com/alexisrrh/consultorio-odontologico",
-    images: [
+    images: [home2,
+      home3,
+      home4,
+      home1,
       loginImg,
       dashboardImg,
       calendarioImg,
       agendarImg,
-      miscitasImg,
-      presupuestoImg,
-      tratamientosImg,
-      home1Img,
-      homecomentariosImg,
-      homeFotosImg,
+      
       homeHorariosImg,
     ],
   },
