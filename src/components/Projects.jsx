@@ -16,7 +16,11 @@ import loginImg from "../assets/odontologia/login.png";
 import miscitasImg from "../assets/odontologia/mis-citas.png";
 import presupuestoImg from "../assets/odontologia/presupuesto.png";
 import tratamientosImg from "../assets/odontologia/tratamientos.png";
-
+import priteca1Img from "../assets/priteca/priteca.png";
+import priteca2Img from "../assets/priteca/priteca1.png"
+import priteca3Img from "../assets/priteca/priteca2.png"
+import priteca4Img from "../assets/priteca/priteca3.png"
+import priteca5Img from "../assets/priteca/priteca4.png"
 import panaderiaImg from "../assets/panaderia/panaderia1.png";
 import panaderia2Img from "../assets/panaderia/panaderia2.png";
 import panaderia3Img from "../assets/panaderia/panaderia3.png";
@@ -54,6 +58,21 @@ const projects = [
       homeHorariosImg,
     ],
   },
+  {
+  title: "Constructora Priteca",
+  description:
+    "Sitio web moderno para empresa de reformas y construcción, con enfoque en conversión de clientes y diseño profesional.",
+  image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
+   tech: ["React", "Tailwind", "Framer Motion"],
+  demo: "https://priteca-web.vercel.app/",
+  code: "https://github.com/alexisrrh/priteca-web",
+  images:[
+    priteca1Img,
+    priteca2Img,
+    priteca5Img,
+    priteca4Img,
+    priteca3Img]
+},
   {
     title: "Panadería Ipanema",
     description:
