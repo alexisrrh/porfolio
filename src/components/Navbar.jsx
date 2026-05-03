@@ -31,7 +31,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -40, scale: 0.94 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-       className="relative mx-auto flex max-w-7xl items-center justify-between overflow-hidden rounded-[1.5rem] px-4 py-3 sm:px-5 sm:py-3 ..."
+        className="relative mx-auto flex max-w-7xl items-center justify-between overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-[#020617]/55 px-5 py-3 text-white shadow-[0_0_90px_rgba(34,211,238,0.18)] backdrop-blur-2xl"
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(34,211,238,0.22),transparent_28%),radial-gradient(circle_at_90%_100%,rgba(168,85,247,0.22),transparent_32%)]" />
 
@@ -133,7 +133,7 @@ export default function Navbar() {
             <span className="relative flex items-center gap-2 rounded-[1.6rem] bg-[#020617] px-5 py-2.5 text-sm font-black text-white shadow-[0_0_40px_rgba(34,211,238,0.25)]">
               Hablemos
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover:rotate-45">
-                →
+                ↗
               </span>
             </span>
           </a>
@@ -218,7 +218,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className="mt-3 rounded-2xl bg-cyan-300 px-4 py-3 text-center font-black text-[#020617] shadow-[0_0_35px_rgba(34,211,238,0.35)]"
               >
-                Hablemos ↗
+                Hablemos  →
               </a>
             </div>
           </motion.div>

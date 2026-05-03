@@ -259,7 +259,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-cyan-300/20 to-white/0 opacity-0 transition group-hover:opacity-100" />
 
     <span className="relative flex w-full items-center justify-center gap-4">
-      Contactarme
+      Contactame
       <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200 sm:h-9 sm:w-9">
         →
       </span>

@@ -34,7 +34,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300">
+          <p className="text-md font-black uppercase tracking-[0.4em] text-cyan-300">
             Sobre mí
           </p>
 
@@ -47,7 +47,7 @@ export default function About() {
         </motion.div>
 
         {/* CONTENIDO */}
-        <div className="grid gap-16 lg:grid-cols-2 items-start">
+        <div className="grid gap-16 lg:grid-cols-2 items-center">
 
           {/* TEXTO */}
           <motion.div
@@ -55,26 +55,26 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             className="space-y-6 text-lg leading-8 text-cyan-50/80"
           >
-            <p>
+            <p className="text-center" >
               Soy desarrollador frontend especializado en React. Me enfoco en
               construir interfaces modernas, rápidas y bien estructuradas,
               trabajando con datos reales y lógica funcional.
             </p>
 
-            <p>
+            <p className="text-center" >
               Me interesa crear productos que no solo se vean bien, sino que
               funcionen correctamente en escenarios reales: navegación fluida,
               manejo de estado, consumo de APIs y experiencia de usuario clara.
             </p>
 
-            <p>
+             <p className="text-center" >
               Actualmente busco formar parte de un equipo donde pueda seguir
               creciendo y aportar valor desde el desarrollo frontend.
             </p>
 
             {/* FRASE DIFERENCIADORA */}
             <div className="mt-6 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-5">
-              <p className="text-sm text-cyan-200 font-semibold">
+              <p className="text-sm text-cyan-200 font-semibold text-center">
                 No busco solo hacer interfaces bonitas, busco construir
                 aplicaciones que funcionen bien.
               </p>
@@ -94,10 +94,10 @@ export default function About() {
                   transition={{ delay: i * 0.1 }}
                   className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/10"
                 >
-                  <p className="text-lg font-black text-white">
+                  <p className="text-lg font-black text-white text-center">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-sm text-cyan-50/70">
+                  <p className="mt-2 text-sm text-cyan-50/70 text-center">
                     {item.text}
                   </p>
                 </motion.div>
@@ -110,7 +110,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               className="rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-6"
             >
-              <p className="text-sm font-black uppercase tracking-[0.3em] text-purple-300 mb-4">
+              <p className="text-sm font-black uppercase tracking-[0.3em] text-purple-300 mb-4 text-center">
                 Stack principal
               </p>
 
