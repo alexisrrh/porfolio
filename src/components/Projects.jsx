@@ -270,7 +270,7 @@ viewport={{ once: true, amount: 0.15 }}
               rel="noreferrer"
                className="relative flex w-full items-center justify-center gap-4">
       Ver código
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200 sm:h-9 sm:w-9">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
         ↗
       </span>
             </a>
