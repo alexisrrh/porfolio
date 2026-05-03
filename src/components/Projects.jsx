@@ -127,16 +127,17 @@ function ProjectShowcase({ project, index }) {
   const [currentImage, setCurrentImage] = useState(0);
   const isReverse = index % 2 !== 0;
 
-  useEffect(() => {
-    if (!project.images?.length) return;
-    if (window.innerWidth < 768) return;
+ useEffect(() => {
+  if (!project.images?.length || project.images.length === 1) return;
 
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % project.images.length);
-    }, 3500);
+  const isMobile = window.innerWidth < 768;
 
-    return () => clearInterval(interval);
-  }, [project.images]);
+  const interval = setInterval(() => {
+    setCurrentImage((prev) => (prev + 1) % project.images.length);
+  }, isMobile ? 3000 : 3000);
+
+  return () => clearInterval(interval);
+}, [project.images]);
 
   return (
     <motion.article
