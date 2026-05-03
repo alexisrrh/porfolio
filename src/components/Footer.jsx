@@ -55,7 +55,7 @@ export default function Footer() {
                 href="#contact"
                 className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-cyan-300/15"
               >
-                Hablemos
+                Hablemos 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-200 text-[#020617]">
                   →
                 </span>

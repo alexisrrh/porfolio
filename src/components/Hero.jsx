@@ -16,7 +16,7 @@ export default function Hero() {
 
 const isMobile = window.innerWidth < 768;
 
-const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
+const particles = Array.from({ length: isMobile ? 220 : 250 }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: Math.random() * 3 + 2.5,
@@ -306,7 +306,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
 
             <div className="relative mt-5 grid grid-cols-3 gap-4">
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-2xl font-black text-cyan-200 text-center">4+</p>
+                <p className="text-2xl font-black text-cyan-200 text-center">5+</p>
                 <p className="text-xs text-cyan-100/60 text-center">Projects</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4">

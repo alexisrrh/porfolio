@@ -79,7 +79,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300"
+          className="text-2xl  font-black uppercase tracking-[0.4em] text-cyan-300"
         >
           Contacto
         </motion.p>

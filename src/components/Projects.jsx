@@ -38,21 +38,29 @@ import groom7 from "../assets/groom/groom7.png";
 import groom8 from "../assets/groom/groom8.png";
 import groom9 from "../assets/groom/groom9.png";
 
-
 const projects = [
-{
-  title: "The Real Groom",
-  label: "Cliente real · Ecommerce",
-  description:
-    "Rediseño frontend de ecommerce de productos para mascotas, optimizando velocidad, experiencia de usuario y navegación.",
-  result:
-    "Mejora en rendimiento y experiencia visual, manteniendo backend en WordPress/WooCommerce.",
-  tech: ["React", "Tailwind", "WooCommerce API", "UX/UI"],
-  demo: "https://the-real-groom.vercel.app",
-  code: "https://github.com/ultraxcode-com/the-real-groom",
-  images: [groom1, groom2, groom3, groom4,groom5,groom6,groom7,groom8,groom9],
-},
-
+  {
+    title: "The Real Groom",
+    label: "Cliente real · Ecommerce",
+    description:
+      "Rediseño frontend de ecommerce de productos para mascotas, optimizando velocidad, experiencia de usuario y navegación.",
+    result:
+      "Mejora en rendimiento y experiencia visual, manteniendo backend en WordPress/WooCommerce.",
+    tech: ["React", "Tailwind", "WooCommerce API", "UX/UI"],
+    demo: "https://the-real-groom.vercel.app",
+    code: "https://github.com/ultraxcode-com/the-real-groom",
+    images: [
+      groom1,
+      groom2,
+      groom3,
+      groom4,
+      groom5,
+      groom6,
+      groom7,
+      groom8,
+      groom9,
+    ],
+  },
   {
     title: "VHSFlix",
     label: "Web App · API",
@@ -121,71 +129,72 @@ function ProjectShowcase({ project, index }) {
 
   useEffect(() => {
     if (!project.images?.length) return;
+    if (window.innerWidth < 768) return;
 
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % project.images.length);
-    }, 2600);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [project.images]);
 
   return (
     <motion.article
-    initial={{ opacity: 0, y: 35 }}
-whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.45, ease: "easeOut" }}
-viewport={{ once: true, amount: 0.15 }}
-      className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-300/15 bg-white/[0.07] p-4 shadow-[0_0_90px_rgba(34,211,238,0.09)] backdrop-blur-2xl"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.08 }}
+      className="group relative overflow-hidden rounded-[1.7rem] border border-cyan-300/15 bg-white/[0.07] p-3 shadow-[0_0_60px_rgba(34,211,238,0.08)] backdrop-blur-2xl md:rounded-[2.5rem] md:p-4"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.18),transparent_30%)] opacity-70" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.14),transparent_30%)] opacity-70" />
 
       <motion.div
         animate={{ x: ["-120%", "120%"] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-xl"
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-y-0 left-0 hidden w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-xl md:block"
       />
 
       <div
-        className={`relative grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] ${
+        className={`relative grid items-center gap-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 ${
           isReverse ? "lg:[&>*:first-child]:order-2" : ""
         }`}
       >
-        {/* Mockup */}
         <motion.div
           whileHover={{ rotate: isReverse ? -1.5 : 1.5, scale: 1.015 }}
           transition={{ type: "spring", stiffness: 180, damping: 18 }}
           className="relative"
         >
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-r from-cyan-400/20 via-blue-500/10 to-purple-500/20 blur-2xl opacity-80 transition group-hover:opacity-100" />
+          <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-r from-cyan-400/15 via-blue-500/10 to-purple-500/15 blur-2xl opacity-70 transition group-hover:opacity-100 md:-inset-4 md:rounded-[2.5rem]" />
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020617]/80 p-3 shadow-[0_35px_120px_rgba(0,0,0,0.55)]">
-            <div className="mb-3 flex items-center justify-between px-2">
-              <div className="flex gap-2">
-                <span className="h-3 w-3 rounded-full bg-red-400" />
-                <span className="h-3 w-3 rounded-full bg-yellow-300" />
-                <span className="h-3 w-3 rounded-full bg-green-400" />
+          <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#020617]/80 p-2 shadow-[0_25px_80px_rgba(0,0,0,0.45)] md:rounded-[2rem] md:p-3 md:shadow-[0_35px_120px_rgba(0,0,0,0.55)]">
+            <div className="mb-2 flex items-center justify-between px-2 md:mb-3">
+              <div className="flex gap-1.5 md:gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400 md:h-3 md:w-3" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-300 md:h-3 md:w-3" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-400 md:h-3 md:w-3" />
               </div>
 
-              <span className="text-xs font-bold text-cyan-100/50">
+              <span className="text-[10px] font-bold text-cyan-100/50 md:text-xs">
                 live-preview
               </span>
             </div>
 
-            <div className="relative h-[300px] overflow-hidden rounded-[1.5rem] md:h-[430px]">
+            <div className="relative h-[190px] overflow-hidden rounded-[1.2rem] sm:h-[240px] md:h-[430px] md:rounded-[1.5rem]">
               <img
                 src={project.images[currentImage]}
                 alt={project.title}
-                className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
+                loading="lazy"
+                className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-transparent" />
 
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4">
+              <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3 md:bottom-5 md:left-5 md:right-5 md:items-center md:gap-4">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-200">
+                  <p className="text-[9px] font-black uppercase tracking-[0.22em] text-cyan-200 md:text-xs md:tracking-[0.3em]">
                     Proyecto 0{index + 1}
                   </p>
-                  <p className="mt-1 text-2xl font-black text-white">
+                  <p className="mt-0.5 text-lg font-black text-white md:mt-1 md:text-2xl">
                     {project.title}
                   </p>
                 </div>
@@ -196,15 +205,15 @@ viewport={{ once: true, amount: 0.15 }}
               </div>
             </div>
 
-            <div className="mt-4 flex justify-center gap-2">
+            <div className="mt-3 flex justify-center gap-1.5 md:mt-4 md:gap-2">
               {project.images.map((_, imgIndex) => (
                 <button
                   key={imgIndex}
                   onClick={() => setCurrentImage(imgIndex)}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-1.5 rounded-full transition-all md:h-2 ${
                     currentImage === imgIndex
-                      ? "w-12 bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.7)]"
-                      : "w-2 bg-white/30 hover:bg-white/60"
+                      ? "w-8 bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.7)] md:w-12"
+                      : "w-1.5 bg-white/30 hover:bg-white/60 md:w-2"
                   }`}
                   aria-label={`Ver imagen ${imgIndex + 1}`}
                 />
@@ -213,52 +222,51 @@ viewport={{ once: true, amount: 0.15 }}
           </div>
         </motion.div>
 
-        {/* Info */}
-        <div className="relative p-2 lg:p-8 text-center">
-          <div className="mb-6 inline-flex rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-cyan-200 text-center">
+        <div className="relative p-3 text-center sm:p-5 lg:p-8">
+          <div className="mb-4 inline-flex rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.18em] text-cyan-200 sm:text-[10px] md:mb-6 md:px-4 md:py-2 md:text-xs md:tracking-[0.25em]">
             {project.label}
           </div>
 
-          <h3 className="text-4xl font-black leading-tight tracking-[-0.04em] text-white md:text-6xl text-center">
+          <h3 className="text-2xl font-black leading-tight tracking-[-0.04em] text-white sm:text-3xl md:text-6xl">
             {project.title}
           </h3>
 
-          <p className="mt-6 text-lg leading-8 text-cyan-50/75 text-center">
+          <p className="mt-3 text-sm leading-6 text-cyan-50/75 sm:text-base md:mt-6 md:text-lg md:leading-8">
             {project.description}
           </p>
 
-          <div className="mt-7 rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-5 text-center">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-purple-300 text-center">
+          <div className="mt-7 hidden rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-5 text-center md:block">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-purple-300">
               Resultado
             </p>
-            <p className="mt-3 text-base leading-7 text-cyan-50/80 text-center">
+            <p className="mt-3 text-base leading-7 text-cyan-50/80">
               {project.result}
             </p>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap justify-center gap-2 md:mt-6">
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-xs font-black text-cyan-50/80 backdrop-blur transition hover:border-cyan-300/50 hover:bg-cyan-300/10"
+                className="rounded-xl border border-white/10 bg-white/10 px-3 py-1.5 text-[10px] font-black text-cyan-50/80 backdrop-blur transition hover:border-cyan-300/50 hover:bg-cyan-300/10 sm:text-xs md:rounded-2xl md:px-4 md:py-2"
               >
                 {tech}
               </span>
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-5 grid grid-cols-2 gap-3 md:mt-8">
             <a
               href={project.demo}
               target="_blank"
               rel="noreferrer"
-              className="group/btn relative overflow-hidden rounded-[1.6rem] p-[2px] transition hover:-translate-y-1 hover:scale-[1.03] active:scale-95"
+              className="group/btn relative overflow-hidden rounded-[1.3rem] p-[2px] transition hover:-translate-y-1 hover:scale-[1.03] active:scale-95 md:rounded-[1.6rem]"
             >
-              <span className="absolute inset-0 rounded-[1.6rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md" />
+              <span className="absolute inset-0 rounded-[1.3rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md md:rounded-[1.6rem]" />
 
-              <span className="relative flex items-center justify-center gap-3 rounded-[1.6rem] bg-[#020617] px-7 py-4 font-black text-white shadow-[0_0_55px_rgba(34,211,238,0.35)]">
+              <span className="relative flex items-center justify-center gap-2 rounded-[1.3rem] bg-[#020617] px-3 py-3 text-xs font-black text-white shadow-[0_0_35px_rgba(34,211,238,0.25)] sm:px-5 sm:text-sm md:gap-3 md:rounded-[1.6rem] md:px-7 md:py-4 md:text-base">
                 Ver demo
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
+                <span className="hidden h-7 w-7 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1 sm:flex md:h-8 md:w-8">
                   →
                 </span>
               </span>
@@ -268,17 +276,16 @@ viewport={{ once: true, amount: 0.15 }}
               href={project.code}
               target="_blank"
               rel="noreferrer"
-             className="group/btn relative overflow-hidden rounded-[1.6rem] p-[2px] transition hover:-translate-y-1 hover:scale-[1.03] active:scale-95"
+              className="group/btn relative overflow-hidden rounded-[1.3rem] p-[2px] transition hover:-translate-y-1 hover:scale-[1.03] active:scale-95 md:rounded-[1.6rem]"
             >
-              <span className="absolute inset-0 rounded-[1.6rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md" />
+              <span className="absolute inset-0 rounded-[1.3rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md md:rounded-[1.6rem]" />
 
-              <span className="relative flex items-center justify-center gap-3 rounded-[1.6rem] bg-[#020617] px-7 py-4 font-black text-white shadow-[0_0_55px_rgba(34,211,238,0.35)]">
+              <span className="relative flex items-center justify-center gap-2 rounded-[1.3rem] bg-[#020617] px-3 py-3 text-xs font-black text-white shadow-[0_0_35px_rgba(34,211,238,0.25)] sm:px-5 sm:text-sm md:gap-3 md:rounded-[1.6rem] md:px-7 md:py-4 md:text-base">
                 Ver código
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
-                   →
+                <span className="hidden h-7 w-7 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1 sm:flex md:h-8 md:w-8">
+                  →
                 </span>
               </span>
-            
             </a>
           </div>
         </div>
@@ -291,29 +298,29 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative overflow-hidden bg-[#020617] px-6 py-32 text-white"
+      className="relative overflow-hidden bg-[#020617] px-4 py-24 text-white sm:px-6 md:py-32"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(34,211,238,0.25),transparent_30%),radial-gradient(circle_at_85%_45%,rgba(168,85,247,0.22),transparent_32%),radial-gradient(circle_at_50%_100%,rgba(59,130,246,0.18),transparent_35%)]" />
 
       <motion.div
         animate={{ backgroundPosition: ["0px 0px", "140px 140px"] }}
         transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-0 opacity-25 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:140px_140px]"
+        className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:140px_140px]"
       />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut"}}
-          viewport={{ once: true, amount:0.08}}
-          className="mx-auto mb-20 max-w-4xl text-center"
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.08 }}
+          className="mx-auto mb-12 max-w-4xl text-center md:mb-20"
         >
-          <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300">
+          <p className="text-3xl font-black uppercase tracking-[0.32em] text-cyan-300 md:text-sm md:tracking-[0.4em]">
             Proyectos seleccionados
           </p>
 
-          <h2 className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.06em] md:text-7xl">
+          <h2 className="mt-4 text-4xl font-black leading-[0.98] tracking-[-0.05em] md:mt-5 md:text-7xl md:leading-[0.95] md:tracking-[-0.06em]">
             Interfaces reales.
             <br />
             <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -321,14 +328,14 @@ export default function Projects() {
             </span>
           </h2>
 
-          <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-cyan-50/70 md:text-xl">
+          <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-cyan-50/70 sm:text-base md:mt-7 md:text-xl md:leading-8">
             Estos proyectos demuestran mi capacidad para crear productos
             visuales, responsive y funcionales usando React, APIs,
             autenticación, estados globales y despliegues reales.
           </p>
         </motion.div>
 
-        <div className="space-y-14">
+        <div className="space-y-8 md:space-y-14">
           {projects.map((project, index) => (
             <ProjectShowcase
               key={project.title}
