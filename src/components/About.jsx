@@ -1,58 +1,130 @@
+import { motion } from "framer-motion";
+
+const strengths = [
+  {
+    title: "Interfaces cuidadas",
+    text: "Diseño limpio, responsive y con atención al detalle visual.",
+  },
+  {
+    title: "Lógica real",
+    text: "Trabajo con APIs, estados, rutas y estructuras reales de frontend.",
+  },
+  {
+    title: "Código escalable",
+    text: "Componentes reutilizables y estructura clara pensada para crecer.",
+  },
+];
+
+const stack = ["React", "JavaScript", "Tailwind", "APIs", "Supabase", "Git"];
+
 export default function About() {
   return (
-    <section id="about" className="px-6 py-20">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2">
-        <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-red-400 text-center">
+    <section
+      id="about"
+      className="relative overflow-hidden bg-[#020617] px-6 py-32 text-white"
+    >
+      {/* Fondo sutil */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.15),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.15),transparent_30%)]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
+
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300">
             Sobre mí
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold md:text-4xl text-center">
-            Desarrollo interfaces modernas con enfoque práctico y visual
+          <h2 className="mt-4 text-4xl md:text-5xl font-black leading-tight">
+            Desarrollo frontend con enfoque en{" "}
+            <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              calidad real
+            </span>
           </h2>
+        </motion.div>
 
-          <p className="mt-6 leading-8 text-gray-400 text-center">
-            Soy desarrollador frontend y me enfoco en crear aplicaciones web
-            atractivas, funcionales y adaptadas a necesidades reales. Trabajo
-            principalmente con React, Tailwind y APIs, cuidando tanto la
-            experiencia visual como la estructura del proyecto.
-          </p>
+        {/* CONTENIDO */}
+        <div className="grid gap-16 lg:grid-cols-2 items-start">
 
-          <p className="mt-4 leading-8 text-gray-400 text-center">
-            He desarrollado proyectos como una app inspirada en Netflix y un
-            sistema odontológico con autenticación, gestión de pacientes y
-            citas. Me interesa construir productos que no solo se vean bien,
-            sino que también resuelvan problemas concretos.
-          </p>
-        </div>
+          {/* TEXTO */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="space-y-6 text-lg leading-8 text-cyan-50/80"
+          >
+            <p>
+              Soy desarrollador frontend especializado en React. Me enfoco en
+              construir interfaces modernas, rápidas y bien estructuradas,
+              trabajando con datos reales y lógica funcional.
+            </p>
 
-        <div className="rounded-3xl border border-white/10 bg-zinc-950 p-8">
-          <h3 className="text-2xl font-semibold text-white text-center">
-            Lo que puedo aportar
-          </h3>
+            <p>
+              Me interesa crear productos que no solo se vean bien, sino que
+              funcionen correctamente en escenarios reales: navegación fluida,
+              manejo de estado, consumo de APIs y experiencia de usuario clara.
+            </p>
 
-          <div className="mt-6 space-y-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-              <p className="font-medium text-white">Diseño moderno</p>
-              <p className="mt-2 text-sm leading-7 text-gray-400">
-                Interfaces limpias, visuales y adaptadas a móvil.
+            <p>
+              Actualmente busco formar parte de un equipo donde pueda seguir
+              creciendo y aportar valor desde el desarrollo frontend.
+            </p>
+
+            {/* FRASE DIFERENCIADORA */}
+            <div className="mt-6 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-5">
+              <p className="text-sm text-cyan-200 font-semibold">
+                No busco solo hacer interfaces bonitas, busco construir
+                aplicaciones que funcionen bien.
               </p>
             </div>
+          </motion.div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-              <p className="font-medium text-white">Lógica real</p>
-              <p className="mt-2 text-sm leading-7 text-gray-400">
-                Formularios, autenticación, consumo de APIs y flujos de usuario.
-              </p>
+          {/* DERECHA */}
+          <div className="space-y-8">
+
+            {/* BLOQUES DE VALOR */}
+            <div className="grid gap-4">
+              {strengths.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/10"
+                >
+                  <p className="text-lg font-black text-white">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm text-cyan-50/70">
+                    {item.text}
+                  </p>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center">
-              <p className="font-medium text-white">Orientado a negocio</p>
-              <p className="mt-2 text-sm leading-7 text-gray-400">
-                Webs y apps pensadas para mostrar servicios, gestionar datos y
-                ofrecer una experiencia profesional.
+            {/* STACK */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-6"
+            >
+              <p className="text-sm font-black uppercase tracking-[0.3em] text-purple-300 mb-4">
+                Stack principal
               </p>
-            </div>
+
+              <div className="flex flex-wrap gap-3">
+                {stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-50/80"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
