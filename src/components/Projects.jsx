@@ -275,7 +275,7 @@ viewport={{ once: true, amount: 0.15 }}
               <span className="relative flex items-center justify-center gap-3 rounded-[1.6rem] bg-[#020617] px-7 py-4 font-black text-white shadow-[0_0_55px_rgba(34,211,238,0.35)]">
                 Ver código
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
-                  ↗
+                  →
                 </span>
               </span>
             

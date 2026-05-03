@@ -133,7 +133,7 @@ export default function Navbar() {
             <span className="relative flex items-center gap-2 rounded-[1.6rem] bg-[#020617] px-5 py-2.5 text-sm font-black text-white shadow-[0_0_40px_rgba(34,211,238,0.25)]">
               Hablemos
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover:rotate-45">
-                ↗
+                →
               </span>
             </span>
           </a>
