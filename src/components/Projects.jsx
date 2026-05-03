@@ -268,11 +268,17 @@ viewport={{ once: true, amount: 0.15 }}
               href={project.code}
               target="_blank"
               rel="noreferrer"
-               className="relative flex w-full items-center justify-center gap-4">
-      Ver código
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
-        ↗
-      </span>
+             className="group/btn relative overflow-hidden rounded-[1.6rem] p-[2px] transition hover:-translate-y-1 hover:scale-[1.03] active:scale-95"
+            >
+              <span className="absolute inset-0 rounded-[1.6rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md" />
+
+              <span className="relative flex items-center justify-center gap-3 rounded-[1.6rem] bg-[#020617] px-7 py-4 font-black text-white shadow-[0_0_55px_rgba(34,211,238,0.35)]">
+                Ver código
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover/btn:translate-x-1">
+                  ↗
+                </span>
+              </span>
+            
             </a>
           </div>
         </div>
