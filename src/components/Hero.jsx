@@ -16,7 +16,7 @@ export default function Hero() {
 
 const isMobile = window.innerWidth < 768;
 
-const particles = Array.from({ length: isMobile ? 220 : 250 }, () => ({
+const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: Math.random() * 3 + 2.5,
@@ -116,7 +116,7 @@ const particles = Array.from({ length: isMobile ? 220 : 250 }, () => ({
       <motion.div
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-0 bg-[linear-gradient(120deg,#020617,#0f172a,#312e81,#0891b2,#7c3aed,#020617)] bg-[length:500%_500%] opacity-90"
+        className="absolute inset-0 bg-[linear-gradient(120deg,#020617,#0f172a,#312e81,#0891b2,#7c3aed,#020617)] bg-[length:500%_500%] opacity-45"
       />
 
       {/* Luces profundas */}
@@ -149,7 +149,7 @@ const particles = Array.from({ length: isMobile ? 220 : 250 }, () => ({
         className="absolute top-0 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-xl"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-[#020617]/45 to-[#020617]" />
+     <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-[#020617]/25 to-[#020617]/80" />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_0.8fr]">
         {/* Texto */}
