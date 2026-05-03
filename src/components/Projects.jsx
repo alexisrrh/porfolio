@@ -268,9 +268,11 @@ viewport={{ once: true, amount: 0.15 }}
               href={project.code}
               target="_blank"
               rel="noreferrer"
-              className="group rounded-[1.6rem] border border-cyan-300/20 bg-white/10 px-7 py-4 text-center font-black text-white backdrop-blur-xl transition hover:-translate-y-1 hover:scale-[1.03] hover:border-cyan-300/60 hover:bg-cyan-300/10"
-            >
-              Ver código ↗
+               className="relative flex w-full items-center justify-center gap-4">
+      Ver código
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200 sm:h-9 sm:w-9">
+        ↗
+      </span>
             </a>
           </div>
         </div>

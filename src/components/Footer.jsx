@@ -102,7 +102,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-7 border-t border-white/10 pt-5">
-            <div className="flex flex-col items-center justify-between gap-3 text-xs text-cyan-100/35 md:flex-row">
+         <div className="flex flex-col items-center justify-center gap-5 text-center md:flex-row md:justify-between md:text-left">
               <p>© 2026 Alexis.dev. Todos los derechos reservados.</p>
               <p>Diseñado y desarrollado con React + Tailwind.</p>
             </div>

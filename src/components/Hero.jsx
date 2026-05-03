@@ -230,42 +230,42 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
           </motion.div>
 
           {/* Botones ultra */}
-          <motion.div
-            initial={{ opacity: 0, y: 45 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.78, duration: 0.8 }}
-            className="mt-14 flex flex-col justify-center gap-6 sm:flex-row lg:justify-start"
-          >
-            <a
-              href="#projects"
-              className="group relative overflow-hidden rounded-[2rem] p-[2px] transition hover:-translate-y-2 hover:scale-[1.04] active:scale-95"
-            >
-              <span className="absolute inset-0 rounded-[2rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] opacity-90 blur-md transition group-hover:blur-lg" />
+         <motion.div
+  initial={{ opacity: 0, y: 45 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.78, duration: 0.8 }}
+  className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
+>
+  <a
+    href="#projects"
+    className="group relative flex w-full max-w-[280px] overflow-hidden rounded-[2rem] p-[2px] transition hover:-translate-y-2 hover:scale-[1.04] active:scale-95 sm:w-auto sm:max-w-none"
+  >
+    <span className="absolute inset-0 rounded-[2rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] opacity-90 blur-md transition group-hover:blur-lg" />
 
-              <span className="relative flex items-center justify-center gap-4 rounded-[2rem] bg-[#020617] px-11 py-5 text-lg font-black text-white shadow-[0_0_80px_rgba(34,211,238,0.45)] transition group-hover:bg-slate-950">
-                Ver proyectos
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover:translate-x-1">
-                  →
-                </span>
-              </span>
+    <span className="relative flex w-full items-center justify-center gap-4 rounded-[2rem] bg-[#020617] px-8 py-4 text-sm font-black text-white shadow-[0_0_80px_rgba(34,211,238,0.45)] transition group-hover:bg-slate-950 sm:px-11 sm:py-5 sm:text-lg">
+      Ver proyectos
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover:translate-x-1 sm:h-9 sm:w-9">
+        →
+      </span>
+    </span>
 
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition duration-700 group-hover:translate-x-full" />
-            </a>
+    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition duration-700 group-hover:translate-x-full" />
+  </a>
 
-            <a
-              href="#contact"
-              className="group relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/10 px-11 py-5 text-lg font-black text-white shadow-[0_0_40px_rgba(168,85,247,0.18)] backdrop-blur-xl transition hover:-translate-y-2 hover:scale-[1.04] hover:border-cyan-300/70 active:scale-95"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-cyan-300/20 to-white/0 opacity-0 transition group-hover:opacity-100" />
+  <a
+    href="#contact"
+    className="group relative flex w-full max-w-[280px] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/10 px-8 py-4 text-sm font-black text-white shadow-[0_0_40px_rgba(168,85,247,0.18)] backdrop-blur-xl transition hover:-translate-y-2 hover:scale-[1.04] hover:border-cyan-300/70 active:scale-95 sm:w-auto sm:max-w-none sm:px-11 sm:py-5 sm:text-lg"
+  >
+    <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-cyan-300/20 to-white/0 opacity-0 transition group-hover:opacity-100" />
 
-              <span className="relative flex items-center justify-center gap-4">
-                Contactarme
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200">
-                  ↗
-                </span>
-              </span>
-            </a>
-          </motion.div>
+    <span className="relative flex w-full items-center justify-center gap-4">
+      Contactarme
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200 sm:h-9 sm:w-9">
+        ↗
+      </span>
+    </span>
+  </a>
+</motion.div>
         </div>
 
         {/* Recuadro código */}
