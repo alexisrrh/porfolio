@@ -115,7 +115,7 @@ export default function Contact() {
       aria-label={item.label}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08 }}
+     transition={{ duration: 0.35, ease: "easeOut" }}
       viewport={{ once: true }}
       className={`group flex h-14 w-14 items-center justify-center rounded-2xl transition hover:-translate-y-1 hover:scale-[1.06] sm:h-auto sm:w-auto sm:justify-start sm:gap-3 sm:px-5 sm:py-3 ${item.className}`}
     >

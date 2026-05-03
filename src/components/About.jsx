@@ -91,7 +91,7 @@ export default function About() {
                   key={item.title}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
                   className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/10"
                 >
                   <p className="text-lg font-black text-white text-center">

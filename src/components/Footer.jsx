@@ -57,7 +57,7 @@ export default function Footer() {
               >
                 Hablemos
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-200 text-[#020617]">
-                  ↗
+                  →
                 </span>
               </a>
             </div>

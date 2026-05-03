@@ -172,7 +172,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
           <motion.h1
             initial={{ opacity: 0, y: 75, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.15, duration: 0.95 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
             className="text-5xl font-black leading-[1] tracking-[-0.08em] md:text-8xl xl:text-7xl"
           >
           DESARROLLADOR
@@ -196,7 +196,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
        <motion.p
   initial={{ opacity: 0, y: 45 }}
   animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.38, duration: 0.85 }}
+  transition={{ duration: 0.35, ease: "easeOut" }}
   className="mx-auto mt-11 max-w-2xl text-lg font-light leading-8 text-cyan-50/80 md:text-2xl lg:mx-0"
 >
   Desarrollo interfaces modernas con{" "}
@@ -210,7 +210,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.58, duration: 0.8 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start"
           >
             {SKILLS.map((skill, index) => (
@@ -233,7 +233,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
          <motion.div
   initial={{ opacity: 0, y: 45 }}
   animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.78, duration: 0.8 }}
+ transition={{ duration: 0.35, ease: "easeOut" }}
   className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
 >
   <a
@@ -272,7 +272,7 @@ const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
         <motion.div
           initial={{ opacity: 0, scale: 0.86, rotate: -6 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
           className="relative hidden lg:block"
         >
           <motion.div

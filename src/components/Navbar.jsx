@@ -183,7 +183,7 @@ export default function Navbar() {
                   href={link.href}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.06 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
                   onClick={() => setIsOpen(false)}
                   className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 font-black text-cyan-50/80 transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white"
                 >

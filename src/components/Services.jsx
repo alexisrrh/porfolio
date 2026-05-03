@@ -67,7 +67,7 @@ export default function Services() {
               key={service.title}
               initial={{ opacity: 0, y: 55 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08, duration: 0.7 }}
+             transition={{ duration: 0.35, ease: "easeOut" }}
               viewport={{ once: true }}
               className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 backdrop-blur-xl transition hover:-translate-y-2 hover:border-cyan-300/35 hover:bg-cyan-300/[0.08]"
             >

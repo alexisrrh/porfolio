@@ -303,10 +303,10 @@ export default function Projects() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 55 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.35, ease: "easeOut"}}
+          viewport={{ once: true, amount:0.08}}
           className="mx-auto mb-20 max-w-4xl text-center"
         >
           <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300">
