@@ -131,10 +131,10 @@ function ProjectShowcase({ project, index }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 80, scale: 0.96 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.25 }}
+    initial={{ opacity: 0, y: 35 }}
+whileInView={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.45, ease: "easeOut" }}
+viewport={{ once: true, amount: 0.15 }}
       className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-300/15 bg-white/[0.07] p-4 shadow-[0_0_90px_rgba(34,211,238,0.09)] backdrop-blur-2xl"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.18),transparent_30%)] opacity-70" />

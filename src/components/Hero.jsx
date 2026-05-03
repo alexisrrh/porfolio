@@ -14,7 +14,9 @@ export default function Hero() {
     let raf;
     let mouse = { x: -9999, y: -9999 };
 
-    const particles = Array.from({ length: 200 }, () => ({
+const isMobile = window.innerWidth < 768;
+
+const particles = Array.from({ length: isMobile ? 70 : 200 }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: Math.random() * 3 + 2.5,
@@ -157,9 +159,14 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-5 py-2 text-[10px] font-black uppercase tracking-[0.4em] text-cyan-200 shadow-[0_0_40px_rgba(34,211,238,0.35)] backdrop-blur md:text-xs">
-              Frontend Developer · React · Available
-            </span>
+         <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-[9px] font-black uppercase tracking-[0.25em] text-cyan-200 shadow-[0_0_40px_rgba(34,211,238,0.35)] backdrop-blur sm:px-5 sm:text-xs sm:tracking-[0.4em]">
+  <span className="hidden sm:inline">
+    Frontend Developer · React · Available
+  </span>
+  <span className="inline sm:hidden">
+     Frontend Developer · React · Available
+  </span>
+</span>
           </motion.div>
 
           <motion.h1
@@ -171,7 +178,7 @@ export default function Hero() {
           DESARROLLADOR
 
             <br />
-            <span className="relative inline-block bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_70px_rgba(34,211,238,0.65)]">
+            <span className="relative inline-block bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_70px_rgba(34,211,238,0.65)] pb-2">
           FRONTEND
               <motion.span
                 animate={{
@@ -179,7 +186,7 @@ export default function Hero() {
                   opacity: [0.25, 1, 0.25],
                 }}
                 transition={{ duration: 2.4, repeat: Infinity }}
-                className="absolute -bottom-3 left-0 h-2 w-full origin-left rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400"
+                className="absolute -bottom-0 left-0 h-1 w-full origin-left rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 "
               />
             </span>
             <br />
