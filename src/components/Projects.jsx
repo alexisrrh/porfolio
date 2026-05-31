@@ -38,7 +38,50 @@ import groom7 from "../assets/groom/groom7.png";
 import groom8 from "../assets/groom/groom8.png";
 import groom9 from "../assets/groom/groom9.png";
 
+
+import imagen1 from "../assets/nutrismartcoach/imagen1.png";
+import imagen2 from "../assets/nutrismartcoach/imagen2.png";
+import imagen3 from "../assets/nutrismartcoach/imagen3.png";
+import imagen4 from "../assets/nutrismartcoach/imagen4.png";
+import imagen5 from "../assets/nutrismartcoach/imagen5.png";
+
+
 const projects = [
+
+  {
+  title: "NutriSmart Coach AI",
+  label: "SaaS Fitness · Inteligencia Artificial",
+  description:
+    "Plataforma de nutrición impulsada por IA capaz de analizar alimentos mediante fotografías, calcular macros automáticamente, generar planes nutricionales personalizados y realizar seguimiento inteligente del progreso del usuario.",
+  result:
+    "Desarrollé una experiencia completa tipo aplicación móvil con autenticación, análisis nutricional con IA, generación de dietas semanales, seguimiento de hábitos, check-ins de progreso y dashboard personalizado orientado a resultados.",
+  tech: [
+    "React",
+    "Vite",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "Gemini AI",
+    "Supabase",
+    "REST API"
+  ],
+  demo: "https://www.nutrismartcoach.com",
+  code: "https://github.com/alexisrrh/Nutri-smart-coach",
+  images: [
+    imagen1,
+     imagen2,
+      imagen3,
+       imagen4,
+        imagen5,
+         
+            
+
+
+        
+          
+
+  ],
+},
   {
     title: "The Real Groom",
     label: "Cliente real · Ecommerce",
