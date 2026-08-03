@@ -1,4 +1,12 @@
 import { Link } from "react-router-dom";
+import {
+  FaArrowRight,
+  FaEnvelope,
+  FaExternalLinkAlt,
+  FaFilePdf,
+  FaGithub,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { profile } from "../data/profile";
 
@@ -9,11 +17,14 @@ const links = [
 ];
 
 const socials = [
-  { name: "Email", href: `mailto:${profile.email}` },
-  { name: "LinkedIn", href: profile.linkedin },
-  { name: "GitHub", href: profile.github },
-  { name: "CV", href: profile.cvPath },
+  { name: "Email", href: `mailto:${profile.email}`, icon: FaEnvelope },
+  { name: "LinkedIn", href: profile.linkedin, icon: FaLinkedinIn },
+  { name: "GitHub", href: profile.github, icon: FaGithub },
+  { name: "Ver CV", href: profile.cvPath, icon: FaFilePdf },
 ];
+
+const footerLinkClass =
+  "group inline-flex min-h-11 items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-2.5 text-sm font-bold text-cyan-50/70 transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]";
 
 export default function Footer() {
   return (
@@ -41,7 +52,7 @@ export default function Footer() {
                       .dev
                     </span>
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-100/40">
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-100/50">
                     Full Stack Developer
                   </p>
                 </div>
@@ -52,19 +63,21 @@ export default function Footer() {
                 Python y Supabase, cuidando interfaz, datos, APIs y despliegue.
               </p>
 
-              <p className="mt-3 max-w-md text-sm leading-6 text-cyan-50/55">
-                Disponible para oportunidades Full Stack junior, Frontend React
-                y desarrollo web en España o remoto.
-              </p>
+              <div className="mt-4 inline-flex max-w-md items-center gap-3 rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-2.5 text-sm font-bold text-emerald-50/85">
+                <span
+                  className="h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.55)]"
+                  aria-hidden="true"
+                />
+                Disponible para oportunidades Full Stack y Frontend · España /
+                Remoto
+              </div>
 
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-cyan-300/15"
+                className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 px-4 py-2.5 text-sm font-black text-white transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/55 hover:bg-cyan-300/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]"
               >
-                Hablemos 
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-200 text-[#020617]">
-                  →
-                </span>
+                Contactar
+                <FaArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
 
@@ -78,7 +91,7 @@ export default function Footer() {
                   <Link
                     key={link.name}
                     to={link.to}
-                    className="text-sm font-semibold text-cyan-50/55 transition hover:translate-x-1 hover:text-cyan-300"
+                    className="text-sm font-semibold text-cyan-50/60 transition hover:translate-x-1 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
                   >
                     {link.name}
                   </Link>
@@ -96,11 +109,25 @@ export default function Footer() {
                   <a
                     key={item.name}
                     href={item.href}
-                    target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-sm font-semibold text-cyan-50/55 transition hover:translate-x-1 hover:text-purple-300"
+                    target={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
+                    className={footerLinkClass}
                   >
-                    {item.name} →
+                    <span className="flex items-center gap-3">
+                      <item.icon className="h-4 w-4" aria-hidden="true" />
+                      {item.name}
+                    </span>
+                    {item.href.startsWith("http") || item.href.endsWith(".pdf") ? (
+                      <FaExternalLinkAlt
+                        className="h-3 w-3 text-cyan-100/45 transition group-hover:text-cyan-100"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <FaArrowRight
+                        className="h-3 w-3 text-cyan-100/45 transition group-hover:translate-x-0.5 group-hover:text-cyan-100"
+                        aria-hidden="true"
+                      />
+                    )}
                   </a>
                 ))}
               </div>

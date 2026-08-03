@@ -1,5 +1,15 @@
 # Change Log
 
+## 2026-08-03 - Sprint 2 visual
+
+- Pulido visual de Hero, Navbar y Footer sin cambios de arquitectura, rutas ni contenido profesional.
+- Unificacion de la jerarquia de CTA del Hero: Ver proyectos como accion principal, Contactar y Ver CV como acciones secundarias.
+- Incorporacion de logos oficiales de GitHub y LinkedIn mediante `react-icons/fa`, reutilizando la dependencia existente.
+- Ajuste del Navbar con `NavLink`, estados activos mas claros, enlaces sociales accesibles y menu movil con Escape y cierre al navegar.
+- Revision del fondo animado del Hero para reducir intensidad visual, respetar `prefers-reduced-motion` y pausar cuando la pestana no esta visible.
+- Actualizacion del Footer con disponibilidad profesional visible, enlaces de Email, LinkedIn, GitHub y CV, y retirada de Instagram como canal principal.
+- Validacion con `npm run lint`, `npm run build`, servidor local, rutas `/`, `/contact` y `/projects`, capturas responsive reales y comprobacion del PDF del CV.
+
 ## 2026-08-03
 
 - Conversion del portfolio de landing con scroll a aplicacion React con rutas reales mediante React Router.
