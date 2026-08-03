@@ -1,17 +1,18 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { profile } from "../data/profile";
 
 const links = [
-  { name: "Inicio", href: "#hero" },
-  { name: "Sobre mí", href: "#about" },
-  { name: "Proyectos", href: "#projects" },
-  { name: "Servicios", href: "#services" },
-  { name: "Contacto", href: "#contact" },
+  { name: "Proyectos", to: "/projects" },
+  { name: "Experiencia", to: "/experience" },
+  { name: "Contacto", to: "/contact" },
 ];
 
 const socials = [
-  { name: "GitHub", href: "https://github.com/alexisrrh" },
-  { name: "Instagram", href: "https://instagram.com/alexisrrh" },
-  { name: "Email", href: "mailto:alexisrrh123@gmail.com" },
+  { name: "Email", href: `mailto:${profile.email}` },
+  { name: "LinkedIn", href: profile.linkedin },
+  { name: "GitHub", href: profile.github },
+  { name: "CV", href: profile.cvPath },
 ];
 
 export default function Footer() {
@@ -23,7 +24,7 @@ export default function Footer() {
         <div className="rounded-[1.7rem] border border-white/10 bg-[#020617]/70 px-6 py-7 shadow-[0_0_50px_rgba(34,211,238,0.08)]">
           <div className="grid gap-8 md:grid-cols-[1.4fr_0.8fr_0.8fr]">
             <div>
-              <a href="#hero" className="inline-flex items-center gap-3">
+              <Link to="/" className="inline-flex items-center gap-3">
                 <div className="relative rounded-2xl border border-cyan-300/20 bg-white/10 p-1">
                   <span className="absolute inset-0 rounded-2xl bg-cyan-300/15 blur-md" />
                   <img
@@ -41,41 +42,46 @@ export default function Footer() {
                     </span>
                   </p>
                   <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-cyan-100/40">
-                    Frontend Developer
+                    Full Stack Developer
                   </p>
                 </div>
-              </a>
+              </Link>
 
               <p className="mt-5 max-w-md text-sm leading-6 text-cyan-50/55">
-                Portfolio desarrollado con React y Tailwind, enfocado en
-                interfaces modernas, rendimiento visual y proyectos reales.
+                {profile.name} construye proyectos web con React, Node.js,
+                Python y Supabase, cuidando interfaz, datos, APIs y despliegue.
               </p>
 
-              <a
-                href="#contact"
+              <p className="mt-3 max-w-md text-sm leading-6 text-cyan-50/55">
+                Disponible para oportunidades Full Stack junior, Frontend React
+                y desarrollo web en España o remoto.
+              </p>
+
+              <Link
+                to="/contact"
                 className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-cyan-300/15"
               >
                 Hablemos 
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-200 text-[#020617]">
                   →
                 </span>
-              </a>
+              </Link>
             </div>
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-300">
-                Navegación
+                Perfil
               </p>
 
               <div className="mt-4 grid gap-2.5">
                 {links.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
-                    href={link.href}
+                    to={link.to}
                     className="text-sm font-semibold text-cyan-50/55 transition hover:translate-x-1 hover:text-cyan-300"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -91,7 +97,7 @@ export default function Footer() {
                     key={item.name}
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
-                    rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="text-sm font-semibold text-cyan-50/55 transition hover:translate-x-1 hover:text-purple-300"
                   >
                     {item.name} →

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { profile } from "../data/profile";
 
 function WhatsAppIcon() {
   return (
@@ -18,14 +18,6 @@ function MailIcon() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
-      <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5zM16.7 5.15a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 6.8A5.2 5.2 0 1 1 6.8 12 5.2 5.2 0 0 1 12 6.8zm0 1.8A3.4 3.4 0 1 0 15.4 12 3.4 3.4 0 0 0 12 8.6z" />
-    </svg>
-  );
-}
-
 function GitHubIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
@@ -34,38 +26,69 @@ function GitHubIcon() {
   );
 }
 
+function LinkedinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.981 0 1.778-.773 1.778-1.729V1.73C24 .774 23.206 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function DocumentIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-none stroke-current"
+      strokeWidth="2"
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M8 13h8" />
+      <path d="M8 17h5" />
+    </svg>
+  );
+}
+
 const actions = [
   {
-    label: "WhatsApp",
-    text: "Responderé lo antes posible",
-    href: "https://wa.me/34674516605",
-    icon: <WhatsAppIcon />,
-    className:
-      "bg-green-600/90 hover:bg-green-500 hover:shadow-[0_0_35px_rgba(34,197,94,0.55)]",
-  },
-  {
     label: "Email",
-    text: "alexisrrh123@gmail.com",
-    href: "mailto:alexisrrh123@gmail.com",
+    text: profile.email,
+    href: `mailto:${profile.email}`,
     icon: <MailIcon />,
     className:
       "border border-cyan-300/20 bg-cyan-300/10 hover:border-cyan-300/60 hover:bg-cyan-300/15 hover:shadow-[0_0_35px_rgba(34,211,238,0.35)]",
   },
   {
-    label: "Instagram",
-    text: "Ver perfil",
-    href: "https://instagram.com/alexisrrh",
-    icon: <InstagramIcon />,
+    label: "LinkedIn",
+    text: "Perfil profesional",
+    href: profile.linkedin,
+    icon: <LinkedinIcon />,
     className:
-      "bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:shadow-[0_0_35px_rgba(236,72,153,0.45)]",
+      "border border-blue-300/20 bg-blue-400/15 hover:border-blue-300/60 hover:bg-blue-400/20 hover:shadow-[0_0_35px_rgba(96,165,250,0.35)]",
   },
   {
     label: "GitHub",
     text: "Ver código",
-    href: "https://github.com/alexisrrh",
+    href: profile.github,
     icon: <GitHubIcon />,
     className:
       "border border-white/15 bg-white/10 hover:bg-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.18)]",
+  },
+  {
+    label: "CV",
+    text: "PDF actualizado",
+    href: profile.cvPath,
+    icon: <DocumentIcon />,
+    className:
+      "border border-purple-300/20 bg-purple-400/15 hover:border-purple-300/60 hover:bg-purple-400/20 hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]",
+  },
+  {
+    label: "WhatsApp",
+    text: "Contacto directo",
+    href: profile.whatsapp,
+    icon: <WhatsAppIcon />,
+    className:
+      "bg-green-600/90 hover:bg-green-500 hover:shadow-[0_0_35px_rgba(34,197,94,0.55)]",
   },
 ];
 
@@ -75,48 +98,31 @@ export default function Contact() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.16),transparent_32%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl  font-black uppercase tracking-[0.4em] text-cyan-300"
-        >
+        <p className="text-2xl  font-black uppercase tracking-[0.4em] text-cyan-300">
           Contacto
-        </motion.p>
+        </p>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 45 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.06em] md:text-7xl"
-        >
-          Hablemos de una
+        <h2 className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.06em] md:text-7xl">
+          Contacto y evaluación
           <br />
           <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            oportunidad real.
+            profesional.
           </span>
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 45 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-cyan-50/70"
-        >
-          Estoy abierto a oportunidades frontend junior, colaboraciones y proyectos donde pueda aportar con React, Tailwind y diseño funcional.
-        </motion.p>
+        <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-cyan-50/70">
+          Puedes revisar mi CV, código y proyectos, o escribirme para
+          oportunidades Full Stack junior, Frontend React y desarrollo web en
+          España o remoto.
+        </p>
 <div className="mt-12 flex flex-wrap justify-center gap-4">
-  {actions.map((item, index) => (
-    <motion.a
+  {actions.map((item) => (
+    <a
       key={item.label}
       href={item.href}
       target={item.href.startsWith("http") ? "_blank" : undefined}
-      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-      aria-label={item.label}
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-     transition={{ duration: 0.35, ease: "easeOut" }}
-      viewport={{ once: true }}
+      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+      aria-label={`${item.label}: ${item.text}`}
       className={`group flex h-14 w-14 items-center justify-center rounded-2xl transition hover:-translate-y-1 hover:scale-[1.06] sm:h-auto sm:w-auto sm:justify-start sm:gap-3 sm:px-5 sm:py-3 ${item.className}`}
     >
       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-black/20 text-white backdrop-blur sm:h-9 sm:w-9">
@@ -131,9 +137,10 @@ export default function Contact() {
       <span className="ml-2 hidden text-white/50 transition group-hover:translate-x-1 sm:block">
         →
       </span>
-    </motion.a>
+    </a>
   ))}
 </div>
+
       </div>
     </section>
   );

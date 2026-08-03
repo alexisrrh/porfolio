@@ -1,29 +1,38 @@
 import { motion } from "framer-motion";
 
-const services = [
+const techGroups = [
   {
     number: "01",
-    title: "Convertir diseños en interfaces",
-    text: "Transformo ideas, referencias o diseños en páginas responsive con estructura clara, animaciones cuidadas y acabado profesional.",
-    tags: ["React", "Tailwind", "Responsive"],
+    title: "Frontend",
+    text: "Interfaces React responsive, componentes reutilizables y estados de interfaz.",
+    tags: [
+      "React",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Tailwind CSS",
+      "Bootstrap",
+      "Vite",
+      "Context API",
+    ],
   },
   {
     number: "02",
-    title: "Dar vida a proyectos con datos",
-    text: "Integro APIs, productos, formularios, búsquedas, filtros y contenido dinámico para que una web deje de ser estática.",
-    tags: ["APIs", "Fetch", "Estado"],
+    title: "Backend",
+    text: "APIs y lógica de servidor para conectar productos con datos y autenticación.",
+    tags: ["Node.js", "Express", "Python", "Flask", "APIs REST", "JWT"],
   },
   {
     number: "03",
-    title: "Mejorar webs lentas o antiguas",
-    text: "Modernizo la parte visual de sitios existentes, optimizando navegación, experiencia móvil, carga visual y percepción profesional.",
-    tags: ["UX", "Performance", "Rediseño"],
+    title: "Datos y servicios",
+    text: "Persistencia, sesiones, autorización e integración con servicios externos.",
+    tags: ["Supabase", "PostgreSQL", "MySQL", "SQL", "Google Gemini"],
   },
   {
     number: "04",
-    title: "Construir flujos funcionales",
-    text: "Creo pantallas conectadas entre sí: login, paneles, formularios, rutas protegidas, favoritos, dashboards y gestión de datos.",
-    tags: ["Auth", "Rutas", "Supabase"],
+    title: "Herramientas y despliegue",
+    text: "Control de versiones, pruebas de APIs, publicación web y mobile.",
+    tags: ["Git", "GitHub", "Postman", "Vercel", "Render", "Capacitor"],
   },
 ];
 
@@ -43,26 +52,26 @@ export default function Services() {
           className="mb-20 max-w-4xl"
         >
           <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300 text-center">
-            Qué puedo aportar
+            Tecnologías
           </p>
 
           <h2 className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl text-center">
-            Soluciones frontend
+            Herramientas para construir
             <br />
             <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent text-center">
-              para problemas reales.
+              productos web.
             </span>
           </h2>
 
           <p className="mt-7 max-w-3xl text-lg leading-8 text-cyan-50/70 text-center">
-            No vendo una lista de tecnologías. Uso frontend para mejorar
-            productos, crear experiencias claras y construir interfaces que
-            funcionen en escenarios reales.
+            Trabajo con herramientas demostradas en mis proyectos: React para
+            interfaz, Node.js y Python para APIs, Supabase/PostgreSQL para
+            datos y Vercel/Render para despliegue.
           </p>
         </motion.div>
 
         <div className="grid gap-5 lg:grid-cols-2">
-          {services.map((service, index) => (
+          {techGroups.map((service) => (
             <motion.article
               key={service.title}
               initial={{ opacity: 0, y: 55 }}
@@ -110,8 +119,9 @@ export default function Services() {
           className="mt-16 rounded-[2rem] border border-cyan-300/20 bg-cyan-300/10 p-8 text-center backdrop-blur-xl"
         >
           <p className="mx-auto max-w-3xl text-xl font-semibold leading-8 text-cyan-50/85 text-center">
-            Mi objetivo es simple: crear frontend que se vea profesional, se
-            entienda rápido y funcione bien desde el primer uso.
+            Este stack refleja experiencia práctica mediante proyectos:
+            interfaces, autenticación, APIs, datos, integración con IA y
+            despliegue.
           </p>
         </motion.div>
       </div>

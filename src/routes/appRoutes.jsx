@@ -1,14 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-import  Home  from "../pages/Home";
-import Categorias from "../pages/Categorias";
-import Favoritos from "../pages/Favoritos";
+import { Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
+import ProjectsPage from "../pages/ProjectsPage";
+import AboutPage from "../pages/AboutPage";
+import ExperiencePage from "../pages/ExperiencePage";
+import TechnologiesPage from "../pages/TechnologiesPage";
+import ContactPage from "../pages/ContactPage";
+import CaseStudyPage from "../pages/CaseStudyPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
-export const AppRoutes = () => {
+export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/categorias" element={<Categorias />} />
-       <Route path="/favoritos" element={<Favoritos />} />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/experience" element={<ExperiencePage />} />
+      <Route path="/technologies" element={<TechnologiesPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/projects/:slug" element={<CaseStudyPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
-};
+}

@@ -1,7 +1,28 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { profile } from "../data/profile";
 
-const SKILLS = ["React", "JavaScript", "Tailwind", "APIs", "Supabase", "Git"];
+const SKILLS = [
+  "React",
+  "Node.js",
+  "Python",
+  "Supabase",
+  "APIs REST",
+  "Integración con IA",
+];
+
+const SOCIAL_LINKS = [
+  { label: "LinkedIn", href: profile.linkedin },
+  { label: "GitHub", href: profile.github },
+];
+
+const heroButtonBase =
+  "group relative inline-flex min-h-14 w-full max-w-[280px] items-center justify-center overflow-hidden rounded-[1.65rem] px-6 py-3.5 text-sm font-black leading-none transition hover:-translate-y-1 focus:outline-none focus-visible:ring-2 active:scale-[0.98] sm:min-h-16 sm:w-auto sm:max-w-none sm:px-8 sm:text-base";
+
+const heroButtonPrimary = `${heroButtonBase} bg-cyan-300 text-[#020617] shadow-[0_0_42px_rgba(34,211,238,0.35)] hover:bg-cyan-200 focus-visible:ring-cyan-200`;
+
+const heroButtonSecondary = `${heroButtonBase} border border-cyan-300/20 bg-white/10 text-white shadow-[0_0_28px_rgba(255,255,255,0.08)] backdrop-blur-xl hover:border-cyan-300/60 hover:bg-cyan-300/10 focus-visible:ring-cyan-300`;
 
 export default function Hero() {
   const canvasRef = useRef(null);
@@ -151,9 +172,9 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
 
      <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-[#020617]/25 to-[#020617]/80" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1fr_0.8fr]">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl min-w-0 items-center gap-14 lg:grid-cols-[1fr_0.8fr]">
         {/* Texto */}
-        <div className="text-center lg:text-left">
+        <div className="mx-auto w-full max-w-[342px] min-w-0 text-center sm:max-w-none lg:mx-0 lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
@@ -161,10 +182,10 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
           >
          <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-[9px] font-black uppercase tracking-[0.25em] text-cyan-200 shadow-[0_0_40px_rgba(34,211,238,0.35)] backdrop-blur sm:px-5 sm:text-xs sm:tracking-[0.4em]">
   <span className="hidden sm:inline">
-    Frontend Developer · React · Available
+    Full Stack Developer · React · Disponible
   </span>
   <span className="inline sm:hidden">
-     Frontend Developer · React · Available
+     Full Stack · React · Disponible
   </span>
 </span>
           </motion.div>
@@ -173,13 +194,13 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
             initial={{ opacity: 0, y: 75, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
-            className="text-5xl font-black leading-[1] tracking-[-0.08em] md:text-8xl xl:text-7xl"
+            className="mx-auto max-w-full text-3xl font-black leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-8xl md:tracking-[-0.08em] lg:mx-0 xl:text-7xl"
           >
-          DESARROLLADOR
+          FULL STACK
 
             <br />
             <span className="relative inline-block bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_70px_rgba(34,211,238,0.65)] pb-2">
-          FRONTEND
+          DEVELOPER
               <motion.span
                 animate={{
                   scaleX: [0.15, 1, 0.15],
@@ -189,29 +210,33 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
                 className="absolute -bottom-0 left-0 h-1 w-full origin-left rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 "
               />
             </span>
-            <br />
-          CON REACT
           </motion.h1>
 
        <motion.p
   initial={{ opacity: 0, y: 45 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.35, ease: "easeOut" }}
-  className="mx-auto mt-11 max-w-2xl text-lg font-light leading-8 text-cyan-50/80 md:text-2xl lg:mx-0"
+  className="mx-auto mt-8 max-w-2xl text-base font-light leading-7 text-cyan-50/80 sm:text-lg md:mt-11 md:text-2xl lg:mx-0"
 >
-  Desarrollo interfaces modernas con{" "}
-  <span className="font-semibold text-white">React</span>,{" "}
-  <span className="font-semibold text-white">Tailwind</span> y consumo de{" "}
-  <span className="font-semibold text-cyan-200">APIs reales</span>. Me enfoco
-  en crear experiencias rápidas, limpias y funcionales que puedan usarse en
-  proyectos reales.
+  Desarrollo aplicaciones web completas, desde interfaces modernas hasta APIs,
+  autenticación, bases de datos relacionales e integraciones con inteligencia
+  artificial.
 </motion.p>
+
+          <p className="mx-auto mt-5 max-w-full text-sm font-semibold text-cyan-100/75 sm:max-w-2xl md:text-base lg:mx-0">
+            React · Node.js · Python · Supabase
+          </p>
+
+          <p className="mx-auto mt-4 max-w-2xl text-xs font-black uppercase tracking-[0.2em] text-purple-200/80 md:text-sm lg:mx-0">
+            Disponible para oportunidades Full Stack y Frontend · España /
+            Remoto
+          </p>
 
           <motion.div
             initial={{ opacity: 0, y: 35 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start"
+            className="mt-10 flex max-w-full flex-wrap justify-center gap-3 lg:justify-start"
           >
             {SKILLS.map((skill, index) => (
               <motion.span
@@ -222,7 +247,7 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="rounded-2xl border border-white/10 bg-white/10 px-5 py-2 text-xs font-semibold text-cyan-50/85 backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/10 md:text-sm"
+                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold text-cyan-50/85 backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/10 sm:px-5 md:text-sm"
               >
                 {skill}
               </motion.span>
@@ -234,38 +259,65 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
   initial={{ opacity: 0, y: 45 }}
   animate={{ opacity: 1, y: 0 }}
  transition={{ duration: 0.35, ease: "easeOut" }}
-  className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
+  className="mt-14 flex w-full flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
 >
-  <a
-    href="#projects"
-    className="group relative flex w-full max-w-[280px] overflow-hidden rounded-[2rem] p-[2px] transition hover:-translate-y-2 hover:scale-[1.04] active:scale-95 sm:w-auto sm:max-w-none"
+  <Link
+    to="/projects"
+    className={heroButtonPrimary}
   >
-    <span className="absolute inset-0 rounded-[2rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] opacity-90 blur-md transition group-hover:blur-lg" />
-
-    <span className="relative flex w-full items-center justify-center gap-4 rounded-[2rem] bg-[#020617] px-8 py-4 text-sm font-black text-white shadow-[0_0_80px_rgba(34,211,238,0.45)] transition group-hover:bg-slate-950 sm:px-11 sm:py-5 sm:text-lg">
+    <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 opacity-0 transition group-hover:opacity-100" />
+    <span className="relative flex items-center justify-center gap-3">
       Ver proyectos
-      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-200 text-[#020617] transition group-hover:translate-x-1 sm:h-9 sm:w-9">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#020617] text-cyan-200 transition group-hover:translate-x-1 sm:h-9 sm:w-9">
         →
       </span>
     </span>
-
-    <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition duration-700 group-hover:translate-x-full" />
-  </a>
+  </Link>
 
   <a
-    href="#contact"
-    className="group relative flex w-full max-w-[280px] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/10 px-8 py-4 text-sm font-black text-white shadow-[0_0_40px_rgba(168,85,247,0.18)] backdrop-blur-xl transition hover:-translate-y-2 hover:scale-[1.04] hover:border-cyan-300/70 active:scale-95 sm:w-auto sm:max-w-none sm:px-11 sm:py-5 sm:text-lg"
+    href={profile.cvPath}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir CV de Alexis Rodriguez en PDF"
+    className={heroButtonSecondary}
+  >
+    <span className="relative flex items-center justify-center gap-3">
+      Ver CV
+      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 transition group-hover:border-cyan-200 sm:h-9 sm:w-9">
+        ↓
+      </span>
+    </span>
+  </a>
+
+  <Link
+    to="/contact"
+    className={heroButtonSecondary}
   >
     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-cyan-300/20 to-white/0 opacity-0 transition group-hover:opacity-100" />
 
-    <span className="relative flex w-full items-center justify-center gap-4">
-      Contactame
+    <span className="relative flex items-center justify-center gap-3">
+      Contactar
       <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:rotate-45 group-hover:border-cyan-200 sm:h-9 sm:w-9">
         →
       </span>
     </span>
-  </a>
+  </Link>
 </motion.div>
+
+          <div className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir ${link.label} de Alexis Rodriguez`}
+                className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-bold text-cyan-50/80 backdrop-blur transition hover:border-cyan-300/50 hover:text-cyan-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Recuadro código */}
@@ -295,27 +347,29 @@ const particles = Array.from({ length: isMobile ? 150 : 250 }, () => ({
               <p className="text-purple-300">const developer = {"{"}</p>
               <p className="ml-5 text-cyan-200">name: "Alexis",</p>
               <p className="ml-5 text-blue-200">
-                role: "Frontend Developer",
+                role: "Full Stack Developer",
               </p>
-              <p className="ml-5 text-emerald-200">stack: "React + Tailwind",</p>
+              <p className="ml-5 text-emerald-200">
+                stack: "React + Node.js + Python + Supabase",
+              </p>
               <p className="ml-5 text-pink-200">
-                focus: "clean UI & real apps",
+                focus: "producto web y mobile",
               </p>
               <p className="text-purple-300">{"}"}</p>
             </div>
 
             <div className="relative mt-5 grid grid-cols-3 gap-4">
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-2xl font-black text-cyan-200 text-center">5+</p>
-                <p className="text-xs text-cyan-100/60 text-center">Projects</p>
+                <p className="text-2xl font-black text-cyan-200 text-center">Web</p>
+                <p className="text-xs text-cyan-100/60 text-center">Frontend</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-2xl font-black text-cyan-200 text-center">UI</p>
-                <p className="text-xs text-cyan-100/60 text-center">Premium</p>
+                <p className="text-2xl font-black text-cyan-200 text-center">FS</p>
+                <p className="text-xs text-cyan-100/60 text-center">Backend</p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/10 pt-4 ">
-                <p className="text-2xl font-black text-cyan-200 text-center">OPEN</p>
-                <p className="text-xs text-cyan-100/60 text-center">To work</p>
+                <p className="text-2xl font-black text-cyan-200 text-center">Data</p>
+                <p className="text-xs text-cyan-100/60 text-center">Supabase</p>
               </div>
             </div>
           </motion.div>

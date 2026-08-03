@@ -7,7 +7,7 @@ import { useAppContext } from "../context/AppContext";
 const PeliculasAnimadas = () => {
 
 
-const { state, dispatch } = useAppContext();
+const { state } = useAppContext();
 
 
 

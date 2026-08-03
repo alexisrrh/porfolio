@@ -3,20 +3,25 @@ import fotoPerfil from "../assets/foto-perfil.jpeg";
 
 const strengths = [
   {
-    title: "Interfaces cuidadas",
-    text: "Diseño limpio, responsive y con atención al detalle visual.",
+    title: "Entender antes de construir",
+    text: "Primero aclaro el problema, el flujo de usuario y las responsabilidades técnicas.",
   },
   {
-    title: "Lógica real",
-    text: "Trabajo con APIs, estados, rutas y estructuras reales de frontend.",
+    title: "Resolver flujos completos",
+    text: "Trabajo con autenticación, datos, APIs, carga de imágenes, errores y estados asíncronos.",
   },
   {
-    title: "Código escalable",
-    text: "Componentes reutilizables y estructura clara pensada para crecer.",
+    title: "Aprender y adaptarme",
+    text: "Integro nuevas herramientas cuando el proyecto lo necesita y documento decisiones para seguir avanzando.",
   },
 ];
 
-const stack = ["React", "JavaScript", "Tailwind", "APIs", "Supabase", "Git"];
+const workPrinciples = [
+  "Comprender el problema",
+  "Separar responsabilidades",
+  "Cuidar la experiencia de usuario",
+  "Mantener orden técnico",
+];
 
 export default function About() {
   return (
@@ -34,13 +39,13 @@ export default function About() {
           className="mb-20 text-center"
         >
           <p className="text-3xl font-black uppercase tracking-[0.4em] text-cyan-300">
-            Mi enfoque
+            Sobre mí
           </p>
 
           <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-            Desarrollo frontend con enfoque en{" "}
+            Cómo trabajo como{" "}
             <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              calidad real
+              desarrollador Full Stack
             </span>
           </h2>
         </motion.div>
@@ -71,7 +76,7 @@ export default function About() {
                     Open to work
                   </p>
                   <p className="mt-1 text-sm font-bold text-white">
-                    Frontend Developer
+                    Full Stack Developer
                   </p>
                 </div>
               </div>
@@ -88,26 +93,29 @@ export default function About() {
               className="space-y-6 text-lg leading-8 text-cyan-50/80"
             >
               <p className="text-center">
-                Soy desarrollador frontend especializado en React. Me enfoco en
-                construir interfaces modernas, rápidas y bien estructuradas,
-                trabajando con datos reales y lógica funcional.
+                Soy desarrollador Full Stack y construyo aplicaciones web
+                completas con React, Node.js y Python. Me gusta comprender el
+                problema antes de implementar una solución, separar
+                responsabilidades y cuidar tanto la experiencia del usuario
+                como la estructura técnica.
               </p>
 
               <p className="text-center">
-                Me interesa crear productos que no solo se vean bien, sino que
-                funcionen correctamente en escenarios reales: navegación fluida,
-                manejo de estado, consumo de APIs y experiencia de usuario clara.
+                He trabajado con autenticación, APIs, bases de datos, carga de
+                imágenes, estados asíncronos e integraciones con inteligencia
+                artificial.
               </p>
 
               <p className="text-center">
-                Actualmente busco formar parte de un equipo donde pueda seguir
-                creciendo y aportar valor desde el desarrollo frontend.
+                Mi experiencia laboral previa también me ha enseñado a
+                colaborar, cumplir plazos, resolver incidencias y mantener la
+                calidad en entornos exigentes.
               </p>
 
               <div className="mt-6 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-5 text-center">
                 <p className="text-sm font-semibold text-cyan-200">
-                  No busco solo hacer interfaces bonitas, busco construir
-                  aplicaciones que funcionen bien.
+                  Me interesa construir productos útiles, responsive y
+                  entendibles, cuidando el recorrido completo de una aplicación.
                 </p>
               </div>
             </motion.div>
@@ -141,11 +149,11 @@ export default function About() {
                 className="rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-5"
               >
                 <p className="mb-4 text-sm font-black uppercase tracking-[0.3em] text-purple-300 text-center">
-                  Stack principal
+                  Forma de trabajo
                 </p>
 
              <div className="flex flex-wrap justify-center gap-3 text-center">
-                  {stack.map((tech) => (
+                  {workPrinciples.map((tech) => (
                     <span
                       key={tech}
                       className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-/80"

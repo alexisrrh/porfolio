@@ -1,18 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-import Home from "./pages/Home";
+import ScrollToTop from "./components/ScrollToTop";
+import { AppRoutes } from "./routes/appRoutes";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-black text-white">
+        <ScrollToTop />
         <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <AppRoutes />
 
         <Footer />
       </div>

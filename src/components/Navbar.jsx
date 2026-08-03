@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/logo.png";
+import { profile } from "../data/profile";
 
 const links = [
-  { name: "Inicio", href: "#hero" },
-  { name: "Sobre mí", href: "#about" },
-  { name: "Proyectos", href: "#projects" },
-  { name: "Servicios", href: "#services" },
+  { name: "Inicio", to: "/" },
+  { name: "Proyectos", to: "/projects" },
+  { name: "Experiencia", to: "/experience" },
+  { name: "Tecnologías", to: "/technologies" },
+  { name: "Sobre mí", to: "/about" },
+  { name: "Contacto", to: "/contact" },
 ];
 
 const GithubIcon = () => (
@@ -23,7 +27,19 @@ const LinkedinIcon = () => (
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState("Inicio");
+
+  const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isOpen]);
 
   return (
     <header className="fixed left-0 top-0 z-50 w-full px-4 py-4">
@@ -47,7 +63,7 @@ export default function Navbar() {
           className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent blur-lg"
         />
 
-        <a href="#hero" className="relative z-10 flex items-center gap-3">
+        <Link to="/" className="relative z-10 flex items-center gap-3">
           <motion.div
             animate={{
               rotate: [0, 2, -2, 0],
@@ -76,56 +92,63 @@ export default function Navbar() {
               </span>
             </p>
             <p className="mt-1 hidden text-[10px] font-black uppercase tracking-[0.34em] text-cyan-100/50 sm:block">
-              Frontend Lab
+              Full Stack Lab
             </p>
           </div>
-        </a>
+        </Link>
 
         <div className="relative z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-xl md:flex">
           {links.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.href}
-              onMouseEnter={() => setActive(link.name)}
-              className="relative overflow-hidden rounded-full px-4 py-2 text-sm font-black text-cyan-50/70 transition hover:text-white"
+              to={link.to}
+              className={({ isActive }) =>
+                `relative overflow-hidden rounded-full px-4 py-2 text-sm font-black transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
+                  isActive ? "text-white" : "text-cyan-50/70"
+                }`
+              }
             >
-              {active === link.name && (
+              {({ isActive }) => (
+                <>
+                  {isActive && (
                 <motion.span
                   layoutId="nav-active"
                   className="absolute inset-0 rounded-full border border-cyan-300/25 bg-cyan-300/10 shadow-[0_0_30px_rgba(34,211,238,0.28)]"
                   transition={{ type: "spring", stiffness: 420, damping: 32 }}
                 />
+                  )}
+                  <span className="relative z-10">{link.name}</span>
+                </>
               )}
-              <span className="relative z-10">{link.name}</span>
-            </a>
+            </NavLink>
           ))}
         </div>
 
         <div className="relative z-10 hidden items-center gap-4 md:flex">
           <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-cyan-100/65 backdrop-blur-xl">
             <a
-              href="https://github.com/alexisrrh"
+              href={profile.github}
               target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
+              rel="noopener noreferrer"
+              aria-label="Abrir GitHub de Alexis Rodriguez"
               className="transition hover:scale-110 hover:text-cyan-300 hover:drop-shadow-[0_0_14px_rgba(34,211,238,0.75)]"
             >
               <GithubIcon />
             </a>
 
             <a
-              href="https://www.linkedin.com"
+              href={profile.linkedin}
               target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
+              rel="noopener noreferrer"
+              aria-label="Abrir LinkedIn de Alexis Rodriguez"
               className="transition hover:scale-110 hover:text-cyan-300 hover:drop-shadow-[0_0_14px_rgba(34,211,238,0.75)]"
             >
               <LinkedinIcon />
             </a>
           </div>
 
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="group relative overflow-hidden rounded-[1.6rem] p-[2px] transition hover:-translate-y-1 hover:scale-105"
           >
             <span className="absolute inset-0 rounded-[1.6rem] bg-[conic-gradient(from_180deg_at_50%_50%,#22d3ee,#3b82f6,#a855f7,#22d3ee)] blur-md" />
@@ -136,13 +159,18 @@ export default function Navbar() {
                 ↗
               </span>
             </span>
-          </a>
+          </Link>
         </div>
 
         <button
           onClick={() => setIsOpen(!isOpen)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") closeMenu();
+          }}
           className="relative z-10 flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/25 bg-white/10 text-white backdrop-blur-xl md:hidden"
           aria-label="Abrir menú"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           <span className="absolute inset-0 rounded-2xl bg-cyan-300/10 blur-md" />
           <div className="relative flex flex-col gap-1.5">
@@ -168,6 +196,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -25, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -25, scale: 0.92 }}
@@ -177,49 +206,58 @@ export default function Navbar() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.2),transparent_35%),radial-gradient(circle_at_bottom,rgba(168,85,247,0.2),transparent_35%)]" />
 
             <div className="relative flex flex-col gap-2">
-              {links.map((link, index) => (
-                <motion.a
+              {links.map((link) => (
+                <motion.div
                   key={link.name}
-                  href={link.href}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 font-black text-cyan-50/80 transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white"
                 >
-                  {link.name}
-                </motion.a>
+                  <NavLink
+                    to={link.to}
+                    onClick={closeMenu}
+                    className={({ isActive }) =>
+                      `block rounded-2xl border px-4 py-3 font-black transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
+                        isActive
+                          ? "border-cyan-300/35 bg-cyan-300/10 text-white"
+                          : "border-white/10 bg-white/5 text-cyan-50/80"
+                      }`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                </motion.div>
               ))}
 
               <div className="mt-4 flex items-center justify-center gap-5 text-cyan-100/70">
                 <a
-                  href="https://github.com/alexisrrh"
+                  href={profile.github}
                   target="_blank"
-                  rel="noreferrer"
-                  aria-label="GitHub"
+                  rel="noopener noreferrer"
+                  aria-label="Abrir GitHub de Alexis Rodriguez"
                   className="rounded-2xl border border-white/10 bg-white/10 p-3 transition hover:scale-110 hover:text-cyan-300"
                 >
                   <GithubIcon />
                 </a>
 
                 <a
-                  href="https://www.linkedin.com"
+                  href={profile.linkedin}
                   target="_blank"
-                  rel="noreferrer"
-                  aria-label="LinkedIn"
+                  rel="noopener noreferrer"
+                  aria-label="Abrir LinkedIn de Alexis Rodriguez"
                   className="rounded-2xl border border-white/10 bg-white/10 p-3 transition hover:scale-110 hover:text-cyan-300"
                 >
                   <LinkedinIcon />
                 </a>
               </div>
 
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
+              <Link
+                to="/contact"
+                onClick={closeMenu}
                 className="mt-3 rounded-2xl bg-cyan-300 px-4 py-3 text-center font-black text-[#020617] shadow-[0_0_35px_rgba(34,211,238,0.35)]"
               >
                 Hablemos  →
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

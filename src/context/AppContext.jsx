@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { appReducer, initialState } from "./appReducer";
 
+/* eslint-disable react-refresh/only-export-components */
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
