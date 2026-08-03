@@ -1,5 +1,13 @@
 # Change Log
 
+## 2026-08-03 - Sprint 3 tecnologias
+
+- Rediseno puntual de la pagina `/technologies` para mostrar el stack con tarjetas, logos oficiales, nombres claros y descripciones breves.
+- Organizacion del stack en Frontend, Backend, Datos y servicios, y Herramientas y despliegue, manteniendo solo tecnologias respaldadas por CV, proyectos o codigo existente.
+- Uso de `react-icons/si` para logos oficiales disponibles y alternativa consistente para SQL mediante icono de base de datos.
+- Mantenimiento de la identidad visual existente: fondo oscuro, bordes, radios, sombras y estados hover sutiles sin convertir las tarjetas en enlaces.
+- Validacion con `npm run lint`, `npm run build`, servidor local, ruta `/technologies` y revision responsive en 1440, 1024, 768, 500 y 375 px.
+
 ## 2026-08-03 - Sprint 2 visual
 
 - Pulido visual de Hero, Navbar y Footer sin cambios de arquitectura, rutas ni contenido profesional.
