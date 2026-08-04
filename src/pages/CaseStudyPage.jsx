@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
+import ConsultorioLacCaseStudy from "./ConsultorioLacCaseStudy";
 import NutriSmartCaseStudy from "./NutriSmartCaseStudy";
 
 const futureSections = [
@@ -22,6 +23,10 @@ export default function CaseStudyPage() {
 
   if (slug === "nutrismart-coach") {
     return <NutriSmartCaseStudy />;
+  }
+
+  if (slug === "consultorio-lac") {
+    return <ConsultorioLacCaseStudy />;
   }
 
   if (!project?.caseStudyPath) {

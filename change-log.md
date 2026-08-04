@@ -1,5 +1,29 @@
 # Change Log
 
+## 2026-08-04 - Ajuste capturas Consultorio LAC
+
+- Ajuste puntual del componente de capturas del caso de estudio de Consultorio LAC para eliminar proporciones fijas que generaban espacio negro sobrante.
+- Las imagenes ahora se renderizan con `width: 100%`, `height: auto`, `display: block` y `object-fit: contain`, manteniendo bordes, radios y paleta.
+- Aplicacion del cambio a todas las capturas de la pagina sin modificar textos, rutas, otras paginas ni estilos globales.
+- Validacion con `npm run lint` y `npm run build`.
+
+## 2026-08-04 - Caso de estudio Consultorio LAC
+
+- Creacion de una pagina especifica para `/projects/consultorio-lac` basada en `docs/consultorio-lac-case-study.md` y capturas existentes del proyecto.
+- Mantenimiento de `CaseStudyPage` como fallback para otros proyectos, derivando solo el slug de Consultorio LAC a su componente propio.
+- Incorporacion de hero, problema, solucion, experiencias por rol, flujo principal, funcionalidades, arquitectura, decisiones tecnicas, retos, aprendizajes y evolucion futura.
+- Uso exclusivo de funcionalidades confirmadas: autenticacion, roles cliente/medico, citas, pacientes, historial clinico, odontograma, presupuestos, consentimientos, dashboard y Supabase.
+- Validacion con `npm run lint`, `npm run build`, servidor local y comprobacion HTTP de `/projects/consultorio-lac`, `/projects`, `/projects/nutrismart-coach` y `/projects/vhsflix`.
+
+## 2026-08-04 - Documento maestro Consultorio LAC
+
+- Investigacion del repositorio confirmado `https://github.com/alexisrrh/consultorio-odontologico` y de las evidencias disponibles en el portfolio.
+- Creacion de `docs/consultorio-lac-case-study.md` como documento fuente para el futuro caso de estudio, con tabla de evidencias y contenido limitado a funcionalidades verificadas.
+- Documentacion de roles reales `cliente` y `medico`, autenticacion con Supabase, rutas protegidas, gestion de citas, pacientes, ficha clinica, historial, odontograma, presupuesto y consentimiento informado.
+- Identificacion de funcionalidades no confirmadas o futuras, como pagos, notificaciones en tiempo real, multi-medico, metricas de uso y cliente real.
+- Creacion de `docs/consultorio-lac-screenshots.md` con capturas recomendadas y reglas para usar solo datos ficticios y anonimizados.
+- Validacion con `npm run lint` y `npm run build`.
+
 ## 2026-08-03 - Ajuste visual de tarjetas de proyectos
 
 - Compactacion visual de las tarjetas de proyectos sin modificar rutas, enlaces, carrusel, imagenes ni casos de estudio.

@@ -98,7 +98,7 @@ function ProjectCard({ project, compact = false }) {
           setIsPaused(false);
         }
       }}
-      className={`group relative w-full min-w-0 overflow-hidden rounded-[1.7rem] border bg-white/[0.07] p-3 backdrop-blur-2xl md:rounded-[2rem] ${
+      className={`group relative flex h-full w-full min-w-0 flex-col overflow-hidden rounded-[1.7rem] border bg-white/[0.07] p-2.5 backdrop-blur-2xl md:rounded-[2rem] ${
         isMainProject
           ? "border-cyan-300/35 shadow-[0_0_70px_rgba(34,211,238,0.14)]"
           : "border-cyan-300/15 shadow-[0_0_60px_rgba(34,211,238,0.08)]"
@@ -106,8 +106,8 @@ function ProjectCard({ project, compact = false }) {
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.14),transparent_30%)] opacity-70" />
 
-      <div className="relative grid h-full min-w-0 grid-rows-[auto_1fr] gap-5">
-        <div className="relative aspect-[16/9] min-w-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#020617]/80">
+      <div className="relative flex h-full min-w-0 flex-col gap-3">
+        <div className="relative aspect-[16/9] min-w-0 shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#020617]/80">
           <img
             src={activeImage?.src}
             alt={activeImage?.alt ?? `Vista previa de ${project.title}`}
@@ -181,49 +181,52 @@ function ProjectCard({ project, compact = false }) {
           )}
         </div>
 
-        <div className="flex h-full min-w-0 flex-col gap-3 p-3 text-center">
-          <div>
+        <div className="flex h-full min-w-0 flex-col gap-2 px-3 py-2 text-center">
+          <div className="flex min-h-7 items-start justify-center">
             {isMainProject && (
-              <p className="mx-auto mb-2 inline-flex max-w-full items-center justify-center rounded-full border border-cyan-200/45 bg-cyan-300/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-100">
+              <p className="inline-flex max-w-full items-center justify-center rounded-full border border-cyan-200/45 bg-cyan-300/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-100">
                 {project.label}
               </p>
             )}
-            <h3 className="mx-auto flex min-h-14 max-w-[22rem] items-center justify-center text-2xl font-black leading-tight tracking-[-0.03em] text-white">
-              {project.title}
-            </h3>
-            <p
-              className="mx-auto mt-2 max-w-[42rem] overflow-hidden text-sm leading-6 text-cyan-50/72 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4]"
-              aria-label={project.description}
-            >
-              {project.description}
-            </p>
           </div>
 
-          <div className="flex min-h-14 flex-wrap items-start justify-center gap-1.5">
-            {visibleTech.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-xl border border-white/10 bg-white/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-50/78"
-              >
-                {tech}
-              </span>
-            ))}
+          <h3 className="mx-auto flex min-h-14 max-w-[22rem] items-center justify-center text-2xl font-black leading-tight tracking-[-0.03em] text-white">
+            {project.title}
+          </h3>
+
+          <p className="mx-auto max-w-[42rem] text-sm leading-[1.55] text-cyan-50/72">
+            {project.description}
+          </p>
+
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap content-start items-start justify-center gap-1.5">
+              {visibleTech.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-xl border border-white/10 bg-white/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-50/78"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
             {remainingTechCount > 0 && (
-              <span
-                className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-100"
-                aria-label={`${remainingTechCount} tecnologías adicionales`}
-              >
-                +{remainingTechCount} tecnologías
-              </span>
+              <div className="flex justify-center">
+                <span
+                  className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-100"
+                  aria-label={`${remainingTechCount} tecnologías adicionales`}
+                >
+                  +{remainingTechCount} tecnologías
+                </span>
+              </div>
             )}
           </div>
 
           {visibleProof.length > 0 && (
-            <div className="min-h-16 px-2 py-1">
+            <div className="px-2 py-0.5">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300/80">
                 Capacidades
               </p>
-              <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+              <div className="mt-1 flex flex-wrap justify-center gap-1.5">
                 {visibleProof.map((item) => (
                   <span
                     key={item}
@@ -237,7 +240,7 @@ function ProjectCard({ project, compact = false }) {
           )}
 
           <div
-            className={`mt-auto grid gap-2 ${
+            className={`mt-auto grid gap-1.5 ${
               project.caseStudyPath ? "sm:grid-cols-3" : "sm:grid-cols-2"
             }`}
           >
@@ -290,7 +293,7 @@ export function FeaturedProjects({ compact = false }) {
           </h2>
         </div>
 
-        <div className="grid min-w-0 gap-6 lg:grid-cols-3">
+        <div className="grid min-w-0 items-stretch gap-6 lg:grid-cols-3">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} compact={compact} />
           ))}
@@ -331,7 +334,7 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="grid min-w-0 gap-7 lg:grid-cols-2">
+        <div className="grid min-w-0 items-stretch gap-7 lg:grid-cols-2">
           {sortedProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}

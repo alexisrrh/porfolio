@@ -54,7 +54,7 @@ export const projects = [
     title: "NutriSmart Coach",
     label: "Proyecto principal",
     description:
-      "Plataforma Full Stack de nutrición y entrenamiento que integra inteligencia artificial para analizar comidas mediante fotografías, calcular información nutricional, generar dietas y rutinas de ejercicio personalizadas y realizar un seguimiento del progreso del usuario desde una única aplicación.",
+      "Plataforma Full Stack de nutrición y entrenamiento con IA que analiza comidas mediante fotografías, calcula información nutricional, genera dietas y rutinas personalizadas y permite seguir el progreso del usuario.",
     result:
       "Proyecto Full Stack con frontend en React, API en Node.js y Express, autenticación, datos en Supabase/PostgreSQL, integración con Google Gemini y despliegue web/mobile.",
     proof: ["IA", "Full Stack", "Mobile", "APIs REST"],
