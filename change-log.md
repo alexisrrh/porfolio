@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-08-04 - Documento maestro VHSFlix
+
+- Investigacion del proyecto local `../proyecto-Peliculas` y del repositorio confirmado `https://github.com/alexisrrh/proyecto-Peliculas.git`.
+- Creacion de `docs/vhsflix-case-study.md` como documento fuente para el futuro caso de estudio, con tabla de evidencias basada en README, frontend React, backend Flask, modelos, rutas, servicios y configuracion.
+- Confirmacion de funcionalidades reales: exploracion de peliculas, categorias, busqueda, trailers, autenticacion JWT, favoritos persistidos, perfil/avatar, recuperacion de contrasena, comentarios, modo Relax y leaderboard.
+- Identificacion de contenido no confirmado o descartado: cliente real, metricas, roles diferenciados, pagos, suscripciones, reproductor propio, valoraciones y recomendaciones personalizadas.
+- Creacion de `docs/vhsflix-screenshots.md` con capturas existentes, capturas recomendadas y reglas para evitar datos sensibles.
+- Validacion con `npm run lint` y `npm run build`.
+
 ## 2026-08-04 - Ajuste capturas Consultorio LAC
 
 - Ajuste puntual del componente de capturas del caso de estudio de Consultorio LAC para eliminar proporciones fijas que generaban espacio negro sobrante.

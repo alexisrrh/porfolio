@@ -245,7 +245,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 75, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
-            className="mx-auto max-w-full text-3xl font-black leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-8xl md:tracking-[-0.08em] lg:mx-0 xl:text-7xl"
+            className="mx-auto max-w-full text-5xl font-black leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-8xl md:tracking-[-0.08em] lg:mx-0 xl:text-7xl"
           >
           FULL STACK
 
