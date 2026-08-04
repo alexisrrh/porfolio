@@ -1,5 +1,14 @@
 # Change Log
 
+## 2026-08-04 - Caso de estudio VHSFlix
+
+- Creacion de `src/data/vhsflixCaseStudy.js` con contenido estructurado basado exclusivamente en `docs/vhsflix-case-study.md` y `docs/vhsflix-screenshots.md`.
+- Creacion de `src/pages/VHSFlixCaseStudy.jsx` como caso de estudio completo para `/projects/vhsflix`, manteniendo el sistema visual de NutriSmart y Consultorio LAC.
+- Incorporacion de hero, problema, solucion, flujo principal, funcionalidades, arquitectura, decisiones tecnicas, retos, capacidades demostradas, aprendizajes, proximos pasos y CTA final.
+- Uso exclusivo de imagenes existentes del carrusel: `home.png`, `busqueda.png`, `trailer.png` y `favoritos.png`.
+- Conexion del slug `vhsflix` en `src/pages/CaseStudyPage.jsx` sin modificar rutas globales ni otros casos de estudio.
+- Validacion con `npm run lint`, `npm run build` y comprobacion HTTP en preview de `/`, `/projects` y `/projects/vhsflix`.
+
 ## 2026-08-04 - Documento maestro VHSFlix
 
 - Investigacion del proyecto local `../proyecto-Peliculas` y del repositorio confirmado `https://github.com/alexisrrh/proyecto-Peliculas.git`.

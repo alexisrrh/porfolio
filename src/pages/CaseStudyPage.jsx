@@ -3,6 +3,7 @@ import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
 import ConsultorioLacCaseStudy from "./ConsultorioLacCaseStudy";
 import NutriSmartCaseStudy from "./NutriSmartCaseStudy";
+import VHSFlixCaseStudy from "./VHSFlixCaseStudy";
 
 const futureSections = [
   "Problema",
@@ -27,6 +28,10 @@ export default function CaseStudyPage() {
 
   if (slug === "consultorio-lac") {
     return <ConsultorioLacCaseStudy />;
+  }
+
+  if (slug === "vhsflix") {
+    return <VHSFlixCaseStudy />;
   }
 
   if (!project?.caseStudyPath) {
