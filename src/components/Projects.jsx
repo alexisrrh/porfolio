@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { featuredProjects, projects } from "../data/projects";
 
-const carouselIntervalMs = 2000;
+const carouselIntervalMs = 1700;
 
 const projectButtonBase =
-  "inline-flex min-h-12 items-center justify-center rounded-2xl px-4 py-3 text-sm font-black leading-tight transition hover:-translate-y-1 focus:outline-none focus-visible:ring-2 active:scale-[0.98]";
+  "inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl px-3 py-2.5 text-xs font-black leading-none transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 active:scale-[0.98] sm:px-4";
 
 const projectButtonPrimary = `${projectButtonBase} bg-cyan-300 text-[#020617] shadow-[0_0_28px_rgba(34,211,238,0.28)] hover:bg-cyan-200 focus-visible:ring-cyan-200`;
 
@@ -39,6 +39,11 @@ function ProjectCard({ project, compact = false }) {
   const imageCount = images.length;
   const activeImage = images[currentImage] ?? images[0];
   const canRotate = imageCount > 1 && !prefersReducedMotion;
+  const visibleTechCount = Math.min(project.visibleTechCount ?? 4, 4);
+  const visibleTech = project.tech.slice(0, compact ? 4 : visibleTechCount);
+  const remainingTechCount = project.tech.length - visibleTech.length;
+  const visibleProof = project.proof?.slice(0, 3) ?? [];
+  const isMainProject = project.slug === "nutrismart-coach";
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -93,7 +98,11 @@ function ProjectCard({ project, compact = false }) {
           setIsPaused(false);
         }
       }}
-      className="group relative w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-cyan-300/15 bg-white/[0.07] p-3 shadow-[0_0_60px_rgba(34,211,238,0.08)] backdrop-blur-2xl md:rounded-[2rem]"
+      className={`group relative w-full min-w-0 overflow-hidden rounded-[1.7rem] border bg-white/[0.07] p-3 backdrop-blur-2xl md:rounded-[2rem] ${
+        isMainProject
+          ? "border-cyan-300/35 shadow-[0_0_70px_rgba(34,211,238,0.14)]"
+          : "border-cyan-300/15 shadow-[0_0_60px_rgba(34,211,238,0.08)]"
+      }`}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.14),transparent_30%)] opacity-70" />
 
@@ -110,9 +119,6 @@ function ProjectCard({ project, compact = false }) {
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-transparent" />
-          <p className="absolute left-3 right-3 top-3 truncate rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-cyan-200 backdrop-blur sm:bottom-4 sm:left-4 sm:right-24 sm:top-auto">
-            {project.label}
-          </p>
 
           {showControls && (
             <>
@@ -175,29 +181,63 @@ function ProjectCard({ project, compact = false }) {
           )}
         </div>
 
-        <div className="grid h-full min-w-0 grid-rows-[auto_auto_1fr] gap-4 p-3 text-center">
+        <div className="flex h-full min-w-0 flex-col gap-3 p-3 text-center">
           <div>
-            <h3 className="text-2xl font-black leading-tight tracking-[-0.03em] text-white">
+            {isMainProject && (
+              <p className="mx-auto mb-2 inline-flex max-w-full items-center justify-center rounded-full border border-cyan-200/45 bg-cyan-300/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-100">
+                {project.label}
+              </p>
+            )}
+            <h3 className="mx-auto flex min-h-14 max-w-[22rem] items-center justify-center text-2xl font-black leading-tight tracking-[-0.03em] text-white">
               {project.title}
             </h3>
-            <p className="mt-3 text-sm leading-6 text-cyan-50/75">
+            <p
+              className="mx-auto mt-2 max-w-[42rem] overflow-hidden text-sm leading-6 text-cyan-50/72 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4]"
+              aria-label={project.description}
+            >
               {project.description}
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2">
-            {project.tech.slice(0, compact ? 5 : project.tech.length).map((tech) => (
+          <div className="flex min-h-14 flex-wrap items-start justify-center gap-1.5">
+            {visibleTech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-xl border border-white/10 bg-white/10 px-3 py-1.5 text-[10px] font-black text-cyan-50/80"
+                className="rounded-xl border border-white/10 bg-white/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-50/78"
               >
                 {tech}
               </span>
             ))}
+            {remainingTechCount > 0 && (
+              <span
+                className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-100"
+                aria-label={`${remainingTechCount} tecnologías adicionales`}
+              >
+                +{remainingTechCount} tecnologías
+              </span>
+            )}
           </div>
 
+          {visibleProof.length > 0 && (
+            <div className="min-h-16 px-2 py-1">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300/80">
+                Capacidades
+              </p>
+              <div className="mt-2 flex flex-wrap justify-center gap-1.5">
+                {visibleProof.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[10px] font-bold text-cyan-50/62"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div
-            className={`mt-auto grid gap-3 ${
+            className={`mt-auto grid gap-2 ${
               project.caseStudyPath ? "sm:grid-cols-3" : "sm:grid-cols-2"
             }`}
           >
@@ -206,7 +246,7 @@ function ProjectCard({ project, compact = false }) {
                 to={project.caseStudyPath}
                 className={projectButtonPrimary}
               >
-                Ver caso de estudio
+                Caso de estudio
               </Link>
             )}
 
@@ -216,7 +256,7 @@ function ProjectCard({ project, compact = false }) {
               rel="noopener noreferrer"
               className={projectButtonSecondary}
             >
-              Ver demo
+              Demo
             </a>
 
             {project.code && (
@@ -225,7 +265,7 @@ function ProjectCard({ project, compact = false }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={projectButtonSecondary}>
-                Ver código
+                Código
               </a>
             )}
           </div>

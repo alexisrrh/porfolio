@@ -52,21 +52,23 @@ export const projects = [
   {
     slug: "nutrismart-coach",
     title: "NutriSmart Coach",
-    label: "Nutrición · IA · Mobile",
+    label: "Proyecto principal",
     description:
-      "Aplicación de nutrición que aborda el seguimiento de alimentación y progreso físico mediante análisis de imágenes, planes personalizados e integración con inteligencia artificial.",
+      "Plataforma Full Stack de nutrición y entrenamiento que integra inteligencia artificial para analizar comidas mediante fotografías, calcular información nutricional, generar dietas y rutinas de ejercicio personalizadas y realizar un seguimiento del progreso del usuario desde una única aplicación.",
     result:
       "Proyecto Full Stack con frontend en React, API en Node.js y Express, autenticación, datos en Supabase/PostgreSQL, integración con Google Gemini y despliegue web/mobile.",
+    proof: ["IA", "Full Stack", "Mobile", "APIs REST"],
+    visibleTechCount: 4,
     tech: [
       "React",
+      "Node.js",
+      "Supabase",
+      "Google Gemini",
+      "PostgreSQL",
+      "Capacitor",
       "Vite",
       "Tailwind CSS",
-      "Capacitor",
-      "Node.js",
       "Express",
-      "Supabase",
-      "PostgreSQL",
-      "Google Gemini",
       "APIs REST",
       "Render",
       "Vercel",
@@ -86,18 +88,20 @@ export const projects = [
   {
     slug: "consultorio-lac",
     title: "Consultorio Odontológico LAC",
-    label: "Gestión clínica · Auth",
+    label: "Proyecto Full Stack",
     description:
-      "Aplicación web para organizar información clínica, sesiones de usuario y datos de pacientes mediante Supabase y una interfaz responsive.",
+      "Aplicación web desarrollada para digitalizar la gestión diaria de un consultorio odontológico, centralizando pacientes, citas e historiales mediante una interfaz rápida, intuitiva y conectada a una base de datos.",
     result:
       "Proyecto con React, Vite, Bootstrap, autenticación, PostgreSQL y sincronización de datos en Supabase.",
+    proof: ["CRUD", "Autenticación", "PostgreSQL", "Dashboard"],
+    visibleTechCount: 4,
     tech: [
       "React",
-      "Vite",
-      "Bootstrap",
       "Supabase",
       "PostgreSQL",
       "Autenticación",
+      "Bootstrap",
+      "Vite",
       "Sincronización de datos",
     ],
     demo: "https://consultorio-odontologico-lac.vercel.app",
@@ -119,20 +123,22 @@ export const projects = [
   {
     slug: "vhsflix",
     title: "VHSFlix",
-    label: "Streaming · APIs",
+    label: "Proyecto Full Stack",
     description:
-      "Plataforma tipo streaming para explorar películas, gestionar favoritos y consumir información externa de TMDB y YouTube.",
+      "Plataforma inspirada en servicios de streaming que consume APIs externas para explorar películas, gestionar autenticación de usuarios y ofrecer una experiencia interactiva desarrollada con React y Flask.",
     result:
       "Proyecto con React, Context API y useReducer en frontend, backend con Python/Flask, autenticación JWT y persistencia mediante SQLAlchemy.",
+    proof: ["APIs", "Flask", "JWT", "React"],
+    visibleTechCount: 4,
     tech: [
       "React",
-      "Tailwind CSS",
-      "Context API",
-      "useReducer",
-      "Python",
       "Flask",
-      "SQLAlchemy",
       "JWT",
+      "Python",
+      "Context API",
+      "Tailwind CSS",
+      "useReducer",
+      "SQLAlchemy",
       "TMDB",
       "YouTube",
     ],
@@ -150,11 +156,13 @@ export const projects = [
   {
     slug: "the-real-groom",
     title: "The Real Groom",
-    label: "Ecommerce · Frontend",
+    label: "Proyecto frontend",
     description:
-      "Interfaz ecommerce para productos de mascotas, centrada en presentación de catálogo, navegación y experiencia visual responsive.",
+      "Experiencia ecommerce para presentar productos de grooming, organizar el catálogo y facilitar la exploración de artículos conectando la interfaz con datos de WooCommerce.",
     result:
       "Proyecto frontend conectado a WooCommerce API, con foco en estructura visual, navegación y adaptación responsive.",
+    proof: ["Ecommerce", "Catálogo", "API externa", "Responsive"],
+    visibleTechCount: 4,
     tech: ["React", "Tailwind CSS", "WooCommerce API", "UX/UI"],
     demo: "https://the-real-groom.vercel.app",
     code: "https://github.com/ultraxcode-com/the-real-groom",
@@ -173,11 +181,13 @@ export const projects = [
   {
     slug: "priteca",
     title: "Constructora Priteca",
-    label: "Landing · Negocio",
+    label: "Proyecto comercial",
     description:
-      "Sitio web de presentación para servicios de reformas y construcción, orientado a explicar la oferta y facilitar el contacto.",
+      "Presencia digital para una constructora que necesitaba presentar servicios, mostrar trabajos y dirigir al usuario hacia el contacto de forma clara.",
     result:
       "Landing responsive construida con React, Tailwind CSS y animaciones controladas con Framer Motion.",
+    proof: ["Presentación comercial", "Servicios", "Contacto", "Animaciones"],
+    visibleTechCount: 3,
     tech: ["React", "Tailwind CSS", "Framer Motion"],
     demo: "https://priteca-web.vercel.app/",
     code: "https://github.com/alexisrrh/priteca-web",
@@ -192,11 +202,13 @@ export const projects = [
   {
     slug: "panaderia-ipanema",
     title: "Panadería Ipanema",
-    label: "Web comercial",
+    label: "Proyecto comercial",
     description:
-      "Web comercial para presentar productos, secciones informativas y vías de contacto de una panadería.",
+      "Interfaz comercial para una panadería que organiza productos, información del negocio y vías de contacto en una experiencia sencilla de consultar.",
     result:
       "Proyecto responsive con React, Tailwind CSS y navegación mediante React Router.",
+    proof: ["Productos", "Navegación", "Contacto", "Responsive"],
+    visibleTechCount: 3,
     tech: ["React", "Tailwind CSS", "React Router"],
     demo: "https://panaderia-peach.vercel.app/",
     code: "https://github.com/alexisrrh/panaderia-web.git",

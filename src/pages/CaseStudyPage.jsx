@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
+import NutriSmartCaseStudy from "./NutriSmartCaseStudy";
 
 const futureSections = [
   "Problema",
@@ -18,6 +19,10 @@ export default function CaseStudyPage() {
   const { slug } = useParams();
   const project = getProjectBySlug(slug);
   const heroImage = project?.images?.[0];
+
+  if (slug === "nutrismart-coach") {
+    return <NutriSmartCaseStudy />;
+  }
 
   if (!project?.caseStudyPath) {
     return <Navigate to="/projects" replace />;
