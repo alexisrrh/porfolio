@@ -80,7 +80,9 @@ function StudyImage({
         src={image.src}
         alt={image.alt}
         loading={loading}
-        className="block h-auto w-full rounded-[1.1rem]"
+     className={`block w-full rounded-[1.1rem] ${
+  fixedFrame ? "h-full" : "h-auto"
+}`}
         style={{
           objectFit: image.fit ?? "cover",
           objectPosition: fixedFrame ? "center" : image.position ?? "top",
@@ -253,14 +255,17 @@ export default function VHSFlixCaseStudy() {
 
           <div className="mt-8 grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
             {flowScreens.map((screen) => (
-              <article key={screen.title} className={`${shellClass} flex h-full flex-col`}>
+           <article
+  key={screen.title}
+  className="flex h-full flex-col rounded-[1.5rem] border border-fuchsia-200/12 bg-white/[0.055] p-4 shadow-[0_20px_70px_rgba(15,23,42,0.28)] backdrop-blur-xl"
+>
                 <h3 className="text-lg font-black text-white">{screen.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-200/70">
                   {screen.text}
                 </p>
                 <StudyImage
                   image={screen.image}
-                  className="mt-5"
+                  className="mt-3"
                   compact
                   hover
                   fixedFrame

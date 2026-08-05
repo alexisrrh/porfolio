@@ -105,17 +105,17 @@ export const mainFlow = [
 export const flowScreens = [
   {
     title: "01 Descubrir peliculas",
-    text: "Home con carriles de peliculas populares y categorias cargadas desde TMDB.",
+    text: "Explora películas populares y por categorías obtenidas desde TMDB. La interfaz permite navegar rápidamente por el catálogo y acceder al detalle de cada título.",
     image: vhsflixImages.hero,
   },
   {
     title: "02 Consultar informacion y trailer",
-    text: "Modal de detalle con trailer de YouTube y comentarios vinculados a la pelicula.",
+    text: "Accede a la ficha completa de la película con sinopsis, tráiler integrado desde YouTube y comentarios relacionados para conocer más antes de añadirla a favoritos.",
     image: vhsflixImages.solution,
   },
   {
     title: "03 Guardar favoritos y gestionar perfil",
-    text: "Favoritos persistidos por usuario y datos asociados a la cuenta.",
+    text: "Guarda películas favoritas de forma persistente, administra tu perfil y sincroniza la información del usuario mediante autenticación JWT y la API desarrollada en Flask.",
     image: vhsflixImages.favorites,
   },
 ];
