@@ -4,12 +4,12 @@
 
 Full Stack Developer focused on building complete web applications with **React, Node.js, Python and PostgreSQL**.
 
-I work across the full stack — from responsive user interfaces to REST APIs, authentication, relational databases, third-party services and AI integrations.
+I work across the full stack: from responsive user interfaces to REST APIs, authentication, relational databases, external services and artificial intelligence integrations.
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-22c55e?style=flat-square)](https://portafolio-alexis-chi.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?style=flat-square&logo=github)](https://github.com/alexisrrh)
 
-🌐 **[View Live Portfolio](https://portafolio-alexis-chi.vercel.app/)**
+🌐 **[View Portfolio](https://portafolio-alexis-chi.vercel.app/)**
 
 ---
 
@@ -21,16 +21,24 @@ I work across the full stack — from responsive user interfaces to REST APIs, a
 
 ### 🥗 NutriSmart Coach
 
-Full Stack nutrition tracking application that uses **artificial intelligence to analyze food from images**, helping users simplify nutrition tracking and maintain a history of their meals.
+Full Stack nutrition tracking application that uses **artificial intelligence to analyze food from images**, simplifying food logging and helping users track their nutrition over time.
 
 **Stack**
 
-`React` · `Node.js` · `Express` · `Supabase` · `PostgreSQL` · `Gemini AI` · `Capacitor`
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white" alt="Express" />
+  <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Gemini_AI-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" alt="Gemini AI" />
+  <img src="https://img.shields.io/badge/Capacitor-119EFF?style=flat-square&logo=capacitor&logoColor=white" alt="Capacitor" />
+</p>
 
 **Technical highlights**
 
-- AI-powered food analysis with Gemini.
-- REST API built with Node.js and Express.
+- AI-powered food analysis using Gemini.
+- REST API developed with Node.js and Express.
 - Authentication and data persistence with Supabase.
 - Image processing and optimization before analysis.
 - Nutrition history and tracking.
@@ -39,7 +47,7 @@ Full Stack nutrition tracking application that uses **artificial intelligence to
 
 **What this project demonstrates**
 
-Full Stack architecture, AI integration, image handling, authentication, relational data, API communication and multi-platform development.
+Full Stack architecture, artificial intelligence integration, image processing, authentication, relational data, API communication and cross-platform development.
 
 ➡️ **[View Case Study](https://portafolio-alexis-chi.vercel.app/projects/nutrismart-coach)**
 
@@ -47,11 +55,17 @@ Full Stack architecture, AI integration, image handling, authentication, relatio
 
 ### 🦷 LAC Dental Clinic
 
-Dental clinic management platform designed around different workflows and permissions for **patients and healthcare professionals**.
+Management platform for a dental clinic designed around different workflows and permissions for **patients and healthcare professionals**.
 
 **Stack**
 
-`React` · `Vite` · `Supabase` · `PostgreSQL` · `React Router`
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white" alt="React Router" />
+</p>
 
 **Technical highlights**
 
@@ -78,7 +92,14 @@ Full Stack application for discovering audiovisual content, managing users and s
 
 **Stack**
 
-`React` · `Python` · `Flask` · `SQLAlchemy` · `JWT` · `TMDB API`
+<p>
+  <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white" alt="Flask" />
+  <img src="https://img.shields.io/badge/SQLAlchemy-D71F00?style=flat-square&logo=sqlalchemy&logoColor=white" alt="SQLAlchemy" />
+  <img src="https://img.shields.io/badge/JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white" alt="JWT" />
+  <img src="https://img.shields.io/badge/TMDB-01B4E4?style=flat-square&logo=themoviedatabase&logoColor=white" alt="TMDB API" />
+</p>
 
 **Technical highlights**
 
@@ -97,23 +118,65 @@ Python backend development, REST APIs, authentication, ORM-based persistence, ex
 
 ---
 
-## 🛠️ Core Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
 
-`React` · `JavaScript` · `HTML5` · `CSS3` · `Tailwind CSS` · `React Router`
+<p>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="45" title="React" alt="React" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" width="45" title="JavaScript" alt="JavaScript" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="45" title="HTML5" alt="HTML5" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" width="45" title="CSS3" alt="CSS3" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="45" title="Tailwind CSS" alt="Tailwind CSS" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" width="45" title="React Router" alt="React Router" />
+</p>
 
 ### Backend
 
-`Node.js` · `Express` · `Python` · `Flask` · `REST APIs` · `JWT`
+<p>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="45" title="Node.js" alt="Node.js" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" width="45" title="Express" alt="Express" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="45" title="Python" alt="Python" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" width="45" title="Flask" alt="Flask" />
+</p>
+
+**REST APIs** · **JWT**
 
 ### Databases & Services
 
-`PostgreSQL` · `Supabase` · `SQLAlchemy` · `Gemini AI` · `TMDB API`
+<p>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" width="45" title="PostgreSQL" alt="PostgreSQL" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" width="45" title="Supabase" alt="Supabase" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlalchemy/sqlalchemy-original.svg" width="45" title="SQLAlchemy" alt="SQLAlchemy" />
+</p>
+
+**Gemini AI** · **TMDB API**
 
 ### Tools & Deployment
 
-`Git` · `GitHub` · `Vite` · `Vercel` · `Render` · `Capacitor` · `ESLint`
+<p>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" width="45" title="Git" alt="Git" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" width="45" title="GitHub" alt="GitHub" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" width="45" title="Vite" alt="Vite" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" width="45" title="Vercel" alt="Vercel" />
+  &nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eslint/eslint-original.svg" width="45" title="ESLint" alt="ESLint" />
+</p>
+
+**Render** · **Capacitor**
 
 ---
 
@@ -129,7 +192,7 @@ Through my projects, I have worked with:
 - React state management.
 - Protected routes and application flows.
 - Forms and data validation.
-- Third-party API integrations.
+- Third-party API and service integrations.
 - Artificial intelligence integrations.
 - Image processing and optimization.
 - Full Stack application deployment.
@@ -139,7 +202,7 @@ Through my projects, I have worked with:
 
 ## 🏗️ Portfolio Architecture
 
-The portfolio follows a component-based structure with separation between UI components, pages, routing, project data and visual assets.
+The portfolio follows a component-based architecture, keeping UI components, pages, routes, project data and visual assets separated.
 
 ```text
 src/
@@ -153,7 +216,7 @@ src/
 └── main.jsx
 ```
 
-Project information and technical case study content are separated from the visual components, making the application easier to maintain and extend.
+Project information and technical case study content are separated from visual components to improve maintainability, reusability and extensibility.
 
 ---
 
@@ -162,13 +225,13 @@ Project information and technical case study content are separated from the visu
 The three featured projects include detailed case studies covering:
 
 - The problem being solved.
-- The proposed solution.
+- The solution developed.
 - My responsibilities.
 - Application architecture.
 - Technical decisions.
-- Development challenges.
+- Challenges encountered during development.
 - Lessons learned.
-- Future improvements and roadmap.
+- Potential improvements and roadmap.
 
 The goal is to show not only **what I built**, but also **how I approached the technical decisions behind each project**.
 
@@ -221,7 +284,7 @@ Vite will display the local development URL in the terminal.
 
 I'm currently focused on continuing to grow as a **Full Stack Developer**, strengthening my knowledge of software architecture, testing, security, performance and development best practices.
 
-I'm looking for opportunities where I can contribute my skills in **React and Full Stack development**, learn from an experienced engineering team and participate in building real-world products.
+I'm looking for opportunities where I can contribute my skills in **React and Full Stack development**, continue learning within a professional engineering team and participate in building real-world products.
 
 ---
 
