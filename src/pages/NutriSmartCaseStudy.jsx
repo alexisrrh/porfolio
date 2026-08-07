@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
+import { localized } from "../utils/localized";
 import {
   architectureFlow,
   externalIcon as ExternalIcon,
@@ -54,12 +56,18 @@ function SectionHeading({ eyebrow, title, children }) {
 }
 
 function CaseStudyMedia({ media, loading = "lazy", className = "" }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+  const mediaTitle = localized(media.title, language);
+  const mediaText = localized(media.text, language);
+  const mediaAlt = localized(media.alt, language);
+
   return (
     <figure
       aria-label={
         media.src
-          ? media.alt
-          : `${media.title}. ${media.text}. Archivo esperado: ${media.filename}`
+          ? mediaAlt
+          : `${mediaTitle}. ${mediaText}. ${t("caseStudy.expectedFile")} ${media.filename}`
       }
       className={`overflow-hidden rounded-[1.7rem] border border-cyan-300/15 bg-[#020617]/80 p-4 shadow-[0_28px_90px_rgba(34,211,238,0.08)] ${className}`}
       style={{ aspectRatio: media.aspect }}
@@ -67,7 +75,7 @@ function CaseStudyMedia({ media, loading = "lazy", className = "" }) {
       {media.src ? (
         <img
           src={media.src}
-          alt={media.alt}
+          alt={mediaAlt}
           loading={loading}
           className="h-full w-full rounded-[1.25rem]"
           style={{
@@ -79,17 +87,17 @@ function CaseStudyMedia({ media, loading = "lazy", className = "" }) {
         <div className="flex h-full min-h-56 flex-col justify-between rounded-[1.25rem] border border-dashed border-cyan-300/25 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.14),transparent_34%),linear-gradient(135deg,rgba(15,23,42,0.95),rgba(49,46,129,0.35))] p-5">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-cyan-300">
-              {media.title}
+              {mediaTitle}
             </p>
             <p className="mt-4 max-w-md text-lg font-black leading-tight text-white">
-              {media.text}
+              {mediaText}
             </p>
           </div>
           <figcaption className="mt-6 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-xs leading-5 text-cyan-50/70">
-            Archivo esperado:{" "}
+            {t("caseStudy.expectedFile")}{" "}
             <span className="font-black text-cyan-100">{media.filename}</span>
             <br />
-            Ruta: {media.path}
+            {t("caseStudy.route")} {media.path}
           </figcaption>
         </div>
       )}
@@ -98,16 +106,23 @@ function CaseStudyMedia({ media, loading = "lazy", className = "" }) {
 }
 
 function TextBlock({ paragraphs }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <div className="space-y-5 text-base leading-8 text-cyan-50/72">
       {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={localized(paragraph, language)}>
+          {localized(paragraph, language)}
+        </p>
       ))}
     </div>
   );
 }
 
 function IconCard({ item }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const Icon = item.icon;
 
   return (
@@ -115,7 +130,9 @@ function IconCard({ item }) {
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      <p className="text-sm font-bold leading-6 text-cyan-50/78">{item.text}</p>
+      <p className="text-sm font-bold leading-6 text-cyan-50/78">
+        {localized(item.text, language)}
+      </p>
     </article>
   );
 }
@@ -132,13 +149,21 @@ function TechPill({ item }) {
 }
 
 export default function NutriSmartCaseStudy() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const project = getProjectBySlug("nutrismart-coach");
 
   return (
     <main className="relative overflow-hidden bg-[#020617] text-white">
       <Seo
-        title="NutriSmart Coach | Caso de estudio Full Stack"
-        description="Caso de estudio de NutriSmart Coach, una plataforma Full Stack de nutrición y entrenamiento que integra React, Node.js, Supabase, PostgreSQL, Google Gemini y Capacitor."
+        title={{
+          es: "NutriSmart Coach | Caso de estudio Full Stack",
+          en: "NutriSmart Coach | Full Stack case study",
+        }}
+        description={{
+          es: "Caso de estudio de NutriSmart Coach, una plataforma Full Stack de nutrición y entrenamiento que integra React, Node.js, Supabase, PostgreSQL, Google Gemini y Capacitor.",
+          en: "Case study for NutriSmart Coach, a Full Stack nutrition and training platform integrating React, Node.js, Supabase, PostgreSQL, Google Gemini, and Capacitor.",
+        }}
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(168,85,247,0.16),transparent_28%),radial-gradient(circle_at_50%_75%,rgba(59,130,246,0.12),transparent_34%)]" />
@@ -146,20 +171,19 @@ export default function NutriSmartCaseStudy() {
       <section className="relative z-10 px-6 pb-20 pt-32">
         <div className="mx-auto max-w-7xl">
           <Link to="/projects" className={secondaryButton}>
-            Volver a proyectos
+            {t("caseStudy.backToProjects")}
           </Link>
 
           <div className="mt-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center xl:gap-16">
             <div>
               <p className="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.26em] text-cyan-200">
-                Proyecto principal
+                {t("nutrismart.badge")}
               </p>
               <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl">
                 NutriSmart Coach
               </h1>
               <p className="mt-5 text-xl font-bold leading-8 text-cyan-100/88">
-                Plataforma Full Stack de nutrición y entrenamiento impulsada por
-                inteligencia artificial.
+                {t("nutrismart.subtitle")}
               </p>
               <div className="mt-7">
                 <TextBlock paragraphs={nutrismartIntro} />
@@ -179,7 +203,7 @@ export default function NutriSmartCaseStudy() {
                   className={primaryButton}
                   aria-label="Abrir demo de NutriSmart Coach en una nueva pestaña"
                 >
-                  Ver demo
+                  {t("caseStudy.viewDemo")}
                   <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
                 </a>
                 {project.code && (
@@ -188,14 +212,16 @@ export default function NutriSmartCaseStudy() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={secondaryButton}
-                    aria-label="Abrir repositorio de NutriSmart Coach en una nueva pestaña"
+                    aria-label={t("caseStudy.openRepository", {
+                      title: "NutriSmart Coach",
+                    })}
                   >
-                    Ver código
+                    {t("caseStudy.viewCode")}
                     <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
                   </a>
                 )}
                 <Link to="/projects" className={secondaryButton}>
-                  Volver a proyectos
+                  {t("caseStudy.backToProjects")}
                 </Link>
               </div>
             </div>
@@ -212,18 +238,18 @@ export default function NutriSmartCaseStudy() {
             className="mt-12 flex flex-wrap gap-2 rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-3"
           >
             {[
-              ["Problema", "#problema"],
-              ["Solución", "#solucion"],
-              ["Arquitectura", "#arquitectura"],
-              ["Retos", "#retos"],
-              ["Aprendizajes", "#aprendizajes"],
+              [t("nutrismart.nav.problem"), "#problema"],
+              [t("nutrismart.nav.solution"), "#solucion"],
+              [t("nutrismart.nav.architecture"), "#arquitectura"],
+              [t("nutrismart.nav.challenges"), "#retos"],
+              [t("nutrismart.nav.learnings"), "#aprendizajes"],
             ].map(([label, href]) => (
               <a
                 key={href}
                 href={href}
                 className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-black text-cyan-50/75 transition hover:border-cyan-300/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
               >
-                {label}
+                    {label}
               </a>
             ))}
           </nav>
@@ -233,12 +259,12 @@ export default function NutriSmartCaseStudy() {
       <section className="relative z-10 px-6 pb-20">
         <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {projectFacts.map((fact) => (
-            <article key={fact.label} className={panelClass}>
+            <article key={localized(fact.label, language)} className={panelClass}>
               <p className="text-xs font-black uppercase tracking-[0.24em] text-cyan-300">
-                {fact.label}
+                {localized(fact.label, language)}
               </p>
               <p className="mt-3 text-base font-bold leading-6 text-white">
-                {fact.value}
+                {localized(fact.value, language)}
               </p>
             </article>
           ))}
@@ -248,7 +274,7 @@ export default function NutriSmartCaseStudy() {
       <section id="problema" className={`${sectionClass} relative z-10 px-6 py-20`}>
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start xl:gap-16">
           <div className="lg:ml-6 xl:ml-10">
-            <SectionHeading eyebrow="El problema" title="Registrar hábitos saludables suele generar fricción." />
+            <SectionHeading eyebrow={t("caseStudy.problem")} title={t("nutrismart.problemTitle")} />
             <div className="mt-7">
               <TextBlock paragraphs={nutrismartProblem} />
             </div>
@@ -267,7 +293,7 @@ export default function NutriSmartCaseStudy() {
             className="mx-auto w-full max-w-[17rem] lg:max-w-[18rem]"
           />
           <div>
-            <SectionHeading eyebrow="La solución" title="Fotografía, IA, nutrición, rutinas y progreso en un solo flujo." />
+            <SectionHeading eyebrow={t("caseStudy.solution")} title={t("nutrismart.solutionTitle")} />
             <div className="mt-7">
               <TextBlock paragraphs={nutrismartSolution} />
             </div>
@@ -277,7 +303,7 @@ export default function NutriSmartCaseStudy() {
 
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Objetivos" title="Alcance real del producto." />
+          <SectionHeading eyebrow={t("nutrismart.objectives")} title={t("nutrismart.objectivesTitle")} />
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {objectives.map((objective) => (
               <IconCard key={objective.text} item={objective} />
@@ -288,14 +314,14 @@ export default function NutriSmartCaseStudy() {
 
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Mi responsabilidad" title="Ownership de extremo a extremo." />
+          <SectionHeading eyebrow={t("nutrismart.responsibility")} title={t("nutrismart.responsibilityTitle")} />
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             {responsibilities.map((group) => (
-              <article key={group.title} className={panelClass}>
-                <h3 className="text-lg font-black text-white">{group.title}</h3>
+              <article key={localized(group.title, language)} className={panelClass}>
+                <h3 className="text-lg font-black text-white">{localized(group.title, language)}</h3>
                 <ul className="mt-4 space-y-2 text-sm leading-6 text-cyan-50/70">
                   {group.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={localized(item, language)}>{localized(item, language)}</li>
                   ))}
                 </ul>
               </article>
@@ -306,21 +332,21 @@ export default function NutriSmartCaseStudy() {
 
       <section id="arquitectura" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Cómo está construido" title="Arquitectura de NutriSmart por capas." />
+          <SectionHeading eyebrow={t("nutrismart.architectureEyebrow")} title={t("nutrismart.architectureTitle")} />
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {stackLayers.map((layer) => (
-              <article key={layer.title} className={panelClass}>
+              <article key={localized(layer.title, language)} className={panelClass}>
                 <div className="flex flex-wrap gap-2">
                 {layer.icons.map((Icon, iconIndex) => (
                     <span
-                      key={`${layer.title}-${iconIndex}`}
+                      key={`${localized(layer.title, language)}-${iconIndex}`}
                       className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200"
                     >
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                   ))}
                 </div>
-                <h3 className="mt-5 text-xl font-black text-white">{layer.title}</h3>
+                <h3 className="mt-5 text-xl font-black text-white">{localized(layer.title, language)}</h3>
                 <p className="mt-3 text-sm leading-6 text-cyan-50/70">
                   {layer.items.join(" · ")}
                 </p>
@@ -329,15 +355,15 @@ export default function NutriSmartCaseStudy() {
           </div>
 
           <div className="mt-12 rounded-[1.7rem] border border-cyan-300/15 bg-[#020617]/70 p-5 md:p-8">
-            <h3 className="text-2xl font-black text-white">Diagrama de arquitectura</h3>
+            <h3 className="text-2xl font-black text-white">{t("nutrismart.architectureDiagram")}</h3>
             <div
               className="mt-7 grid gap-3 text-center"
-              aria-label="Usuario, React y Vite, Node.js y Express, Supabase con Auth PostgreSQL y Storage, Google Gemini, resultado nutricional y usuario"
+              aria-label={t("nutrismart.architectureAria")}
             >
               {architectureFlow.map((node, index) => (
                 <div key={`${node}-${index}`}>
                   <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4 text-sm font-black text-cyan-50/85">
-                    {node}
+                  {localized(node, language)}
                   </div>
                   {node === "Supabase" && (
                     <div className="mx-auto my-3 grid max-w-2xl gap-2 sm:grid-cols-3">
@@ -346,7 +372,7 @@ export default function NutriSmartCaseStudy() {
                           key={branch}
                           className="rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 text-xs font-black text-emerald-50/85"
                         >
-                          {branch}
+                          {localized(branch, language)}
                         </span>
                       ))}
                     </div>
@@ -358,9 +384,7 @@ export default function NutriSmartCaseStudy() {
               ))}
             </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-cyan-50/65">
-              El flujo conecta la interfaz React con una API en Node.js y Express,
-              usa Supabase para autenticación, datos y almacenamiento, y delega el
-              análisis nutricional en Google Gemini antes de devolver el resultado al usuario.
+              {t("nutrismart.architectureDescription")}
             </p>
           </div>
         </div>
@@ -368,15 +392,15 @@ export default function NutriSmartCaseStudy() {
 
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Flujo del usuario" title="Del inicio de sesión al historial de progreso." />
+          <SectionHeading eyebrow={t("nutrismart.userFlow")} title={t("nutrismart.userFlowTitle")} />
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
             {userFlow.map((step, index) => (
-              <article key={step} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+              <article key={localized(step, language)} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
                 <p className="text-xs font-black uppercase tracking-[0.24em] text-cyan-300">
-                  Paso {index + 1}
+                  {t("caseStudy.step", { count: index + 1 })}
                 </p>
                 <p className="mt-3 text-sm font-bold leading-6 text-cyan-50/78">
-                  {step}
+                  {localized(step, language)}
                 </p>
               </article>
             ))}
@@ -391,20 +415,22 @@ export default function NutriSmartCaseStudy() {
 
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Decisiones técnicas" title="Elecciones que sostienen el producto." />
+          <SectionHeading eyebrow={t("caseStudy.technicalDecisions")} title={t("nutrismart.decisionsTitle")} />
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             {technicalDecisions.map((decision) => {
               const Icon = decision.icon;
 
               return (
-                <article key={decision.name} className={panelClass}>
+                <article key={localized(decision.name, language)} className={panelClass}>
                   <Icon className="h-8 w-8 text-cyan-300" aria-hidden="true" />
-                  <h3 className="mt-5 text-lg font-black text-white">{decision.name}</h3>
+                  <h3 className="mt-5 text-lg font-black text-white">
+                    {localized(decision.name, language)}
+                  </h3>
                   <p className="mt-3 text-sm font-black text-cyan-100/90">
-                    {decision.decision}
+                    {localized(decision.decision, language)}
                   </p>
                   <p className="mt-3 text-sm leading-6 text-cyan-50/65">
-                    {decision.reason}
+                    {localized(decision.reason, language)}
                   </p>
                 </article>
               );
@@ -415,19 +441,19 @@ export default function NutriSmartCaseStudy() {
 
       <section id="retos" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Retos técnicos" title="Problemas técnicos abordados durante el desarrollo." />
+          <SectionHeading eyebrow={t("caseStudy.technicalChallenges")} title={t("nutrismart.challengesTitle")} />
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {technicalChallenges.map((item) => (
-              <article key={item.challenge} className={panelClass}>
-                <h3 className="text-xl font-black text-white">{item.challenge}</h3>
+              <article key={localized(item.challenge, language)} className={panelClass}>
+                <h3 className="text-xl font-black text-white">{localized(item.challenge, language)}</h3>
                 <p className="mt-4 text-sm font-black uppercase tracking-[0.22em] text-cyan-300">
-                  Decisión o enfoque
+                  {t("caseStudy.decisionApproach")}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-cyan-50/70">{item.approach}</p>
+                <p className="mt-2 text-sm leading-6 text-cyan-50/70">{localized(item.approach, language)}</p>
                 <p className="mt-4 text-sm font-black uppercase tracking-[0.22em] text-purple-200">
-                  Impacto técnico o de UX
+                  {t("caseStudy.technicalImpact")}
                 </p>
-                <p className="mt-2 text-sm leading-6 text-cyan-50/70">{item.impact}</p>
+                <p className="mt-2 text-sm leading-6 text-cyan-50/70">{localized(item.impact, language)}</p>
               </article>
             ))}
           </div>
@@ -436,7 +462,7 @@ export default function NutriSmartCaseStudy() {
 
       <section id="aprendizajes" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <SectionHeading eyebrow="Lo que aprendí" title="Una visión más completa del desarrollo Full Stack." />
+          <SectionHeading eyebrow={t("caseStudy.learnings")} title={t("nutrismart.learningsTitle")} />
           <div className={panelClass}>
             <TextBlock paragraphs={learnings} />
           </div>
@@ -445,16 +471,15 @@ export default function NutriSmartCaseStudy() {
 
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Roadmap conceptual" title="Cómo evolucionaría el producto.">
+          <SectionHeading eyebrow={t("nutrismart.roadmap")} title={t("nutrismart.roadmapTitle")}>
             <p>
-              Estas mejoras forman parte de una posible evolución del producto y no
-              se presentan como funcionalidades disponibles actualmente.
+              {t("caseStudy.conceptualRoadmapNote")}
             </p>
           </SectionHeading>
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {roadmap.map((item) => (
-              <article key={item} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-                <p className="text-sm font-bold leading-6 text-cyan-50/75">{item}</p>
+              <article key={localized(item, language)} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+                <p className="text-sm font-bold leading-6 text-cyan-50/75">{localized(item, language)}</p>
               </article>
             ))}
           </div>
@@ -464,7 +489,7 @@ export default function NutriSmartCaseStudy() {
       <section className="relative z-10 px-6 py-20">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-cyan-300/20 bg-cyan-300/10 p-8 text-center backdrop-blur-xl md:p-10">
           <h2 className="text-3xl font-black tracking-[-0.03em] text-white md:text-5xl">
-            ¿Quieres conocer cómo está construido?
+            {t("nutrismart.ctaTitle")}
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {project.code && (
@@ -474,7 +499,7 @@ export default function NutriSmartCaseStudy() {
                 rel="noopener noreferrer"
                 className={secondaryButton}
               >
-                Ver repositorio
+                {t("caseStudy.viewRepository")}
                 <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
               </a>
             )}
@@ -484,14 +509,14 @@ export default function NutriSmartCaseStudy() {
               rel="noopener noreferrer"
               className={primaryButton}
             >
-              Probar NutriSmart Coach
+              {t("nutrismart.tryDemo")}
               <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
             </a>
             <Link to="/projects" className={secondaryButton}>
-              Volver a proyectos
+              {t("caseStudy.backToProjects")}
             </Link>
             <Link to="/contact" className={secondaryButton}>
-              Contactar
+              {t("hero.contact")}
             </Link>
           </div>
         </div>

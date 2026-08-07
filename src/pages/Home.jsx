@@ -1,14 +1,11 @@
 import Hero from "../components/Hero";
 import Seo from "../components/Seo";
 import { FeaturedProjects } from "../components/Projects";
+import { useTranslation } from "react-i18next";
 
 function CapabilitiesIntro() {
-  const capabilities = [
-    "Interfaces React responsive",
-    "APIs con Node.js, Express, Python y Flask",
-    "Autenticación, autorización y datos con Supabase",
-    "IA, PostgreSQL, Vercel, Render y Capacitor",
-  ];
+  const { t } = useTranslation();
+  const capabilities = t("home.capabilities", { returnObjects: true });
 
   return (
     <section className="relative overflow-hidden bg-[#020617] px-6 py-24 text-white">
@@ -17,10 +14,10 @@ function CapabilitiesIntro() {
       <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.35em] text-cyan-300">
-            Capacidades Full Stack
+            {t("home.capabilitiesEyebrow")}
           </p>
           <h2 className="mt-5 text-4xl font-black leading-tight md:text-6xl">
-            Frontend, backend, datos y despliegue.
+            {t("home.capabilitiesTitle")}
           </h2>
         </div>
 
@@ -40,11 +37,13 @@ function CapabilitiesIntro() {
 }
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Seo
-        title="Alexis Rodríguez | Full Stack Developer"
-        description="Portfolio de Alexis Rodriguez, Full Stack Developer con proyectos en React, Node.js, Python, Supabase, APIs REST e inteligencia artificial."
+        title={t("seo.home.title")}
+        description={t("seo.home.description")}
       />
       <Hero />
       <FeaturedProjects compact />

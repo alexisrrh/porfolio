@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import {
+  FaExternalLinkAlt,
+  FaGithub,
+  FaGlobe,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { profile } from "../data/profile";
 
 const links = [
-  { name: "Inicio", to: "/" },
-  { name: "Proyectos", to: "/projects" },
-  { name: "Experiencia", to: "/experience" },
-  { name: "Tecnologías", to: "/technologies" },
-  { name: "Sobre mí", to: "/about" },
-  { name: "Contacto", to: "/contact" },
+  { key: "navbar.home", to: "/" },
+  { key: "navbar.projects", to: "/projects" },
+  { key: "navbar.experience", to: "/experience" },
+  { key: "navbar.technologies", to: "/technologies" },
+  { key: "navbar.about", to: "/about" },
+  { key: "navbar.contact", to: "/contact" },
 ];
 
 const socialLinks = [
@@ -22,10 +28,25 @@ const socialLinks = [
 const navbarIconLink =
   "inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-cyan-100/75 transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]";
 
+const languageToggleClass =
+  "inline-flex h-10 min-w-20 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/12 px-3.5 text-xs font-black text-cyan-50 shadow-[0_0_20px_rgba(34,211,238,0.08)] transition duration-200 hover:-translate-y-0.5 hover:border-cyan-200/70 hover:bg-cyan-300/20 hover:text-white hover:shadow-[0_0_26px_rgba(34,211,238,0.16)] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617] active:scale-[0.98]";
+
 export default function Navbar() {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const currentLanguage = (i18n.resolvedLanguage || i18n.language)?.startsWith(
+    "en",
+  )
+    ? "en"
+    : "es";
+  const nextLanguage = currentLanguage === "es" ? "en" : "es";
 
   const closeMenu = () => setIsOpen(false);
+  const toggleLanguage = () => {
+    i18n.changeLanguage(nextLanguage);
+    localStorage.setItem("portfolio-language", nextLanguage);
+    document.documentElement.lang = nextLanguage;
+  };
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -97,7 +118,7 @@ export default function Navbar() {
         <div className="relative z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-xl md:flex">
           {links.map((link) => (
             <NavLink
-              key={link.name}
+              key={link.key}
               to={link.to}
               className={({ isActive }) =>
                 `relative overflow-hidden rounded-full px-4 py-2 text-sm font-black transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
@@ -114,7 +135,7 @@ export default function Navbar() {
                   transition={{ type: "spring", stiffness: 420, damping: 32 }}
                 />
                   )}
-                  <span className="relative z-10">{link.name}</span>
+                  <span className="relative z-10">{t(link.key)}</span>
                 </>
               )}
             </NavLink>
@@ -129,13 +150,25 @@ export default function Navbar() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Abrir ${link.label} de Alexis Rodriguez`}
+                aria-label={t("navbar.openSocial", { label: link.label })}
                 title={link.label}
                 className={navbarIconLink}
               >
                 <link.icon className="h-5 w-5" aria-hidden="true" />
               </a>
             ))}
+            <div className="ml-1 border-l border-white/12 pl-4">
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={t("navbar.switchLanguage")}
+                title={t("navbar.switchLanguage")}
+                className={languageToggleClass}
+              >
+                <FaGlobe className="h-4 w-4 text-cyan-200" aria-hidden="true" />
+                <span>{nextLanguage.toUpperCase()}</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -145,7 +178,7 @@ export default function Navbar() {
             if (event.key === "Escape") closeMenu();
           }}
           className="relative z-10 flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/25 bg-white/10 text-white backdrop-blur-xl md:hidden"
-          aria-label="Abrir menú"
+          aria-label={t("navbar.openMenu")}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
         >
@@ -185,7 +218,7 @@ export default function Navbar() {
             <div className="relative flex flex-col gap-2">
               {links.map((link) => (
                 <motion.div
-                  key={link.name}
+                  key={link.key}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
@@ -201,7 +234,7 @@ export default function Navbar() {
                       }`
                     }
                   >
-                    {link.name}
+                    {t(link.key)}
                   </NavLink>
                 </motion.div>
               ))}
@@ -213,7 +246,7 @@ export default function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Abrir ${link.label} de Alexis Rodriguez`}
+                    aria-label={t("navbar.openSocial", { label: link.label })}
                     className="flex min-h-12 items-center justify-between rounded-2xl border border-white/10 bg-white/10 px-4 py-3 font-black transition hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
                   >
                     <span className="flex items-center gap-3">
@@ -223,6 +256,21 @@ export default function Navbar() {
                     <FaExternalLinkAlt className="h-3 w-3 text-cyan-100/50" aria-hidden="true" />
                   </a>
                 ))}
+                <button
+                  type="button"
+                  onClick={toggleLanguage}
+                  aria-label={t("navbar.switchLanguage")}
+                  title={t("navbar.switchLanguage")}
+                  className="mt-1 flex min-h-12 items-center justify-between rounded-2xl border border-cyan-300/25 bg-cyan-300/12 px-4 py-3 font-black text-cyan-50 transition hover:border-cyan-300/60 hover:bg-cyan-300/20 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                >
+                  <span className="flex items-center gap-3">
+                    <FaGlobe className="h-5 w-5 text-cyan-200" aria-hidden="true" />
+                    {nextLanguage.toUpperCase()}
+                  </span>
+                  <span className="text-xs text-cyan-100/50">
+                    {currentLanguage.toUpperCase()}
+                  </span>
+                </button>
               </div>
             </div>
           </motion.div>

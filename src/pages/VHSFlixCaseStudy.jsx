@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
+import { localized } from "../utils/localized";
 import {
   architectureFlow,
   architectureLayers,
@@ -49,10 +51,15 @@ function SectionHeading({ eyebrow, title, children }) {
 }
 
 function TextBlock({ paragraphs }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <div className="space-y-5 text-base leading-8 text-slate-200/75">
       {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={localized(paragraph, language)}>
+          {localized(paragraph, language)}
+        </p>
       ))}
     </div>
   );
@@ -66,6 +73,9 @@ function StudyImage({
   hover = false,
   fixedFrame = false,
 }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <figure
       className={`mx-auto w-full overflow-hidden rounded-[1.5rem] border border-fuchsia-200/12 bg-[#100719]/88 shadow-[0_18px_54px_rgba(2,6,23,0.24)] ${
@@ -78,7 +88,7 @@ function StudyImage({
     >
       <img
         src={image.src}
-        alt={image.alt}
+        alt={localized(image.alt, language)}
         loading={loading}
      className={`block w-full rounded-[1.1rem] ${
   fixedFrame ? "h-full" : "h-auto"
@@ -104,25 +114,35 @@ function TechChip({ item }) {
 }
 
 function FeatureCard({ feature }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const Icon = feature.icon;
 
   return (
     <article className={shellClass}>
       <Icon className="h-7 w-7 text-fuchsia-200" aria-hidden="true" />
-      <h3 className="mt-5 text-lg font-black text-white">{feature.title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-200/70">{feature.text}</p>
+      <h3 className="mt-5 text-lg font-black text-white">{localized(feature.title, language)}</h3>
+      <p className="mt-3 text-sm leading-6 text-slate-200/70">{localized(feature.text, language)}</p>
     </article>
   );
 }
 
 export default function VHSFlixCaseStudy() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const project = getProjectBySlug("vhsflix");
 
   return (
     <main className="relative overflow-hidden bg-[#020617] text-white">
       <Seo
-        title="VHSFlix | Caso de estudio Full Stack"
-        description="Caso de estudio de VHSFlix, aplicacion Full Stack con React, Flask, JWT, SQLAlchemy, TMDB, YouTube, Vercel y Render."
+        title={{
+          es: "VHSFlix | Caso de estudio Full Stack",
+          en: "VHSFlix | Full Stack case study",
+        }}
+        description={{
+          es: "Caso de estudio de VHSFlix, aplicacion Full Stack con React, Flask, JWT, SQLAlchemy, TMDB, YouTube, Vercel y Render.",
+          en: "Case study for VHSFlix, a Full Stack application with React, Flask, JWT, SQLAlchemy, TMDB, YouTube, Vercel, and Render.",
+        }}
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(217,70,239,0.16),transparent_30%),radial-gradient(circle_at_84%_20%,rgba(34,211,238,0.12),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(24,5,29,0.76)_55%,rgba(2,6,23,1))]" />
@@ -130,21 +150,19 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 pb-20 pt-32">
         <div className="mx-auto max-w-7xl">
           <Link to="/projects" className={secondaryButton}>
-            Volver a proyectos
+            {t("caseStudy.backToProjects")}
           </Link>
 
           <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.04fr] lg:items-center xl:gap-16">
             <div>
               <p className="inline-flex rounded-full border border-fuchsia-200/25 bg-fuchsia-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-fuchsia-100">
-                Proyecto Full Stack
+                {t("vhsflix.badge")}
               </p>
               <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl">
                 VHSFlix
               </h1>
               <p className="mt-6 text-xl font-bold leading-8 text-fuchsia-50/88">
-                Plataforma inspirada en servicios de streaming que combina
-                exploracion de peliculas, autenticacion, favoritos persistentes y
-                consumo de APIs externas.
+                {t("vhsflix.subtitle")}
               </p>
 
               <div className="mt-7 flex flex-wrap gap-2">
@@ -159,9 +177,9 @@ export default function VHSFlixCaseStudy() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={primaryButton}
-                  aria-label="Abrir demo de VHSFlix en una nueva pestaña"
+                  aria-label={t("caseStudy.openDemo", { title: "VHSFlix" })}
                 >
-                  Ver demo
+                  {t("caseStudy.viewDemo")}
                   <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
                 </a>
                 {project.code && (
@@ -170,14 +188,16 @@ export default function VHSFlixCaseStudy() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={secondaryButton}
-                    aria-label="Abrir repositorio de VHSFlix en una nueva pestaña"
+                    aria-label={t("caseStudy.openRepository", {
+                      title: "VHSFlix",
+                    })}
                   >
-                    Ver código
+                    {t("caseStudy.viewCode")}
                     <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
                   </a>
                 )}
                 <Link to="/projects" className={secondaryButton}>
-                  Volver a proyectos
+                  {t("caseStudy.backToProjects")}
                 </Link>
               </div>
             </div>
@@ -187,12 +207,12 @@ export default function VHSFlixCaseStudy() {
 
           <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {vhsflixFacts.map((fact) => (
-              <article key={fact.label} className={shellClass}>
+              <article key={localized(fact.label, language)} className={shellClass}>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-fuchsia-200">
-                  {fact.label}
+                  {localized(fact.label, language)}
                 </p>
                 <p className="mt-3 text-sm font-bold leading-6 text-slate-100/88">
-                  {fact.value}
+                  {localized(fact.value, language)}
                 </p>
               </article>
             ))}
@@ -204,8 +224,8 @@ export default function VHSFlixCaseStudy() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center xl:gap-16">
           <div>
             <SectionHeading
-              eyebrow="El problema"
-              title="Explorar peliculas exige coordinar APIs, rutas y datos de usuario."
+              eyebrow={t("caseStudy.problem")}
+              title={t("vhsflix.problemTitle")}
             />
             <div className="mt-7">
               <TextBlock paragraphs={vhsflixProblem} />
@@ -220,8 +240,8 @@ export default function VHSFlixCaseStudy() {
           <StudyImage image={vhsflixImages.solution} />
           <div>
             <SectionHeading
-              eyebrow="La solucion"
-              title="Una experiencia de streaming conectada a una API propia."
+              eyebrow={t("caseStudy.solution")}
+              title={t("vhsflix.solutionTitle")}
             />
             <div className="mt-7">
               <TextBlock paragraphs={vhsflixSolution} />
@@ -233,21 +253,21 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Flujo principal"
-            title="De la exploracion al dato persistido."
+            eyebrow={t("vhsflix.mainFlow")}
+            title={t("vhsflix.mainFlowTitle")}
           />
 
           <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-fuchsia-200/12 bg-[#100719]/72 p-5">
             <ol className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
               {mainFlow.map((step, index) => (
                 <li
-                  key={step}
+                  key={localized(step, language)}
                   className="relative rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-4"
                 >
                   <p className="text-xs font-black uppercase tracking-[0.22em] text-fuchsia-200">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <p className="mt-2 text-sm font-black text-white">{step}</p>
+                  <p className="mt-2 text-sm font-black text-white">{localized(step, language)}</p>
                 </li>
               ))}
             </ol>
@@ -256,12 +276,12 @@ export default function VHSFlixCaseStudy() {
           <div className="mt-8 grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
             {flowScreens.map((screen) => (
            <article
-  key={screen.title}
+  key={localized(screen.title, language)}
   className="flex h-full flex-col rounded-[1.5rem] border border-fuchsia-200/12 bg-white/[0.055] p-4 shadow-[0_20px_70px_rgba(15,23,42,0.28)] backdrop-blur-xl"
 >
-                <h3 className="text-lg font-black text-white">{screen.title}</h3>
+                <h3 className="text-lg font-black text-white">{localized(screen.title, language)}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-200/70">
-                  {screen.text}
+                  {localized(screen.text, language)}
                 </p>
                 <StudyImage
                   image={screen.image}
@@ -279,13 +299,13 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Funcionalidades"
-            title="Funciones reales conectadas entre interfaz, API y base de datos."
+            eyebrow={t("vhsflix.features")}
+            title={t("vhsflix.featuresTitle")}
           />
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {featureCards.map((feature) => (
-              <FeatureCard key={feature.title} feature={feature} />
+              <FeatureCard key={localized(feature.title, language)} feature={feature} />
             ))}
           </div>
         </div>
@@ -294,8 +314,8 @@ export default function VHSFlixCaseStudy() {
       <section id="arquitectura" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Arquitectura"
-            title="Frontend React, API Flask y servicios externos conectados."
+            eyebrow={t("caseStudy.architecture")}
+            title={t("vhsflix.architectureTitle")}
           />
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -303,13 +323,15 @@ export default function VHSFlixCaseStudy() {
               const Icon = layer.icon;
 
               return (
-                <article key={layer.title} className={shellClass}>
+                <article key={localized(layer.title, language)} className={shellClass}>
                   <Icon className="h-8 w-8 text-fuchsia-200" aria-hidden="true" />
                   <h3 className="mt-5 text-lg font-black text-white">
-                    {layer.title}
+                    {localized(layer.title, language)}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-slate-200/70">
-                    {layer.items.join(" · ")}
+                    {layer.items
+                      .map((item) => localized(item, language))
+                      .join(" · ")}
                   </p>
                 </article>
               );
@@ -319,14 +341,14 @@ export default function VHSFlixCaseStudy() {
           <div className="mt-8 rounded-[1.5rem] border border-fuchsia-200/12 bg-[#100719]/78 p-5 md:p-8">
             <div
               className="grid gap-3 text-center"
-              aria-label="Usuario, React y Vite, React Router, Context API y useReducer, servicios fetch, Flask API, JWT Auth, SQLAlchemy, Render y Vercel"
+              aria-label={t("vhsflix.architectureAria")}
             >
               {architectureFlow.map((node, index) => (
-                <div key={node}>
+                <div key={`${localized(node, language)}-${index}`}>
                   <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-white/[0.06] px-5 py-4 text-sm font-black text-slate-50/88">
-                    {node}
+                    {localized(node, language)}
                   </div>
-                  {node === "Servicios fetch" && (
+                  {index === 4 && (
                     <div className="mx-auto my-3 grid max-w-2xl gap-2 sm:grid-cols-3">
                       {externalServices.map((service) => (
                         <span
@@ -348,9 +370,7 @@ export default function VHSFlixCaseStudy() {
               ))}
             </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-slate-200/70">
-              La aplicacion combina una SPA en React con una API Flask propia,
-              datos relacionales mediante SQLAlchemy, autenticacion JWT y consumo
-              de servicios externos para peliculas, trailers, comentarios y email.
+              {t("vhsflix.architectureDescription")}
             </p>
           </div>
         </div>
@@ -359,8 +379,8 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Decisiones tecnicas"
-            title="Elecciones justificadas por el codigo."
+            eyebrow={t("caseStudy.technicalDecisions")}
+            title={t("vhsflix.decisionsTitle")}
           />
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -368,16 +388,16 @@ export default function VHSFlixCaseStudy() {
               const Icon = decision.icon;
 
               return (
-                <article key={decision.name} className={shellClass}>
+                <article key={localized(decision.name, language)} className={shellClass}>
                   <Icon className="h-8 w-8 text-fuchsia-200" aria-hidden="true" />
                   <h3 className="mt-5 text-lg font-black text-white">
-                    {decision.name}
+                    {localized(decision.name, language)}
                   </h3>
                   <p className="mt-3 text-sm font-black text-fuchsia-50/88">
-                    {decision.decision}
+                    {localized(decision.decision, language)}
                   </p>
                   <p className="mt-3 text-sm leading-6 text-slate-200/68">
-                    {decision.reason}
+                    {localized(decision.reason, language)}
                   </p>
                 </article>
               );
@@ -389,27 +409,27 @@ export default function VHSFlixCaseStudy() {
       <section id="retos" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Retos tecnicos"
-            title="Problemas propios de una app conectada a APIs y datos de usuario."
+            eyebrow={t("caseStudy.technicalChallenges")}
+            title={t("vhsflix.challengesTitle")}
           />
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {technicalChallenges.map((item) => (
-              <article key={item.challenge} className={shellClass}>
+              <article key={localized(item.challenge, language)} className={shellClass}>
                 <h3 className="text-xl font-black text-white">
-                  {item.challenge}
+                  {localized(item.challenge, language)}
                 </h3>
                 <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-fuchsia-200">
-                  Enfoque aplicado
+                  {t("caseStudy.approach")}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-200/72">
-                  {item.approach}
+                  {localized(item.approach, language)}
                 </p>
                 <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-cyan-100">
-                  Resultado observable
+                  {t("caseStudy.observableResult")}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-200/72">
-                  {item.result}
+                  {localized(item.result, language)}
                 </p>
               </article>
             ))}
@@ -420,17 +440,17 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Que demuestra"
-            title="Capacidades tecnicas visibles en el proyecto."
+            eyebrow={t("vhsflix.proof")}
+            title={t("vhsflix.proofTitle")}
           />
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {proofItems.map((item) => (
               <article
-                key={item}
+                key={localized(item, language)}
                 className="rounded-2xl border border-white/10 bg-white/[0.055] px-5 py-4"
               >
-                <p className="text-sm font-black text-slate-100/88">✓ {item}</p>
+                <p className="text-sm font-black text-slate-100/88">✓ {localized(item, language)}</p>
               </article>
             ))}
           </div>
@@ -440,8 +460,8 @@ export default function VHSFlixCaseStudy() {
       <section id="aprendizajes" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading
-            eyebrow="Lo que aprendi"
-            title="Conectar experiencia de usuario, APIs y persistencia."
+            eyebrow={t("caseStudy.learnings")}
+            title={t("vhsflix.learningsTitle")}
           />
           <div className={shellClass}>
             <TextBlock paragraphs={learnings} />
@@ -452,23 +472,22 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Proximos pasos"
-            title="Mejoras realistas, no funcionalidades actuales."
+            eyebrow={t("caseStudy.nextSteps")}
+            title={t("vhsflix.nextStepsTitle")}
           >
             <p>
-              Estas mejoras representan posibles evoluciones del producto y no
-              funcionalidades disponibles actualmente.
+              {t("caseStudy.vhsRoadmapNote")}
             </p>
           </SectionHeading>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {roadmap.map((item) => (
               <article
-                key={item}
+                key={localized(item, language)}
                 className="rounded-2xl border border-white/10 bg-white/[0.055] p-5"
               >
                 <p className="text-sm font-bold leading-6 text-slate-100/78">
-                  {item}
+                  {localized(item, language)}
                 </p>
               </article>
             ))}
@@ -479,7 +498,7 @@ export default function VHSFlixCaseStudy() {
       <section className="relative z-10 px-6 py-20">
         <div className="mx-auto max-w-5xl rounded-[1.7rem] border border-fuchsia-200/18 bg-fuchsia-200/10 p-8 text-center backdrop-blur-xl md:p-10">
           <h2 className="text-3xl font-black tracking-[-0.03em] text-white md:text-5xl">
-            Una app Full Stack para explorar peliculas y datos de usuario.
+            {t("vhsflix.ctaTitle")}
           </h2>
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             {deployTech.map((tech) => (
@@ -493,7 +512,7 @@ export default function VHSFlixCaseStudy() {
               rel="noopener noreferrer"
               className={primaryButton}
             >
-              Ver demo
+              {t("caseStudy.viewDemo")}
               <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
             </a>
             {project.code && (
@@ -503,12 +522,12 @@ export default function VHSFlixCaseStudy() {
                 rel="noopener noreferrer"
                 className={secondaryButton}
               >
-                Ver código
+                {t("caseStudy.viewCode")}
                 <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
               </a>
             )}
             <Link to="/projects" className={secondaryButton}>
-              Volver a proyectos
+              {t("caseStudy.backToProjects")}
             </Link>
           </div>
         </div>

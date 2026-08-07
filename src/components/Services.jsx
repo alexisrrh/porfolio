@@ -1,10 +1,30 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { localized } from "../utils/localized";
+
+const tr = (es, en) => ({ es, en });
+
+const servicesCopy = {
+  titleLine: tr("Herramientas para construir", "Tools for building"),
+  titleHighlight: tr("productos web.", "web products."),
+  description: tr(
+    "Trabajo con herramientas demostradas en mis proyectos: React para interfaz, Node.js y Python para APIs, Supabase/PostgreSQL para datos y Vercel/Render para despliegue.",
+    "I work with tools demonstrated in my projects: React for interfaces, Node.js and Python for APIs, Supabase/PostgreSQL for data, and Vercel/Render for deployment.",
+  ),
+  callout: tr(
+    "Este stack refleja experiencia práctica mediante proyectos: interfaces, autenticación, APIs, datos, integración con IA y despliegue.",
+    "This stack reflects practical experience through projects: interfaces, authentication, APIs, data, AI integration, and deployment.",
+  ),
+};
 
 const techGroups = [
   {
     number: "01",
     title: "Frontend",
-    text: "Interfaces React responsive, componentes reutilizables y estados de interfaz.",
+    text: tr(
+      "Interfaces React responsive, componentes reutilizables y estados de interfaz.",
+      "Responsive React interfaces, reusable components, and interface states.",
+    ),
     tags: [
       "React",
       "JavaScript",
@@ -19,24 +39,36 @@ const techGroups = [
   {
     number: "02",
     title: "Backend",
-    text: "APIs y lógica de servidor para conectar productos con datos y autenticación.",
+    text: tr(
+      "APIs y lógica de servidor para conectar productos con datos y autenticación.",
+      "APIs and server logic to connect products with data and authentication.",
+    ),
     tags: ["Node.js", "Express", "Python", "Flask", "APIs REST", "JWT"],
   },
   {
     number: "03",
-    title: "Datos y servicios",
-    text: "Persistencia, sesiones, autorización e integración con servicios externos.",
+    title: tr("Datos y servicios", "Data and services"),
+    text: tr(
+      "Persistencia, sesiones, autorización e integración con servicios externos.",
+      "Persistence, sessions, authorization, and integration with external services.",
+    ),
     tags: ["Supabase", "PostgreSQL", "MySQL", "SQL", "Google Gemini"],
   },
   {
     number: "04",
-    title: "Herramientas y despliegue",
-    text: "Control de versiones, pruebas de APIs, publicación web y mobile.",
+    title: tr("Herramientas y despliegue", "Tools and deployment"),
+    text: tr(
+      "Control de versiones, pruebas de APIs, publicación web y mobile.",
+      "Version control, API testing, web publishing, and mobile deployment.",
+    ),
     tags: ["Git", "GitHub", "Postman", "Vercel", "Render", "Capacitor"],
   },
 ];
 
 export default function Services() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <section
       id="services"
@@ -52,28 +84,26 @@ export default function Services() {
           className="mb-20 max-w-4xl"
         >
           <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300 text-center">
-            Tecnologías
+            {t("technologies.eyebrow")}
           </p>
 
           <h2 className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl text-center">
-            Herramientas para construir
+            {localized(servicesCopy.titleLine, language)}
             <br />
             <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent text-center">
-              productos web.
+              {localized(servicesCopy.titleHighlight, language)}
             </span>
           </h2>
 
           <p className="mt-7 max-w-3xl text-lg leading-8 text-cyan-50/70 text-center">
-            Trabajo con herramientas demostradas en mis proyectos: React para
-            interfaz, Node.js y Python para APIs, Supabase/PostgreSQL para
-            datos y Vercel/Render para despliegue.
+            {localized(servicesCopy.description, language)}
           </p>
         </motion.div>
 
         <div className="grid gap-5 lg:grid-cols-2">
           {techGroups.map((service) => (
             <motion.article
-              key={service.title}
+              key={localized(service.title, language)}
               initial={{ opacity: 0, y: 55 }}
               whileInView={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.35, ease: "easeOut" }}
@@ -89,11 +119,11 @@ export default function Services() {
 
                 <div>
                   <h3 className="text-2xl font-black tracking-tight text-white text-center">
-                    {service.title}
+                    {localized(service.title, language)}
                   </h3>
 
                   <p className="mt-4 text-base leading-7 text-cyan-50/70 text-center">
-                    {service.text}
+                    {localized(service.text, language)}
                   </p>
 
                   <div className="mt-5 flex flex-wrap gap-2 text-center">
@@ -119,9 +149,7 @@ export default function Services() {
           className="mt-16 rounded-[2rem] border border-cyan-300/20 bg-cyan-300/10 p-8 text-center backdrop-blur-xl"
         >
           <p className="mx-auto max-w-3xl text-xl font-semibold leading-8 text-cyan-50/85 text-center">
-            Este stack refleja experiencia práctica mediante proyectos:
-            interfaces, autenticación, APIs, datos, integración con IA y
-            despliegue.
+            {localized(servicesCopy.callout, language)}
           </p>
         </motion.div>
       </div>

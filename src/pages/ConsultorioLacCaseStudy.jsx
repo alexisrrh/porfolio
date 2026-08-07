@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Seo from "../components/Seo";
+import { localized } from "../utils/localized";
 import {
   architectureFlow,
   featureCards,
@@ -46,10 +48,15 @@ function SectionHeading({ eyebrow, title, children }) {
 }
 
 function TextBlock({ paragraphs }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <div className="space-y-5 text-base leading-8 text-slate-200/75">
       {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={localized(paragraph, language)}>
+          {localized(paragraph, language)}
+        </p>
       ))}
     </div>
   );
@@ -63,6 +70,9 @@ function StudyImage({
   hover = false,
   fixedFrame = false,
 }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
+
   return (
     <figure
       className={`mx-auto w-full overflow-hidden rounded-[1.5rem] border border-emerald-200/12 bg-[#07130f]/88 shadow-[0_18px_54px_rgba(2,6,23,0.24)] ${
@@ -77,7 +87,7 @@ function StudyImage({
     >
       <img
         src={image.src}
-        alt={image.alt}
+        alt={localized(image.alt, language)}
         loading={loading}
         className={`block w-full rounded-[1.1rem] ${
           fixedFrame ? "h-full" : "h-auto"
@@ -107,13 +117,21 @@ function ExternalIcon() {
 }
 
 export default function ConsultorioLacCaseStudy() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const project = getProjectBySlug("consultorio-lac");
 
   return (
     <main className="relative overflow-hidden bg-[#020617] text-white">
       <Seo
-        title="Consultorio Odontológico LAC | Caso de estudio"
-        description="Caso de estudio de Consultorio Odontológico LAC, sistema web de gestión clínica con React, Vite, React Router, Context API, Supabase Auth y Supabase Database."
+        title={{
+          es: "Consultorio Odontológico LAC | Caso de estudio",
+          en: "Consultorio Odontológico LAC | Case study",
+        }}
+        description={{
+          es: "Caso de estudio de Consultorio Odontológico LAC, sistema web de gestión clínica con React, Vite, React Router, Context API, Supabase Auth y Supabase Database.",
+          en: "Case study for Consultorio Odontológico LAC, a clinical management web system with React, Vite, React Router, Context API, Supabase Auth, and Supabase Database.",
+        }}
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(16,185,129,0.16),transparent_30%),radial-gradient(circle_at_84%_20%,rgba(20,184,166,0.12),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(6,18,15,0.78)_55%,rgba(2,6,23,1))]" />
@@ -121,21 +139,19 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 pb-20 pt-32">
         <div className="mx-auto max-w-7xl">
           <Link to="/projects" className={secondaryButton}>
-            Volver a proyectos
+            {t("caseStudy.backToProjects")}
           </Link>
 
           <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.04fr] lg:items-center xl:gap-16">
             <div>
               <p className="inline-flex rounded-full border border-emerald-200/25 bg-emerald-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-emerald-100">
-                Sistema de gestion clinica
+                {t("lac.badge")}
               </p>
               <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl">
                 Consultorio Odontológico LAC
               </h1>
               <p className="mt-6 text-xl font-bold leading-8 text-emerald-50/88">
-                Sistema web para digitalizar la gestión diaria de un consultorio
-                odontológico mediante autenticación segura y herramientas clínicas
-                para pacientes y personal médico.
+                {t("lac.subtitle")}
               </p>
 
               <div className="mt-7 flex flex-wrap gap-2">
@@ -150,9 +166,11 @@ export default function ConsultorioLacCaseStudy() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={primaryButton}
-                  aria-label="Abrir demo de Consultorio Odontológico LAC en una nueva pestaña"
+                  aria-label={t("caseStudy.openDemo", {
+                    title: "Consultorio Odontológico LAC",
+                  })}
                 >
-                  Ver demo
+                  {t("caseStudy.viewDemo")}
                   <ExternalIcon />
                 </a>
                 {project.code && (
@@ -161,14 +179,16 @@ export default function ConsultorioLacCaseStudy() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={secondaryButton}
-                    aria-label="Abrir repositorio de Consultorio Odontológico LAC en una nueva pestaña"
+                    aria-label={t("caseStudy.openRepository", {
+                      title: "Consultorio Odontológico LAC",
+                    })}
                   >
-                    Ver código
+                    {t("caseStudy.viewCode")}
                     <ExternalIcon />
                   </a>
                 )}
                 <Link to="/projects" className={secondaryButton}>
-                  Volver a proyectos
+                  {t("caseStudy.backToProjects")}
                 </Link>
               </div>
             </div>
@@ -181,12 +201,12 @@ export default function ConsultorioLacCaseStudy() {
 
           <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {lacFacts.map((fact) => (
-              <article key={fact.label} className={shellClass}>
+              <article key={localized(fact.label, language)} className={shellClass}>
                 <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-200">
-                  {fact.label}
+                  {localized(fact.label, language)}
                 </p>
                 <p className="mt-3 text-sm font-bold leading-6 text-slate-100/88">
-                  {fact.value}
+                  {localized(fact.value, language)}
                 </p>
               </article>
             ))}
@@ -198,8 +218,8 @@ export default function ConsultorioLacCaseStudy() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center xl:gap-16">
           <div>
             <SectionHeading
-              eyebrow="El problema"
-              title="Datos, agenda e historial no deberían vivir separados."
+              eyebrow={t("caseStudy.problem")}
+              title={t("lac.problemTitle")}
             />
             <div className="mt-7">
               <TextBlock paragraphs={lacProblem} />
@@ -214,8 +234,8 @@ export default function ConsultorioLacCaseStudy() {
           <StudyImage image={lacImages.solution} />
           <div>
             <SectionHeading
-              eyebrow="La solución"
-              title="Un sistema para coordinar pacientes, citas y trabajo clinico."
+              eyebrow={t("caseStudy.solution")}
+              title={t("lac.solutionTitle")}
             />
             <div className="mt-7">
               <TextBlock paragraphs={lacSolution} />
@@ -227,8 +247,8 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Roles"
-            title="Dos experiencias conectadas por la misma base de datos."
+            eyebrow={t("lac.roles")}
+            title={t("lac.rolesTitle")}
           />
 
           <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-2">
@@ -237,7 +257,7 @@ export default function ConsultorioLacCaseStudy() {
 
               return (
                 <article
-                  key={experience.role}
+                  key={localized(experience.role, language)}
                   className={`${shellClass} grid h-full grid-rows-[auto_auto_auto]`}
                 >
                   <div className="flex items-start gap-4 lg:min-h-[7.5rem]">
@@ -246,10 +266,10 @@ export default function ConsultorioLacCaseStudy() {
                     </span>
                     <div>
                       <h2 className="text-2xl font-black text-white">
-                        {experience.role}
+                        {localized(experience.role, language)}
                       </h2>
                       <p className="mt-2 text-sm leading-6 text-slate-200/70">
-                        {experience.description}
+                        {localized(experience.description, language)}
                       </p>
                     </div>
                   </div>
@@ -257,10 +277,10 @@ export default function ConsultorioLacCaseStudy() {
                   <ul className="mt-6 grid content-start gap-2 sm:grid-cols-2 lg:min-h-[11.5rem]">
                     {experience.items.map((item) => (
                       <li
-                        key={item}
+                        key={localized(item, language)}
                         className="flex min-h-11 items-center rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-bold text-slate-100/82"
                       >
-                        {item}
+                        {localized(item, language)}
                       </li>
                     ))}
                   </ul>
@@ -279,21 +299,21 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Flujo principal"
-            title="Del acceso al documento clinico."
+            eyebrow={t("lac.mainFlow")}
+            title={t("lac.mainFlowTitle")}
           />
 
           <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-emerald-200/12 bg-[#07130f]/72 p-5">
             <ol className="grid gap-3 md:grid-cols-4">
               {mainFlow.map((step, index) => (
                 <li
-                  key={step}
+                  key={localized(step, language)}
                   className="relative rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-4"
                 >
                   <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-200">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <p className="mt-2 text-sm font-black text-white">{step}</p>
+                  <p className="mt-2 text-sm font-black text-white">{localized(step, language)}</p>
                 </li>
               ))}
             </ol>
@@ -302,7 +322,7 @@ export default function ConsultorioLacCaseStudy() {
           <div className="mt-8 grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3 xl:gap-5">
             {secondaryScreens.map((image) => (
               <StudyImage
-                key={image.alt}
+                key={localized(image.alt, language)}
                 image={image}
                 compact
                 hover
@@ -316,8 +336,8 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Funcionalidades"
-            title="Modulos que sostienen la operacion diaria."
+            eyebrow={t("lac.features")}
+            title={t("lac.featuresTitle")}
           />
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -325,13 +345,13 @@ export default function ConsultorioLacCaseStudy() {
               const Icon = feature.icon;
 
               return (
-                <article key={feature.title} className={shellClass}>
+                <article key={localized(feature.title, language)} className={shellClass}>
                   <Icon className="h-7 w-7 text-emerald-200" aria-hidden="true" />
                   <h3 className="mt-5 text-lg font-black text-white">
-                    {feature.title}
+                    {localized(feature.title, language)}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-slate-200/70">
-                    {feature.text}
+                    {localized(feature.text, language)}
                   </p>
                 </article>
               );
@@ -343,19 +363,19 @@ export default function ConsultorioLacCaseStudy() {
       <section id="arquitectura" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Arquitectura"
-            title="Una SPA protegida por roles y conectada a Supabase."
+            eyebrow={t("caseStudy.architecture")}
+            title={t("lac.architectureTitle")}
           />
 
           <div className="mt-8 rounded-[1.5rem] border border-emerald-200/12 bg-[#07130f]/78 p-5 md:p-8">
             <div
               className="grid gap-3 text-center"
-              aria-label="Usuario, React y Vite, React Router, Context API, Supabase Auth, Supabase Database, Panel Medico y Paciente"
+              aria-label={t("lac.architectureAria")}
             >
               {architectureFlow.map((node, index) => (
-                <div key={node}>
+                <div key={`${localized(node, language)}-${index}`}>
                   <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-white/[0.06] px-5 py-4 text-sm font-black text-slate-50/88">
-                    {node}
+                    {localized(node, language)}
                   </div>
                   {index < architectureFlow.length - 1 && (
                     <div
@@ -367,9 +387,7 @@ export default function ConsultorioLacCaseStudy() {
               ))}
             </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-6 text-slate-200/70">
-              La aplicacion separa interfaz, rutas, contexto de autenticacion,
-              Supabase Auth y datos para entregar paneles distintos segun el rol
-              autenticado.
+              {t("lac.architectureDescription")}
             </p>
           </div>
         </div>
@@ -378,8 +396,8 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Decisiones tecnicas"
-            title="Elecciones justificadas por el codigo."
+            eyebrow={t("caseStudy.technicalDecisions")}
+            title={t("lac.decisionsTitle")}
           />
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
@@ -387,16 +405,16 @@ export default function ConsultorioLacCaseStudy() {
               const Icon = decision.icon;
 
               return (
-                <article key={decision.name} className={shellClass}>
+                <article key={localized(decision.name, language)} className={shellClass}>
                   <Icon className="h-8 w-8 text-emerald-200" aria-hidden="true" />
                   <h3 className="mt-5 text-lg font-black text-white">
-                    {decision.name}
+                    {localized(decision.name, language)}
                   </h3>
                   <p className="mt-3 text-sm font-black text-emerald-50/88">
-                    {decision.decision}
+                    {localized(decision.decision, language)}
                   </p>
                   <p className="mt-3 text-sm leading-6 text-slate-200/68">
-                    {decision.reason}
+                    {localized(decision.reason, language)}
                   </p>
                 </article>
               );
@@ -408,27 +426,27 @@ export default function ConsultorioLacCaseStudy() {
       <section id="retos" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Retos tecnicos"
-            title="Riesgos propios de una herramienta con roles y datos relacionados."
+            eyebrow={t("caseStudy.technicalChallenges")}
+            title={t("lac.challengesTitle")}
           />
 
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {technicalChallenges.map((item) => (
-              <article key={item.challenge} className={shellClass}>
+              <article key={localized(item.challenge, language)} className={shellClass}>
                 <h3 className="text-xl font-black text-white">
-                  {item.challenge}
+                  {localized(item.challenge, language)}
                 </h3>
                 <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-emerald-200">
-                  Enfoque aplicado
+                  {t("caseStudy.approach")}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-200/72">
-                  {item.approach}
+                  {localized(item.approach, language)}
                 </p>
                 <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-teal-100">
-                  Resultado observable
+                  {t("caseStudy.observableResult")}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-200/72">
-                  {item.result}
+                  {localized(item.result, language)}
                 </p>
               </article>
             ))}
@@ -439,8 +457,8 @@ export default function ConsultorioLacCaseStudy() {
       <section id="aprendizajes" className={`${sectionClass} relative z-10 px-6 py-16`}>
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading
-            eyebrow="Lo que aprendi"
-            title="Gestionar producto tambien es ordenar responsabilidades."
+            eyebrow={t("caseStudy.learnings")}
+            title={t("lac.learningsTitle")}
           />
           <div className={shellClass}>
             <TextBlock paragraphs={learnings} />
@@ -451,23 +469,22 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Evolucion futura"
-            title="Mejoras posibles, no funcionalidades actuales."
+            eyebrow={t("lac.future")}
+            title={t("lac.futureTitle")}
           >
             <p>
-              Estas mejoras representan posibles evoluciones y no funcionalidades
-              disponibles actualmente.
+              {t("caseStudy.futureRoadmapNote")}
             </p>
           </SectionHeading>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {roadmap.map((item) => (
               <article
-                key={item}
+                key={localized(item, language)}
                 className="rounded-2xl border border-white/10 bg-white/[0.055] p-5"
               >
                 <p className="text-sm font-bold leading-6 text-slate-100/78">
-                  {item}
+                  {localized(item, language)}
                 </p>
               </article>
             ))}
@@ -478,7 +495,7 @@ export default function ConsultorioLacCaseStudy() {
       <section className="relative z-10 px-6 py-20">
         <div className="mx-auto max-w-5xl rounded-[1.7rem] border border-emerald-200/18 bg-emerald-200/10 p-8 text-center backdrop-blur-xl md:p-10">
           <h2 className="text-3xl font-black tracking-[-0.03em] text-white md:text-5xl">
-            Un sistema pensado para organizar trabajo clinico.
+            {t("lac.ctaTitle")}
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
@@ -487,7 +504,7 @@ export default function ConsultorioLacCaseStudy() {
               rel="noopener noreferrer"
               className={primaryButton}
             >
-              Ver demo
+              {t("caseStudy.viewDemo")}
               <ExternalIcon />
             </a>
             {project.code && (
@@ -497,12 +514,12 @@ export default function ConsultorioLacCaseStudy() {
                 rel="noopener noreferrer"
                 className={secondaryButton}
               >
-                Ver código
+                {t("caseStudy.viewCode")}
                 <ExternalIcon />
               </a>
             )}
             <Link to="/projects" className={secondaryButton}>
-              Volver a proyectos
+              {t("caseStudy.backToProjects")}
             </Link>
           </div>
         </div>

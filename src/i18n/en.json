@@ -1,0 +1,301 @@
+{
+  "navbar": {
+    "home": "Home",
+    "projects": "Projects",
+    "experience": "Experience",
+    "technologies": "Technologies",
+    "about": "About me",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "openSocial": "Open Alexis Rodriguez's {{label}}",
+    "switchLanguage": "Switch language to Spanish"
+  },
+  "hero": {
+    "description": "I build complete web applications, from modern interfaces to APIs, authentication, relational databases, and AI integrations.",
+    "viewProjects": "View projects",
+    "contact": "Contact",
+    "viewCv": "View CV",
+    "openCv": "Open Alexis Rodriguez's CV as a PDF",
+    "codeFocus": "web and mobile product"
+  },
+  "home": {
+    "featuredEyebrow": "Featured projects",
+    "featuredTitle": "Products built with React, APIs, and data.",
+    "capabilitiesEyebrow": "Full Stack capabilities",
+    "capabilitiesTitle": "Frontend, backend, data, and deployment.",
+    "capabilities": [
+      "Responsive React interfaces",
+      "APIs with Node.js, Express, Python, and Flask",
+      "Authentication, authorization, and data with Supabase",
+      "AI, PostgreSQL, Vercel, Render, and Capacitor"
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Products developed with frontend, backend, and data.",
+    "description": "Each project summarizes the need it solves, the type of product it is, and the main technologies used. Featured projects link to internal case studies.",
+    "capabilities": "Capabilities",
+    "caseStudy": "Case study",
+    "code": "Code",
+    "additionalTech": "+{{count}} technologies",
+    "additionalTechAria": "{{count}} additional technologies",
+    "previousImage": "Previous image for {{title}}",
+    "nextImage": "Next image for {{title}}",
+    "imagesOf": "Images of {{title}}",
+    "viewImage": "View image {{count}} of {{title}}",
+    "previewAlt": "Preview of {{title}}"
+  },
+  "about": {
+    "eyebrow": "About me",
+    "titlePrefix": "How I work as a",
+    "titleHighlight": "Full Stack developer",
+    "profileAlt": "Photo of Alexis",
+    "paragraphs": [
+      "I am a Full Stack Developer and I build complete web applications with React, Node.js, and Python. I like to understand the problem before implementing a solution, separate responsibilities, and care about both user experience and technical structure.",
+      "I have worked with authentication, APIs, databases, image uploads, asynchronous states, and AI integrations.",
+      "My previous work experience has also taught me to collaborate, meet deadlines, solve issues, and maintain quality in demanding environments."
+    ],
+    "callout": "I am interested in building useful, responsive, and understandable products while taking care of the full application journey.",
+    "workStyle": "Work style",
+    "strengths": [
+      {
+        "title": "Understand before building",
+        "text": "I first clarify the problem, the user flow, and the technical responsibilities."
+      },
+      {
+        "title": "Solve complete flows",
+        "text": "I work with authentication, data, APIs, image uploads, errors, and asynchronous states."
+      },
+      {
+        "title": "Learn and adapt",
+        "text": "I integrate new tools when the project needs them and document decisions to keep moving forward."
+      }
+    ],
+    "principles": [
+      "Understand the problem",
+      "Separate responsibilities",
+      "Care for user experience",
+      "Maintain technical order"
+    ]
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Practical experience and transferable skills.",
+    "technicalTitle": "Full Stack project development",
+    "technicalDescription": "I have developed technical projects where I built product flows from the interface to persistence, backend, and deployment. This experience is based on personal projects and is not presented as professional employment.",
+    "technicalItems": [
+      "React interfaces and state management",
+      "REST APIs with Node.js, Express, Python, and Flask",
+      "Authentication, authorization, and JWT",
+      "Supabase, PostgreSQL, and relational databases",
+      "Google Gemini integration and external API consumption",
+      "Deployment on Vercel and Render, with mobile preparation through Capacitor"
+    ],
+    "previousTitle": "Previous work experience",
+    "previousDescription": "This experience is not presented as technology experience; it is included for professional skills transferable to teamwork, communication, and problem solving.",
+    "previousItems": [
+      {
+        "title": "Solar panel installation",
+        "skills": [
+          "teamwork",
+          "meeting deadlines",
+          "problem solving",
+          "responsibility",
+          "work in demanding environments"
+        ]
+      },
+      {
+        "title": "Customer service",
+        "skills": [
+          "communication",
+          "incident resolution",
+          "organization",
+          "user support",
+          "adaptability",
+          "work under pressure"
+        ]
+      }
+    ],
+    "currentOpportunity": "Current availability",
+    "availability": "Available for junior Full Stack, Frontend React, and web development roles in Spain or remote."
+  },
+  "technologies": {
+    "eyebrow": "Technologies",
+    "title": "Technologies and tools",
+    "description": "Stack I use to build interfaces, APIs, databases, and complete integrations.",
+    "groups": {
+      "data": "Data and services",
+      "tools": "Tools and deployment"
+    }
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "titleLine1": "Contact and professional",
+    "titleHighlight": "evaluation.",
+    "description": "You can review my CV, code, and projects, or contact me for junior Full Stack, Frontend React, and web development opportunities in Spain or remote.",
+    "professionalProfile": "Professional profile",
+    "viewCode": "View code",
+    "updatedPdf": "Updated PDF",
+    "directContact": "Direct contact"
+  },
+  "footer": {
+    "description": "{{name}} builds web projects with React, Node.js, Python, and Supabase, with care for interface, data, APIs, and deployment.",
+    "availability": "Available for Full Stack and Frontend opportunities · Spain / Remote",
+    "profile": "Profile",
+    "connect": "Connect",
+    "rights": "© 2026 Alexis.dev. All rights reserved.",
+    "builtWith": "Designed and developed with React + Tailwind."
+  },
+  "caseStudy": {
+    "backToProjects": "Back to projects",
+    "caseStudy": "Case study",
+    "viewDemo": "View demo",
+    "viewRepository": "View repository",
+    "viewCode": "View code",
+    "openDemo": "Open {{title}} demo in a new tab",
+    "openRepository": "Open {{title}} repository in a new tab",
+    "problem": "The problem",
+    "solution": "The solution",
+    "architecture": "Architecture",
+    "technicalChallenges": "Technical challenges",
+    "technicalDecisions": "Technical decisions",
+    "lessons": "Lessons learned",
+    "learnings": "What I learned",
+    "nextSteps": "Next steps",
+    "approach": "Applied approach",
+    "decisionApproach": "Decision or approach",
+    "technicalImpact": "Technical or UX impact",
+    "observableResult": "Observable result",
+    "step": "Step {{count}}",
+    "expectedFile": "Expected file:",
+    "route": "Path:",
+    "index": "Case study structure",
+    "indexDescription": "Defined outline to document the process when specific repository, demo, and technical decision evidence is added.",
+    "futureSections": [
+      "Problem",
+      "Solution",
+      "My responsibility",
+      "Architecture",
+      "Technical challenges",
+      "Decisions",
+      "Result",
+      "Lessons learned",
+      "Next improvements"
+    ],
+    "conceptualRoadmapNote": "These improvements are part of a possible product evolution and are not presented as currently available features.",
+    "futureRoadmapNote": "These improvements represent possible future evolutions and are not currently available features.",
+    "vhsRoadmapNote": "These improvements represent possible product evolutions and are not currently available features."
+  },
+  "nutrismart": {
+    "badge": "Main project",
+    "subtitle": "Full Stack nutrition and training platform powered by artificial intelligence.",
+    "nav": {
+      "problem": "Problem",
+      "solution": "Solution",
+      "architecture": "Architecture",
+      "challenges": "Challenges",
+      "learnings": "Lessons learned"
+    },
+    "problemTitle": "Tracking healthy habits often creates friction.",
+    "solutionTitle": "Photo capture, AI, nutrition, routines, and progress in one flow.",
+    "objectives": "Objectives",
+    "objectivesTitle": "Real product scope.",
+    "responsibility": "My responsibility",
+    "responsibilityTitle": "End-to-end ownership.",
+    "architectureEyebrow": "How it is built",
+    "architectureTitle": "NutriSmart architecture by layers.",
+    "architectureDiagram": "Architecture diagram",
+    "architectureAria": "User, React and Vite, Node.js and Express, Supabase with Auth PostgreSQL and Storage, Google Gemini, nutritional result and user",
+    "architectureDescription": "The flow connects the React interface with a Node.js and Express API, uses Supabase for authentication, data, and storage, and delegates nutritional analysis to Google Gemini before returning the result to the user.",
+    "userFlow": "User flow",
+    "userFlowTitle": "From sign-in to progress history.",
+    "decisionsTitle": "Choices that support the product.",
+    "challengesTitle": "Technical problems addressed during development.",
+    "learningsTitle": "A more complete view of Full Stack development.",
+    "roadmap": "Conceptual roadmap",
+    "roadmapTitle": "How the product could evolve.",
+    "ctaTitle": "Want to see how it is built?",
+    "tryDemo": "Try NutriSmart Coach"
+  },
+  "lac": {
+    "badge": "Clinical management system",
+    "subtitle": "Web system to digitize the daily management of a dental clinic through secure authentication and clinical tools for patients and medical staff.",
+    "problemTitle": "Data, scheduling, and history should not live separately.",
+    "solutionTitle": "A system to coordinate patients, appointments, and clinical work.",
+    "roles": "Roles",
+    "rolesTitle": "Two experiences connected by the same database.",
+    "mainFlow": "Main flow",
+    "mainFlowTitle": "From access to clinical documentation.",
+    "features": "Features",
+    "featuresTitle": "Modules that support daily operations.",
+    "architectureTitle": "A role-protected SPA connected to Supabase.",
+    "architectureAria": "User, React and Vite, React Router, Context API, Supabase Auth, Supabase Database, Doctor and patient panel",
+    "architectureDescription": "The application separates interface, routes, authentication context, Supabase Auth, and data to deliver different panels based on the authenticated role.",
+    "decisionsTitle": "Choices justified by the code.",
+    "challengesTitle": "Risks specific to a tool with roles and related data.",
+    "learningsTitle": "Managing a product also means organizing responsibilities.",
+    "future": "Future evolution",
+    "futureTitle": "Possible improvements, not current features.",
+    "ctaTitle": "A system designed to organize clinical work."
+  },
+  "vhsflix": {
+    "badge": "Full Stack project",
+    "subtitle": "Streaming-inspired platform that combines movie exploration, authentication, persistent favorites, and external API consumption.",
+    "problemTitle": "Exploring movies requires coordinating APIs, routes, and user data.",
+    "solutionTitle": "A streaming experience connected to a custom API.",
+    "mainFlow": "Main flow",
+    "mainFlowTitle": "From exploration to persisted data.",
+    "features": "Features",
+    "featuresTitle": "Real features connected across interface, API, and database.",
+    "architectureTitle": "React frontend, Flask API, and external services connected.",
+    "architectureAria": "User, React and Vite, React Router, Context API and useReducer, fetch services, Flask API, JWT Auth, SQLAlchemy, Render and Vercel",
+    "architectureDescription": "The application combines a React SPA with a custom Flask API, relational data through SQLAlchemy, JWT authentication, and external services for movies, trailers, comments, and email.",
+    "decisionsTitle": "Choices justified by the code.",
+    "challengesTitle": "Problems specific to an app connected to APIs and user data.",
+    "proof": "What it demonstrates",
+    "proofTitle": "Technical capabilities visible in the project.",
+    "learningsTitle": "Connecting user experience, APIs, and persistence.",
+    "nextStepsTitle": "Realistic improvements, not current features.",
+    "ctaTitle": "A Full Stack app for exploring movies and user data."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The requested route does not exist in this portfolio.",
+    "home": "Back home",
+    "projects": "View projects"
+  },
+  "common": {
+    "demo": "Demo"
+  },
+  "seo": {
+    "defaultDescription": "Portfolio of Alexis Rodriguez, Full Stack Developer with projects in React, Node.js, Python, Supabase, PostgreSQL, REST APIs, and AI integration.",
+    "home": {
+      "title": "Alexis Rodríguez | Full Stack Developer",
+      "description": "Portfolio of Alexis Rodriguez, Full Stack Developer with projects in React, Node.js, Python, Supabase, REST APIs, and artificial intelligence."
+    },
+    "projects": {
+      "title": "Projects | Alexis Rodríguez",
+      "description": "Projects by Alexis Rodriguez: NutriSmart Coach, Consultorio Odontológico LAC, VHSFlix, and other applications with React, APIs, data, and AI."
+    },
+    "about": {
+      "title": "About me | Alexis Rodríguez",
+      "description": "How Alexis Rodriguez works as a Full Stack Developer: UX, technical structure, APIs, data, and artificial intelligence."
+    },
+    "experience": {
+      "title": "Experience | Alexis Rodríguez",
+      "description": "Alexis Rodriguez's practical experience through Full Stack projects and previous work experience with transferable skills."
+    },
+    "technologies": {
+      "title": "Technologies | Alexis Rodríguez",
+      "description": "Alexis Rodriguez's stack: React, Node.js, Python, Supabase, PostgreSQL, REST APIs, Google Gemini, Vercel, Render, and Capacitor."
+    },
+    "contact": {
+      "title": "Contact | Alexis Rodríguez",
+      "description": "Professional contact for Alexis Rodriguez: email, LinkedIn, GitHub, CV, and WhatsApp."
+    },
+    "notFound": {
+      "title": "Page not found | Alexis Rodríguez",
+      "description": "Page not found in Alexis Rodriguez's portfolio."
+    }
+  }
+}

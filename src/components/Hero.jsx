@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   FaArrowRight,
   FaDownload,
@@ -35,6 +36,7 @@ const socialLinkClass =
   "group inline-flex min-h-12 w-full max-w-[17rem] items-center justify-center gap-3 rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-sm font-bold text-cyan-50/85 backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617] sm:w-auto sm:max-w-none";
 
 export default function Hero() {
+  const { t } = useTranslation();
   const canvasRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -269,9 +271,7 @@ export default function Hero() {
   transition={{ duration: 0.35, ease: "easeOut" }}
   className="mx-auto mt-8 max-w-2xl text-base font-light leading-7 text-cyan-50/80 sm:text-lg md:mt-11 md:text-2xl lg:mx-0"
 >
-  Desarrollo aplicaciones web completas, desde interfaces modernas hasta APIs,
-  autenticación, bases de datos relacionales e integraciones con inteligencia
-  artificial.
+  {t("hero.description")}
 </motion.p>
 
          
@@ -310,7 +310,7 @@ export default function Hero() {
     className={heroButtonPrimary}
   >
     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 opacity-0 transition group-hover:opacity-100" />
-    <span className="relative">Ver proyectos</span>
+    <span className="relative">{t("hero.viewProjects")}</span>
     <FaArrowRight className="relative h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
   </Link>
 
@@ -319,7 +319,7 @@ export default function Hero() {
     className={heroButtonSecondary}
   >
     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-cyan-300/20 to-white/0 opacity-0 transition group-hover:opacity-100" />
-    <span className="relative">Contactar</span>
+    <span className="relative">{t("hero.contact")}</span>
     <FaArrowRight className="relative h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
   </Link>
 
@@ -327,10 +327,10 @@ export default function Hero() {
     href={profile.cvPath}
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Abrir CV de Alexis Rodriguez en PDF"
+    aria-label={t("hero.openCv")}
     className={heroButtonSecondary}
   >
-    <span className="relative">Ver CV</span>
+    <span className="relative">{t("hero.viewCv")}</span>
     <FaDownload className="relative h-4 w-4 transition group-hover:translate-y-0.5" aria-hidden="true" />
   </a>
 </motion.div>
@@ -342,7 +342,7 @@ export default function Hero() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Abrir ${link.label} de Alexis Rodriguez`}
+                aria-label={t("navbar.openSocial", { label: link.label })}
                 className={socialLinkClass}
               >
                 <link.icon className="h-5 w-5" aria-hidden="true" />
@@ -389,7 +389,7 @@ export default function Hero() {
                 stack: "React + Node.js + Python + Supabase",
               </p>
               <p className="ml-5 text-pink-200">
-                focus: "producto web y mobile",
+                focus: "{t("hero.codeFocus")}",
               </p>
               <p className="text-purple-300">{"}"}</p>
             </div>

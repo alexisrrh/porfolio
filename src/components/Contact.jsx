@@ -1,4 +1,5 @@
 import { profile } from "../data/profile";
+import { useTranslation } from "react-i18next";
 
 function WhatsAppIcon() {
   return (
@@ -49,71 +50,70 @@ function DocumentIcon() {
   );
 }
 
-const actions = [
-  {
-    label: "Email",
-    text: profile.email,
-    href: `mailto:${profile.email}`,
-    icon: <MailIcon />,
-    className:
-      "border border-cyan-300/20 bg-cyan-300/10 hover:border-cyan-300/60 hover:bg-cyan-300/15 hover:shadow-[0_0_35px_rgba(34,211,238,0.35)]",
-  },
-  {
-    label: "LinkedIn",
-    text: "Perfil profesional",
-    href: profile.linkedin,
-    icon: <LinkedinIcon />,
-    className:
-      "border border-blue-300/20 bg-blue-400/15 hover:border-blue-300/60 hover:bg-blue-400/20 hover:shadow-[0_0_35px_rgba(96,165,250,0.35)]",
-  },
-  {
-    label: "GitHub",
-    text: "Ver código",
-    href: profile.github,
-    icon: <GitHubIcon />,
-    className:
-      "border border-white/15 bg-white/10 hover:bg-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.18)]",
-  },
-  {
-    label: "CV",
-    text: "PDF actualizado",
-    href: profile.cvPath,
-    icon: <DocumentIcon />,
-    className:
-      "border border-purple-300/20 bg-purple-400/15 hover:border-purple-300/60 hover:bg-purple-400/20 hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]",
-  },
-  {
-    label: "WhatsApp",
-    text: "Contacto directo",
-    href: profile.whatsapp,
-    icon: <WhatsAppIcon />,
-    className:
-      "bg-green-600/90 hover:bg-green-500 hover:shadow-[0_0_35px_rgba(34,197,94,0.55)]",
-  },
-];
-
 export default function Contact() {
+  const { t } = useTranslation();
+  const actions = [
+    {
+      label: "Email",
+      text: profile.email,
+      href: `mailto:${profile.email}`,
+      icon: <MailIcon />,
+      className:
+        "border border-cyan-300/20 bg-cyan-300/10 hover:border-cyan-300/60 hover:bg-cyan-300/15 hover:shadow-[0_0_35px_rgba(34,211,238,0.35)]",
+    },
+    {
+      label: "LinkedIn",
+      text: t("contact.professionalProfile"),
+      href: profile.linkedin,
+      icon: <LinkedinIcon />,
+      className:
+        "border border-blue-300/20 bg-blue-400/15 hover:border-blue-300/60 hover:bg-blue-400/20 hover:shadow-[0_0_35px_rgba(96,165,250,0.35)]",
+    },
+    {
+      label: "GitHub",
+      text: t("contact.viewCode"),
+      href: profile.github,
+      icon: <GitHubIcon />,
+      className:
+        "border border-white/15 bg-white/10 hover:bg-white/15 hover:shadow-[0_0_30px_rgba(255,255,255,0.18)]",
+    },
+    {
+      label: "CV",
+      text: t("contact.updatedPdf"),
+      href: profile.cvPath,
+      icon: <DocumentIcon />,
+      className:
+        "border border-purple-300/20 bg-purple-400/15 hover:border-purple-300/60 hover:bg-purple-400/20 hover:shadow-[0_0_35px_rgba(168,85,247,0.35)]",
+    },
+    {
+      label: "WhatsApp",
+      text: t("contact.directContact"),
+      href: profile.whatsapp,
+      icon: <WhatsAppIcon />,
+      className:
+        "bg-green-600/90 hover:bg-green-500 hover:shadow-[0_0_35px_rgba(34,197,94,0.55)]",
+    },
+  ];
+
   return (
     <section id="contact" className="relative overflow-hidden bg-[#020617] px-6 py-32 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.16),transparent_32%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
         <p className="text-2xl  font-black uppercase tracking-[0.4em] text-cyan-300">
-          Contacto
+          {t("contact.eyebrow")}
         </p>
 
         <h2 className="mt-5 text-5xl font-black leading-[0.95] tracking-[-0.06em] md:text-7xl">
-          Contacto y evaluación
+          {t("contact.titleLine1")}
           <br />
           <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-            profesional.
+            {t("contact.titleHighlight")}
           </span>
         </h2>
 
         <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-cyan-50/70">
-          Puedes revisar mi CV, código y proyectos, o escribirme para
-          oportunidades Full Stack junior, Frontend React y desarrollo web en
-          España o remoto.
+          {t("contact.description")}
         </p>
 <div className="mt-12 flex flex-wrap justify-center gap-4">
   {actions.map((item) => (

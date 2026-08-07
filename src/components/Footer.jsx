@@ -7,26 +7,29 @@ import {
   FaGithub,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.png";
 import { profile } from "../data/profile";
 
 const links = [
-  { name: "Proyectos", to: "/projects" },
-  { name: "Experiencia", to: "/experience" },
-  { name: "Contacto", to: "/contact" },
+  { key: "navbar.projects", to: "/projects" },
+  { key: "navbar.experience", to: "/experience" },
+  { key: "navbar.contact", to: "/contact" },
 ];
 
 const socials = [
   { name: "Email", href: `mailto:${profile.email}`, icon: FaEnvelope },
   { name: "LinkedIn", href: profile.linkedin, icon: FaLinkedinIn },
   { name: "GitHub", href: profile.github, icon: FaGithub },
-  { name: "Ver CV", href: profile.cvPath, icon: FaFilePdf },
+  { key: "hero.viewCv", href: profile.cvPath, icon: FaFilePdf },
 ];
 
 const footerLinkClass =
   "group inline-flex min-h-11 items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/10 px-4 py-2.5 text-sm font-bold text-cyan-50/70 transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="relative overflow-hidden border-t border-cyan-300/10 bg-[#020617] px-6 py-10 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(34,211,238,0.10),transparent_32%),radial-gradient(circle_at_80%_100%,rgba(168,85,247,0.10),transparent_32%)]" />
@@ -59,8 +62,7 @@ export default function Footer() {
               </Link>
 
               <p className="mt-5 max-w-md text-sm leading-6 text-cyan-50/55">
-                {profile.name} construye proyectos web con React, Node.js,
-                Python y Supabase, cuidando interfaz, datos, APIs y despliegue.
+                {t("footer.description", { name: profile.name })}
               </p>
 
               <div className="mt-4 inline-flex max-w-md items-center gap-3 rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-2.5 text-sm font-bold text-emerald-50/85">
@@ -68,32 +70,31 @@ export default function Footer() {
                   className="h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.55)]"
                   aria-hidden="true"
                 />
-                Disponible para oportunidades Full Stack y Frontend · España /
-                Remoto
+                {t("footer.availability")}
               </div>
 
               <Link
                 to="/contact"
                 className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-2xl border border-cyan-300/25 bg-cyan-300/10 px-4 py-2.5 text-sm font-black text-white transition duration-200 hover:-translate-y-0.5 hover:border-cyan-300/55 hover:bg-cyan-300/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617]"
               >
-                Contactar
+                {t("hero.contact")}
                 <FaArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-300">
-                Perfil
+                {t("footer.profile")}
               </p>
 
               <div className="mt-4 grid gap-2.5">
                 {links.map((link) => (
                   <Link
-                    key={link.name}
+                    key={link.key}
                     to={link.to}
                     className="text-sm font-semibold text-cyan-50/60 transition hover:translate-x-1 hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
                   >
-                    {link.name}
+                    {t(link.key)}
                   </Link>
                 ))}
               </div>
@@ -101,13 +102,13 @@ export default function Footer() {
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-purple-300">
-                Conecta
+                {t("footer.connect")}
               </p>
 
               <div className="mt-4 grid gap-2.5">
                 {socials.map((item) => (
                   <a
-                    key={item.name}
+                    key={item.key ?? item.name}
                     href={item.href}
                     target={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "noopener noreferrer" : undefined}
@@ -115,7 +116,7 @@ export default function Footer() {
                   >
                     <span className="flex items-center gap-3">
                       <item.icon className="h-4 w-4" aria-hidden="true" />
-                      {item.name}
+                      {item.key ? t(item.key) : item.name}
                     </span>
                     {item.href.startsWith("http") || item.href.endsWith(".pdf") ? (
                       <FaExternalLinkAlt
@@ -136,8 +137,8 @@ export default function Footer() {
 
           <div className="mt-7 border-t border-white/10 pt-5">
          <div className="flex flex-col items-center justify-center gap-5 text-center md:flex-row md:justify-between md:text-left">
-              <p>© 2026 Alexis.dev. Todos los derechos reservados.</p>
-              <p>Diseñado y desarrollado con React + Tailwind.</p>
+              <p>{t("footer.rights")}</p>
+              <p>{t("footer.builtWith")}</p>
             </div>
           </div>
         </div>

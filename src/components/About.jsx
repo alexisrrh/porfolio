@@ -1,29 +1,13 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import fotoPerfil from "../assets/foto-perfil.jpeg";
 
-const strengths = [
-  {
-    title: "Entender antes de construir",
-    text: "Primero aclaro el problema, el flujo de usuario y las responsabilidades técnicas.",
-  },
-  {
-    title: "Resolver flujos completos",
-    text: "Trabajo con autenticación, datos, APIs, carga de imágenes, errores y estados asíncronos.",
-  },
-  {
-    title: "Aprender y adaptarme",
-    text: "Integro nuevas herramientas cuando el proyecto lo necesita y documento decisiones para seguir avanzando.",
-  },
-];
-
-const workPrinciples = [
-  "Comprender el problema",
-  "Separar responsabilidades",
-  "Cuidar la experiencia de usuario",
-  "Mantener orden técnico",
-];
-
 export default function About() {
+  const { t } = useTranslation();
+  const strengths = t("about.strengths", { returnObjects: true });
+  const workPrinciples = t("about.principles", { returnObjects: true });
+  const paragraphs = t("about.paragraphs", { returnObjects: true });
+
   return (
     <section
       id="about"
@@ -39,13 +23,13 @@ export default function About() {
           className="mb-20 text-center"
         >
           <p className="text-3xl font-black uppercase tracking-[0.4em] text-cyan-300">
-            Sobre mí
+            {t("about.eyebrow")}
           </p>
 
           <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-            Cómo trabajo como{" "}
+            {t("about.titlePrefix")}{" "}
             <span className="bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              desarrollador Full Stack
+              {t("about.titleHighlight")}
             </span>
           </h2>
         </motion.div>
@@ -65,7 +49,7 @@ export default function About() {
               <div className="relative overflow-hidden rounded-[1.5rem] bg-[#020617]">
                 <img
                   src={fotoPerfil}
-                  alt="Foto de Alexis"
+                  alt={t("about.profileAlt")}
                   className="h-[430px] w-full object-cover object-top"
                 />
 
@@ -92,30 +76,15 @@ export default function About() {
               viewport={{ once: true }}
               className="space-y-6 text-lg leading-8 text-cyan-50/80"
             >
-              <p className="text-center">
-                Soy desarrollador Full Stack y construyo aplicaciones web
-                completas con React, Node.js y Python. Me gusta comprender el
-                problema antes de implementar una solución, separar
-                responsabilidades y cuidar tanto la experiencia del usuario
-                como la estructura técnica.
-              </p>
-
-              <p className="text-center">
-                He trabajado con autenticación, APIs, bases de datos, carga de
-                imágenes, estados asíncronos e integraciones con inteligencia
-                artificial.
-              </p>
-
-              <p className="text-center">
-                Mi experiencia laboral previa también me ha enseñado a
-                colaborar, cumplir plazos, resolver incidencias y mantener la
-                calidad en entornos exigentes.
-              </p>
+              {paragraphs.map((paragraph) => (
+                <p key={paragraph} className="text-center">
+                  {paragraph}
+                </p>
+              ))}
 
               <div className="mt-6 rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-5 text-center">
                 <p className="text-sm font-semibold text-cyan-200">
-                  Me interesa construir productos útiles, responsive y
-                  entendibles, cuidando el recorrido completo de una aplicación.
+                  {t("about.callout")}
                 </p>
               </div>
             </motion.div>
@@ -149,7 +118,7 @@ export default function About() {
                 className="rounded-[1.5rem] border border-white/10 bg-[#020617]/70 p-5"
               >
                 <p className="mb-4 text-sm font-black uppercase tracking-[0.3em] text-purple-300 text-center">
-                  Forma de trabajo
+                  {t("about.workStyle")}
                 </p>
 
              <div className="flex flex-wrap justify-center gap-3 text-center">

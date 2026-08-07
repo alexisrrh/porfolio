@@ -1,12 +1,15 @@
 import Projects from "../components/Projects";
 import Seo from "../components/Seo";
+import { useTranslation } from "react-i18next";
 
 export default function ProjectsPage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Seo
-        title="Proyectos | Alexis Rodríguez"
-        description="Proyectos de Alexis Rodriguez: NutriSmart Coach, Consultorio Odontológico LAC, VHSFlix y otras aplicaciones con React, APIs, datos e IA."
+        title={t("seo.projects.title")}
+        description={t("seo.projects.description")}
       />
       <Projects />
     </>

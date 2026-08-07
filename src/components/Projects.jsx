@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { featuredProjects, projects } from "../data/projects";
+import { localized } from "../utils/localized";
 
 const carouselIntervalMs = 1700;
 
@@ -29,6 +31,8 @@ function usePrefersReducedMotion() {
 }
 
 function ProjectCard({ project, compact = false }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || i18n.language;
   const [currentImage, setCurrentImage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(
@@ -44,6 +48,8 @@ function ProjectCard({ project, compact = false }) {
   const remainingTechCount = project.tech.length - visibleTech.length;
   const visibleProof = project.proof?.slice(0, 3) ?? [];
   const isMainProject = project.slug === "nutrismart-coach";
+  const title = localized(project.title, language);
+  const description = localized(project.description, language);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -110,7 +116,10 @@ function ProjectCard({ project, compact = false }) {
         <div className="relative aspect-[16/9] min-w-0 shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#020617]/80">
           <img
             src={activeImage?.src}
-            alt={activeImage?.alt ?? `Vista previa de ${project.title}`}
+            alt={
+              localized(activeImage?.alt, language) ||
+              t("projects.previewAlt", { title })
+            }
             loading="lazy"
             className="h-full w-full transition duration-500 group-hover:scale-[1.03]"
             style={{
@@ -126,7 +135,7 @@ function ProjectCard({ project, compact = false }) {
                 type="button"
                 onClick={showPreviousImage}
                 className="absolute left-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#020617]/75 text-lg font-black text-white shadow-lg backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:flex"
-                aria-label={`Imagen anterior de ${project.title}`}
+                aria-label={t("projects.previousImage", { title })}
               >
                 ‹
               </button>
@@ -135,20 +144,20 @@ function ProjectCard({ project, compact = false }) {
                 type="button"
                 onClick={showNextImage}
                 className="absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-[#020617]/75 text-lg font-black text-white shadow-lg backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:flex"
-                aria-label={`Imagen siguiente de ${project.title}`}
+                aria-label={t("projects.nextImage", { title })}
               >
                 ›
               </button>
 
               <div
                 className="absolute bottom-3 left-3 right-3 flex items-center justify-center gap-2 rounded-full border border-white/10 bg-[#020617]/75 px-2.5 py-2 backdrop-blur sm:bottom-4 sm:left-auto sm:right-4"
-                aria-label={`Imágenes de ${project.title}`}
+                aria-label={t("projects.imagesOf", { title })}
               >
                 <button
                   type="button"
                   onClick={showPreviousImage}
                   className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/10 text-sm font-black text-white transition hover:border-cyan-300/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:hidden"
-                  aria-label={`Imagen anterior de ${project.title}`}
+                  aria-label={t("projects.previousImage", { title })}
                 >
                   ‹
                 </button>
@@ -163,7 +172,10 @@ function ProjectCard({ project, compact = false }) {
                         ? "w-7 bg-cyan-300"
                         : "w-2 bg-white/45 hover:bg-white/80"
                     }`}
-                    aria-label={`Ver imagen ${index + 1} de ${project.title}`}
+                    aria-label={t("projects.viewImage", {
+                      count: index + 1,
+                      title,
+                    })}
                     aria-current={currentImage === index ? "true" : undefined}
                   />
                 ))}
@@ -172,7 +184,7 @@ function ProjectCard({ project, compact = false }) {
                   type="button"
                   onClick={showNextImage}
                   className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/10 text-sm font-black text-white transition hover:border-cyan-300/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:hidden"
-                  aria-label={`Imagen siguiente de ${project.title}`}
+                  aria-label={t("projects.nextImage", { title })}
                 >
                   ›
                 </button>
@@ -185,27 +197,27 @@ function ProjectCard({ project, compact = false }) {
           <div className="flex min-h-7 items-start justify-center">
             {isMainProject && (
               <p className="inline-flex max-w-full items-center justify-center rounded-full border border-cyan-200/45 bg-cyan-300/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-100">
-                {project.label}
+                {localized(project.label, language)}
               </p>
             )}
           </div>
 
           <h3 className="mx-auto flex min-h-14 max-w-[22rem] items-center justify-center text-2xl font-black leading-tight tracking-[-0.03em] text-white">
-            {project.title}
+            {title}
           </h3>
 
           <p className="mx-auto max-w-[42rem] text-sm leading-[1.55] text-cyan-50/72">
-            {project.description}
+            {description}
           </p>
 
           <div className="space-y-1.5">
             <div className="flex flex-wrap content-start items-start justify-center gap-1.5">
               {visibleTech.map((tech) => (
                 <span
-                  key={tech}
+                  key={localized(tech, language)}
                   className="rounded-xl border border-white/10 bg-white/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-50/78"
                 >
-                  {tech}
+                  {localized(tech, language)}
                 </span>
               ))}
             </div>
@@ -213,9 +225,13 @@ function ProjectCard({ project, compact = false }) {
               <div className="flex justify-center">
                 <span
                   className="rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-2.5 py-1.5 text-[10px] font-black text-cyan-100"
-                  aria-label={`${remainingTechCount} tecnologías adicionales`}
+                  aria-label={t("projects.additionalTechAria", {
+                    count: remainingTechCount,
+                  })}
                 >
-                  +{remainingTechCount} tecnologías
+                  {t("projects.additionalTech", {
+                    count: remainingTechCount,
+                  })}
                 </span>
               </div>
             )}
@@ -224,15 +240,15 @@ function ProjectCard({ project, compact = false }) {
           {visibleProof.length > 0 && (
             <div className="px-2 py-0.5">
               <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-300/80">
-                Capacidades
+                {t("projects.capabilities")}
               </p>
               <div className="mt-1 flex flex-wrap justify-center gap-1.5">
                 {visibleProof.map((item) => (
                   <span
-                    key={item}
+                    key={localized(item, language)}
                     className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[10px] font-bold text-cyan-50/62"
                   >
-                    {item}
+                    {localized(item, language)}
                   </span>
                 ))}
               </div>
@@ -249,7 +265,7 @@ function ProjectCard({ project, compact = false }) {
                 to={project.caseStudyPath}
                 className={projectButtonPrimary}
               >
-                Caso de estudio
+                {t("projects.caseStudy")}
               </Link>
             )}
 
@@ -268,7 +284,7 @@ function ProjectCard({ project, compact = false }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={projectButtonSecondary}>
-                Código
+                {t("projects.code")}
               </a>
             )}
           </div>
@@ -279,6 +295,8 @@ function ProjectCard({ project, compact = false }) {
 }
 
 export function FeaturedProjects({ compact = false }) {
+  const { t } = useTranslation();
+
   return (
     <section className="relative overflow-hidden bg-[#020617] px-4 py-24 text-white sm:px-6">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(34,211,238,0.2),transparent_30%),radial-gradient(circle_at_85%_45%,rgba(168,85,247,0.18),transparent_32%)]" />
@@ -286,10 +304,10 @@ export function FeaturedProjects({ compact = false }) {
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto mb-12 max-w-4xl text-center">
           <p className="text-sm font-black uppercase tracking-[0.35em] text-cyan-300">
-            Proyectos destacados
+            {t("home.featuredEyebrow")}
           </p>
           <h2 className="mt-4 text-4xl font-black leading-tight md:text-6xl">
-            Productos construidos con React, APIs y datos.
+            {t("home.featuredTitle")}
           </h2>
         </div>
 
@@ -304,6 +322,7 @@ export function FeaturedProjects({ compact = false }) {
 }
 
 export default function Projects() {
+  const { t } = useTranslation();
   const sortedProjects = [
     ...featuredProjects,
     ...projects.filter((project) => !project.featured),
@@ -322,15 +341,13 @@ export default function Projects() {
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto mb-10 max-w-4xl text-center md:mb-12">
           <p className="text-sm font-black uppercase tracking-[0.4em] text-cyan-300">
-            Proyectos
+            {t("projects.eyebrow")}
           </p>
           <h1 className="mx-auto mt-5 max-w-[20rem] text-2xl font-black leading-[1.08] tracking-[-0.02em] sm:max-w-4xl sm:text-4xl md:text-6xl md:leading-[0.95] md:tracking-[-0.04em]">
-            Productos desarrollados con frontend, backend y datos.
+            {t("projects.title")}
           </h1>
           <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-cyan-50/70">
-            Cada proyecto resume qué necesidad aborda, qué tipo de producto es
-            y qué tecnologías principales utiliza. Los destacados enlazan a
-            casos de estudio internos.
+            {t("projects.description")}
           </p>
         </div>
 
