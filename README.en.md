@@ -181,13 +181,13 @@ The goal is to show not only **what I built**, but also **how I approached the t
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/alexisrrh/porfolio.git
+git clone https://github.com/alexisrrh/portafolio.git
 ```
 
 ### 2. Enter the project
 
 ```bash
-cd porfolio
+cd portfolio
 ```
 
 ### 3. Install dependencies

@@ -181,13 +181,13 @@ El objetivo es mostrar no sólo **qué he desarrollado**, sino también **cómo 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/alexisrrh/porfolio.git
+git clone https://github.com/alexisrrh/portafolio.git
 ```
 
 ### 2. Entrar en el proyecto
 
 ```bash
-cd porfolio
+cd portfolio
 ```
 
 ### 3. Instalar las dependencias
