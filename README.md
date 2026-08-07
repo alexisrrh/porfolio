@@ -1,101 +1,101 @@
 # Alexis Rodríguez — Full Stack Developer
 
-[🇪🇸 Versión en español](./README.md.es)
+[🇬🇧 English version](./README.en.md)
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-success)](https://portafolio-alexis-chi.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?logo=github)](https://github.com/alexisrrh)
 
-Personal developer portfolio showcasing my main projects, technical skills and growth as a **Full Stack Developer**.
+Portfolio personal donde presento mis principales proyectos, habilidades técnicas y evolución como **Full Stack Developer**.
 
-I primarily work with **React, Node.js, Python and PostgreSQL**, building applications across the full stack — from user interfaces and user experience to APIs, authentication, databases and integrations with external services and artificial intelligence.
+Trabajo principalmente con **React, Node.js, Python y PostgreSQL**, desarrollando aplicaciones desde la interfaz y experiencia de usuario hasta APIs, autenticación, bases de datos e integraciones con servicios externos e inteligencia artificial.
 
-🌐 **[View live portfolio](https://portafolio-alexis-chi.vercel.app/)**
-
----
-
-## 👨‍💻 About the project
-
-This repository contains the source code for my personal developer portfolio.
-
-The goal is not simply to list the technologies I use, but to demonstrate through complete projects how I approach different areas of Full Stack development:
-
-* React interface development.
-* REST API design and consumption.
-* Authentication and authorization.
-* Relational databases.
-* State management.
-* External service integrations.
-* Artificial intelligence.
-* Responsive development.
-* Application deployment.
-
-The three main projects also include detailed **technical case studies** documenting the problem, solution, architecture, technical decisions, challenges, lessons learned and potential improvements.
+🌐 **[Ver portfolio](https://portafolio-alexis-chi.vercel.app/)**
 
 ---
 
-## 🚀 Featured Projects
+## 👨‍💻 Sobre el proyecto
+
+Este repositorio contiene el código fuente de mi portfolio como desarrollador.
+
+El objetivo no es únicamente mostrar las tecnologías que utilizo, sino demostrar mediante proyectos completos cómo abordo diferentes áreas del desarrollo Full Stack:
+
+* Desarrollo de interfaces con React.
+* Diseño y consumo de APIs REST.
+* Autenticación y autorización.
+* Bases de datos relacionales.
+* Gestión de estado.
+* Integraciones con servicios externos.
+* Inteligencia artificial.
+* Desarrollo responsive.
+* Deployment de aplicaciones.
+
+Los tres proyectos principales cuentan además con **casos de estudio técnicos**, donde documento el problema, la solución, arquitectura, decisiones técnicas, retos, aprendizajes y posibles mejoras.
+
+---
+
+## 🚀 Proyectos destacados
 
 ### 🥗 NutriSmart Coach
 
-Full Stack nutrition tracking application that uses artificial intelligence to analyze food from images and simplify nutrition tracking.
+Aplicación Full Stack de seguimiento nutricional que utiliza inteligencia artificial para analizar alimentos a partir de imágenes y facilitar el registro de la alimentación.
 
 **Stack**
 
 `React` · `Node.js` · `Express` · `Supabase` · `PostgreSQL` · `Gemini AI` · `Capacitor`
 
-**Technical highlights**
+**Aspectos técnicos**
 
-* Gemini AI integration.
-* API developed with Node.js and Express.
-* Authentication and persistence with Supabase.
-* Image processing and optimization.
-* Nutrition history and tracking.
-* Android integration using Capacitor.
-* Independent frontend and backend deployment.
+* Integración con Gemini AI.
+* API desarrollada con Node.js y Express.
+* Autenticación y persistencia con Supabase.
+* Procesamiento y optimización de imágenes.
+* Historial y seguimiento nutricional.
+* Adaptación de la aplicación para Android mediante Capacitor.
+* Deploy independiente de frontend y backend.
 
 ---
 
-### 🦷 LAC Dental Clinic
+### 🦷 Consultorio Odontológico LAC
 
-Management platform for a dental clinic with different workflows and permissions for patients and professionals.
+Sistema de gestión para una clínica odontológica con diferentes flujos y permisos para pacientes y profesionales.
 
 **Stack**
 
 `React` · `Vite` · `Supabase` · `PostgreSQL` · `React Router`
 
-**Technical highlights**
+**Aspectos técnicos**
 
-* Authentication and account recovery.
-* Role-based access.
-* Protected routes based on permissions.
-* Patient management.
-* Appointment management and availability.
-* Clinical history.
-* Interactive odontogram.
-* Budget and consent management.
+* Autenticación y recuperación de cuenta.
+* Sistema de roles.
+* Rutas protegidas según permisos.
+* Gestión de pacientes.
+* Gestión y disponibilidad de citas.
+* Historial clínico.
+* Odontograma interactivo.
+* Presupuestos y consentimientos.
 
 ---
 
 ### 🎬 VHSFlix
 
-Full Stack application for discovering audiovisual content, managing users and storing favorites through external API integrations.
+Aplicación Full Stack para explorar contenido audiovisual, gestionar usuarios y almacenar contenido favorito mediante APIs externas.
 
 **Stack**
 
 `React` · `Python` · `Flask` · `SQLAlchemy` · `JWT` · `TMDB API`
 
-**Technical highlights**
+**Aspectos técnicos**
 
-* REST API developed with Flask.
-* JWT authentication.
-* Persistence with SQLAlchemy.
-* TMDB and external service integrations.
-* State management with Context API and `useReducer`.
-* User-based favorites system.
+* API REST desarrollada con Flask.
+* Autenticación mediante JWT.
+* Persistencia con SQLAlchemy.
+* Integración con TMDB y servicios externos.
+* Gestión de estado con Context API y `useReducer`.
+* Sistema de favoritos asociado al usuario.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Stack tecnológico
 
 ### Frontend
 
@@ -105,36 +105,36 @@ Full Stack application for discovering audiovisual content, managing users and s
 
 `Node.js` · `Express` · `Python` · `Flask` · `REST APIs` · `JWT`
 
-### Databases & Services
+### Bases de datos y servicios
 
 `PostgreSQL` · `Supabase` · `SQLAlchemy` · `Gemini AI` · `TMDB API`
 
-### Tools
+### Herramientas
 
 `Git` · `GitHub` · `Vite` · `Vercel` · `Render` · `Capacitor` · `ESLint`
 
 ---
 
-## 🧠 Technical Skills
+## 🧠 Habilidades técnicas
 
-Through these projects, I have worked with:
+A través de estos proyectos he trabajado con:
 
-* Frontend/backend architecture.
-* REST API design and consumption.
-* Authentication and role-based authorization.
-* Data modeling and persistence.
-* External API integrations.
-* React state management.
-* Protected routes.
-* Forms and validation.
-* Responsive web development.
-* Artificial intelligence integrations.
-* Full Stack application deployment.
-* Debugging and problem solving.
+* Arquitectura frontend/backend.
+* Diseño y consumo de APIs REST.
+* Autenticación y autorización basada en roles.
+* Modelado y persistencia de datos.
+* Integración con APIs externas.
+* Gestión de estado en React.
+* Protección de rutas.
+* Formularios y validación.
+* Responsive design.
+* Integraciones con inteligencia artificial.
+* Deployment de aplicaciones Full Stack.
+* Debugging y resolución de problemas.
 
 ---
 
-## 🏗️ Portfolio Architecture
+## 🏗️ Arquitectura del portfolio
 
 ```text
 src/
@@ -148,31 +148,31 @@ src/
 └── main.jsx
 ```
 
-Project and case study data are separated from visual components to improve maintainability and reusability.
+El contenido de los proyectos y sus casos de estudio está separado de los componentes visuales para facilitar el mantenimiento y la reutilización.
 
 ---
 
-## ⚙️ Local Setup
+## ⚙️ Instalación local
 
-Clone the repository:
+Clona el repositorio:
 
 ```bash
 git clone https://github.com/alexisrrh/porfolio.git
 ```
 
-Enter the project:
+Entra en el proyecto:
 
 ```bash
 cd porfolio
 ```
 
-Install dependencies:
+Instala las dependencias:
 
 ```bash
 npm install
 ```
 
-Start the development server:
+Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
@@ -189,24 +189,24 @@ npm run lint
 npm run preview
 ```
 
-| Command           | Description                        |
-| ----------------- | ---------------------------------- |
-| `npm run dev`     | Starts the development environment |
-| `npm run build`   | Creates the production build       |
-| `npm run lint`    | Runs ESLint                        |
-| `npm run preview` | Previews the production build      |
+| Comando           | Descripción                         |
+| ----------------- | ----------------------------------- |
+| `npm run dev`     | Inicia el entorno de desarrollo     |
+| `npm run build`   | Genera el build de producción       |
+| `npm run lint`    | Ejecuta ESLint                      |
+| `npm run preview` | Previsualiza el build de producción |
 
 ---
 
-## 🎯 Career Focus
+## 🎯 Objetivo profesional
 
-I'm currently continuing to develop Full Stack projects while deepening my knowledge of **architecture, testing, security, performance and software development best practices**.
+Actualmente continúo desarrollando proyectos Full Stack mientras profundizo en **arquitectura, testing, seguridad, rendimiento y buenas prácticas de desarrollo**.
 
-I'm looking for opportunities where I can contribute my skills in **React and Full Stack development**, continue growing within a professional engineering team and participate in building real products.
+Busco oportunidades donde pueda aportar mis conocimientos en **React y desarrollo Full Stack**, continuar creciendo dentro de un equipo profesional y participar en el desarrollo de productos reales.
 
 ---
 
-## 📬 Contact
+## 📬 Contacto
 
 🌐 **Portfolio:** [portafolio-alexis-chi.vercel.app](https://portafolio-alexis-chi.vercel.app/)
 
@@ -214,4 +214,4 @@ I'm looking for opportunities where I can contribute my skills in **React and Fu
 
 ---
 
-Built with **React + Vite** and deployed on **Vercel**.
+Desarrollado con **React + Vite** y desplegado en **Vercel**.
