@@ -1,35 +1,19 @@
 # Alexis Rodríguez — Full Stack Developer
 
-[🇬🇧 English version](./README.en.md)
+[🇬🇧 English version](./README.md)
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success)](https://portafolio-alexis-chi.vercel.app/)
-[![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?logo=github)](https://github.com/alexisrrh)
+Full Stack Developer enfocado en desarrollar aplicaciones web completas con **React, Node.js, Python y PostgreSQL**.
 
-Portfolio personal donde presento mis principales proyectos, habilidades técnicas y evolución como **Full Stack Developer**.
+Trabajo en todo el stack: desde interfaces responsive hasta APIs REST, autenticación, bases de datos relacionales, servicios externos e integraciones con inteligencia artificial.
 
-Trabajo principalmente con **React, Node.js, Python y PostgreSQL**, desarrollando aplicaciones desde la interfaz y experiencia de usuario hasta APIs, autenticación, bases de datos e integraciones con servicios externos e inteligencia artificial.
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-22c55e?style=flat-square)](https://portafolio-alexis-chi.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?style=flat-square&logo=github)](https://github.com/alexisrrh)
 
-🌐 **[Ver portfolio](https://portafolio-alexis-chi.vercel.app/)**
+🌐 **[Ver Portfolio](https://portafolio-alexis-chi.vercel.app/)**
 
 ---
 
-## 👨‍💻 Sobre el proyecto
-
-Este repositorio contiene el código fuente de mi portfolio como desarrollador.
-
-El objetivo no es únicamente mostrar las tecnologías que utilizo, sino demostrar mediante proyectos completos cómo abordo diferentes áreas del desarrollo Full Stack:
-
-* Desarrollo de interfaces con React.
-* Diseño y consumo de APIs REST.
-* Autenticación y autorización.
-* Bases de datos relacionales.
-* Gestión de estado.
-* Integraciones con servicios externos.
-* Inteligencia artificial.
-* Desarrollo responsive.
-* Deployment de aplicaciones.
-
-Los tres proyectos principales cuentan además con **casos de estudio técnicos**, donde documento el problema, la solución, arquitectura, decisiones técnicas, retos, aprendizajes y posibles mejoras.
+![Portfolio de Alexis Rodríguez](./public/preview.png)
 
 ---
 
@@ -37,7 +21,7 @@ Los tres proyectos principales cuentan además con **casos de estudio técnicos*
 
 ### 🥗 NutriSmart Coach
 
-Aplicación Full Stack de seguimiento nutricional que utiliza inteligencia artificial para analizar alimentos a partir de imágenes y facilitar el registro de la alimentación.
+Aplicación Full Stack de seguimiento nutricional que utiliza **inteligencia artificial para analizar alimentos a partir de imágenes**, facilitando el registro de la alimentación y el seguimiento nutricional del usuario.
 
 **Stack**
 
@@ -45,19 +29,25 @@ Aplicación Full Stack de seguimiento nutricional que utiliza inteligencia artif
 
 **Aspectos técnicos**
 
-* Integración con Gemini AI.
-* API desarrollada con Node.js y Express.
-* Autenticación y persistencia con Supabase.
-* Procesamiento y optimización de imágenes.
-* Historial y seguimiento nutricional.
-* Adaptación de la aplicación para Android mediante Capacitor.
-* Deploy independiente de frontend y backend.
+- Análisis de alimentos mediante Gemini AI.
+- API REST desarrollada con Node.js y Express.
+- Autenticación y persistencia de datos con Supabase.
+- Procesamiento y optimización de imágenes antes del análisis.
+- Historial y seguimiento nutricional.
+- Adaptación de la aplicación web para Android mediante Capacitor.
+- Deploy independiente de frontend y backend.
+
+**Qué demuestra este proyecto**
+
+Arquitectura Full Stack, integración de inteligencia artificial, procesamiento de imágenes, autenticación, datos relacionales, comunicación mediante APIs y desarrollo multiplataforma.
+
+➡️ **[Ver Case Study](https://portafolio-alexis-chi.vercel.app/projects/nutrismart-coach)**
 
 ---
 
 ### 🦷 Consultorio Odontológico LAC
 
-Sistema de gestión para una clínica odontológica con diferentes flujos y permisos para pacientes y profesionales.
+Plataforma de gestión para una clínica odontológica diseñada alrededor de diferentes flujos y permisos para **pacientes y profesionales sanitarios**.
 
 **Stack**
 
@@ -65,20 +55,26 @@ Sistema de gestión para una clínica odontológica con diferentes flujos y perm
 
 **Aspectos técnicos**
 
-* Autenticación y recuperación de cuenta.
-* Sistema de roles.
-* Rutas protegidas según permisos.
-* Gestión de pacientes.
-* Gestión y disponibilidad de citas.
-* Historial clínico.
-* Odontograma interactivo.
-* Presupuestos y consentimientos.
+- Autenticación y recuperación de cuenta.
+- Sistema de roles para pacientes y profesionales.
+- Rutas protegidas según permisos.
+- Gestión de pacientes.
+- Gestión de citas y validación de disponibilidad.
+- Historial clínico.
+- Odontograma interactivo.
+- Gestión de presupuestos y consentimientos.
+
+**Qué demuestra este proyecto**
+
+Autorización basada en roles, modelado de datos relacionales, flujos protegidos, formularios complejos y lógica de negocio.
+
+➡️ **[Ver Case Study](https://portafolio-alexis-chi.vercel.app/projects/consultorio-lac)**
 
 ---
 
 ### 🎬 VHSFlix
 
-Aplicación Full Stack para explorar contenido audiovisual, gestionar usuarios y almacenar contenido favorito mediante APIs externas.
+Aplicación Full Stack para descubrir contenido audiovisual, gestionar usuarios y almacenar favoritos mediante integraciones con APIs externas.
 
 **Stack**
 
@@ -86,16 +82,22 @@ Aplicación Full Stack para explorar contenido audiovisual, gestionar usuarios y
 
 **Aspectos técnicos**
 
-* API REST desarrollada con Flask.
-* Autenticación mediante JWT.
-* Persistencia con SQLAlchemy.
-* Integración con TMDB y servicios externos.
-* Gestión de estado con Context API y `useReducer`.
-* Sistema de favoritos asociado al usuario.
+- API REST desarrollada con Flask.
+- Autenticación mediante JWT.
+- Persistencia de datos utilizando SQLAlchemy.
+- Integración con TMDB y servicios externos.
+- Gestión global del estado mediante Context API y `useReducer`.
+- Sistema de favoritos asociado al usuario.
+
+**Qué demuestra este proyecto**
+
+Desarrollo backend con Python, APIs REST, autenticación, persistencia mediante ORM, integración con APIs externas y gestión de estado en React.
+
+➡️ **[Ver Case Study](https://portafolio-alexis-chi.vercel.app/projects/vhsflix)**
 
 ---
 
-## 🛠️ Stack tecnológico
+## 🛠️ Stack tecnológico principal
 
 ### Frontend
 
@@ -109,7 +111,7 @@ Aplicación Full Stack para explorar contenido audiovisual, gestionar usuarios y
 
 `PostgreSQL` · `Supabase` · `SQLAlchemy` · `Gemini AI` · `TMDB API`
 
-### Herramientas
+### Herramientas y deployment
 
 `Git` · `GitHub` · `Vite` · `Vercel` · `Render` · `Capacitor` · `ESLint`
 
@@ -117,24 +119,27 @@ Aplicación Full Stack para explorar contenido audiovisual, gestionar usuarios y
 
 ## 🧠 Habilidades técnicas
 
-A través de estos proyectos he trabajado con:
+A través de mis proyectos he trabajado con:
 
-* Arquitectura frontend/backend.
-* Diseño y consumo de APIs REST.
-* Autenticación y autorización basada en roles.
-* Modelado y persistencia de datos.
-* Integración con APIs externas.
-* Gestión de estado en React.
-* Protección de rutas.
-* Formularios y validación.
-* Responsive design.
-* Integraciones con inteligencia artificial.
-* Deployment de aplicaciones Full Stack.
-* Debugging y resolución de problemas.
+- Arquitectura de aplicaciones Full Stack.
+- Desarrollo de interfaces responsive con React.
+- Diseño y consumo de APIs REST.
+- Autenticación y autorización basada en roles.
+- Modelado y persistencia de datos relacionales.
+- Gestión de estado en React.
+- Protección de rutas y flujos de aplicación.
+- Formularios y validación de datos.
+- Integración con APIs y servicios externos.
+- Integraciones con inteligencia artificial.
+- Procesamiento y optimización de imágenes.
+- Deployment de aplicaciones Full Stack.
+- Debugging y resolución de problemas.
 
 ---
 
 ## 🏗️ Arquitectura del portfolio
+
+El portfolio sigue una arquitectura basada en componentes, manteniendo separadas las interfaces, páginas, rutas, datos de los proyectos y recursos visuales.
 
 ```text
 src/
@@ -148,70 +153,88 @@ src/
 └── main.jsx
 ```
 
-El contenido de los proyectos y sus casos de estudio está separado de los componentes visuales para facilitar el mantenimiento y la reutilización.
+La información de los proyectos y el contenido de sus casos de estudio están separados de los componentes visuales para facilitar el mantenimiento, reutilización y ampliación de la aplicación.
+
+---
+
+## 📚 Casos de estudio técnicos
+
+Los tres proyectos destacados cuentan con casos de estudio detallados donde documento:
+
+- El problema que se quería resolver.
+- La solución desarrollada.
+- Mis responsabilidades.
+- La arquitectura de la aplicación.
+- Las decisiones técnicas.
+- Los retos encontrados durante el desarrollo.
+- Los aprendizajes obtenidos.
+- Posibles mejoras y roadmap.
+
+El objetivo es mostrar no sólo **qué he desarrollado**, sino también **cómo he abordado las decisiones técnicas detrás de cada proyecto**.
+
+➡️ **[Explorar todos los proyectos](https://portafolio-alexis-chi.vercel.app/projects)**
 
 ---
 
 ## ⚙️ Instalación local
 
-Clona el repositorio:
+### 1. Clonar el repositorio
 
 ```bash
 git clone https://github.com/alexisrrh/porfolio.git
 ```
 
-Entra en el proyecto:
+### 2. Entrar en el proyecto
 
 ```bash
 cd porfolio
 ```
 
-Instala las dependencias:
+### 3. Instalar las dependencias
 
 ```bash
 npm install
 ```
 
-Inicia el servidor de desarrollo:
+### 4. Iniciar el servidor de desarrollo
 
 ```bash
 npm run dev
 ```
+
+Vite mostrará en la terminal la URL del entorno de desarrollo local.
 
 ---
 
-## 📜 Scripts
+## 📜 Scripts disponibles
 
-```bash
-npm run dev
-npm run build
-npm run lint
-npm run preview
-```
-
-| Comando           | Descripción                         |
-| ----------------- | ----------------------------------- |
-| `npm run dev`     | Inicia el entorno de desarrollo     |
-| `npm run build`   | Genera el build de producción       |
-| `npm run lint`    | Ejecuta ESLint                      |
-| `npm run preview` | Previsualiza el build de producción |
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo |
+| `npm run build` | Genera el build de producción |
+| `npm run lint` | Ejecuta ESLint |
+| `npm run preview` | Previsualiza localmente el build de producción |
 
 ---
 
 ## 🎯 Objetivo profesional
 
-Actualmente continúo desarrollando proyectos Full Stack mientras profundizo en **arquitectura, testing, seguridad, rendimiento y buenas prácticas de desarrollo**.
+Actualmente estoy enfocado en seguir creciendo como **Full Stack Developer**, profundizando mis conocimientos en arquitectura de software, testing, seguridad, rendimiento y buenas prácticas de desarrollo.
 
-Busco oportunidades donde pueda aportar mis conocimientos en **React y desarrollo Full Stack**, continuar creciendo dentro de un equipo profesional y participar en el desarrollo de productos reales.
+Busco oportunidades donde pueda aportar mis conocimientos en **React y desarrollo Full Stack**, continuar aprendiendo dentro de un equipo profesional y participar en el desarrollo de productos reales.
 
 ---
 
 ## 📬 Contacto
 
-🌐 **Portfolio:** [portafolio-alexis-chi.vercel.app](https://portafolio-alexis-chi.vercel.app/)
+🌐 **Portfolio**  
+[portafolio-alexis-chi.vercel.app](https://portafolio-alexis-chi.vercel.app/)
 
-💻 **GitHub:** [github.com/alexisrrh](https://github.com/alexisrrh)
+💻 **GitHub**  
+[github.com/alexisrrh](https://github.com/alexisrrh)
 
 ---
 
-Desarrollado con **React + Vite** y desplegado en **Vercel**.
+<p align="center">
+  Desarrollado con React + Vite · Desplegado en Vercel
+</p>

@@ -1,35 +1,19 @@
 # Alexis Rodríguez — Full Stack Developer
 
-[🇪🇸 Versión en español](./README.md)
+[🇪🇸 Versión en español](./README.es.md)
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success)](https://portafolio-alexis-chi.vercel.app/)
-[![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?logo=github)](https://github.com/alexisrrh)
+Full Stack Developer focused on building complete web applications with **React, Node.js, Python and PostgreSQL**.
 
-Personal developer portfolio showcasing my main projects, technical skills and growth as a **Full Stack Developer**.
+I work across the full stack — from responsive user interfaces to REST APIs, authentication, relational databases, third-party services and AI integrations.
 
-I primarily work with **React, Node.js, Python and PostgreSQL**, building applications across the full stack — from user interfaces and user experience to APIs, authentication, databases and integrations with external services and artificial intelligence.
+[![Portfolio](https://img.shields.io/badge/Portfolio-Live-22c55e?style=flat-square)](https://portafolio-alexis-chi.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-alexisrrh-181717?style=flat-square&logo=github)](https://github.com/alexisrrh)
 
-🌐 **[View live portfolio](https://portafolio-alexis-chi.vercel.app/)**
+🌐 **[View Live Portfolio](https://portafolio-alexis-chi.vercel.app/)**
 
 ---
 
-## 👨‍💻 About the project
-
-This repository contains the source code for my personal developer portfolio.
-
-The goal is not simply to list the technologies I use, but to demonstrate through complete projects how I approach different areas of Full Stack development:
-
-* React interface development.
-* REST API design and consumption.
-* Authentication and authorization.
-* Relational databases.
-* State management.
-* External service integrations.
-* Artificial intelligence.
-* Responsive development.
-* Application deployment.
-
-The three main projects also include detailed **technical case studies** documenting the problem, solution, architecture, technical decisions, challenges, lessons learned and potential improvements.
+![Alexis Rodríguez Portfolio](./public/preview.png)
 
 ---
 
@@ -37,7 +21,7 @@ The three main projects also include detailed **technical case studies** documen
 
 ### 🥗 NutriSmart Coach
 
-Full Stack nutrition tracking application that uses artificial intelligence to analyze food from images and simplify nutrition tracking.
+Full Stack nutrition tracking application that uses **artificial intelligence to analyze food from images**, helping users simplify nutrition tracking and maintain a history of their meals.
 
 **Stack**
 
@@ -45,19 +29,25 @@ Full Stack nutrition tracking application that uses artificial intelligence to a
 
 **Technical highlights**
 
-* Gemini AI integration.
-* API developed with Node.js and Express.
-* Authentication and persistence with Supabase.
-* Image processing and optimization.
-* Nutrition history and tracking.
-* Android integration using Capacitor.
-* Independent frontend and backend deployment.
+- AI-powered food analysis with Gemini.
+- REST API built with Node.js and Express.
+- Authentication and data persistence with Supabase.
+- Image processing and optimization before analysis.
+- Nutrition history and tracking.
+- Web-to-Android adaptation using Capacitor.
+- Independent frontend and backend deployment.
+
+**What this project demonstrates**
+
+Full Stack architecture, AI integration, image handling, authentication, relational data, API communication and multi-platform development.
+
+➡️ **[View Case Study](https://portafolio-alexis-chi.vercel.app/projects/nutrismart-coach)**
 
 ---
 
 ### 🦷 LAC Dental Clinic
 
-Management platform for a dental clinic with different workflows and permissions for patients and professionals.
+Dental clinic management platform designed around different workflows and permissions for **patients and healthcare professionals**.
 
 **Stack**
 
@@ -65,14 +55,20 @@ Management platform for a dental clinic with different workflows and permissions
 
 **Technical highlights**
 
-* Authentication and account recovery.
-* Role-based access.
-* Protected routes based on permissions.
-* Patient management.
-* Appointment management and availability.
-* Clinical history.
-* Interactive odontogram.
-* Budget and consent management.
+- Authentication and account recovery.
+- Role-based access for patients and professionals.
+- Protected routes based on permissions.
+- Patient management.
+- Appointment scheduling and availability validation.
+- Clinical history management.
+- Interactive odontogram.
+- Budget and consent management.
+
+**What this project demonstrates**
+
+Role-based authorization, relational data modeling, protected application flows, complex forms and business logic.
+
+➡️ **[View Case Study](https://portafolio-alexis-chi.vercel.app/projects/consultorio-lac)**
 
 ---
 
@@ -86,16 +82,22 @@ Full Stack application for discovering audiovisual content, managing users and s
 
 **Technical highlights**
 
-* REST API developed with Flask.
-* JWT authentication.
-* Persistence with SQLAlchemy.
-* TMDB and external service integrations.
-* State management with Context API and `useReducer`.
-* User-based favorites system.
+- REST API developed with Flask.
+- JWT-based authentication.
+- Data persistence using SQLAlchemy.
+- Integration with TMDB and external services.
+- Global state management with Context API and `useReducer`.
+- User-based favorites system.
+
+**What this project demonstrates**
+
+Python backend development, REST APIs, authentication, ORM-based persistence, external API integration and React state management.
+
+➡️ **[View Case Study](https://portafolio-alexis-chi.vercel.app/projects/vhsflix)**
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Core Tech Stack
 
 ### Frontend
 
@@ -109,7 +111,7 @@ Full Stack application for discovering audiovisual content, managing users and s
 
 `PostgreSQL` · `Supabase` · `SQLAlchemy` · `Gemini AI` · `TMDB API`
 
-### Tools
+### Tools & Deployment
 
 `Git` · `GitHub` · `Vite` · `Vercel` · `Render` · `Capacitor` · `ESLint`
 
@@ -117,24 +119,27 @@ Full Stack application for discovering audiovisual content, managing users and s
 
 ## 🧠 Technical Skills
 
-Through these projects, I have worked with:
+Through my projects, I have worked with:
 
-* Frontend/backend architecture.
-* REST API design and consumption.
-* Authentication and role-based authorization.
-* Data modeling and persistence.
-* External API integrations.
-* React state management.
-* Protected routes.
-* Forms and validation.
-* Responsive web development.
-* Artificial intelligence integrations.
-* Full Stack application deployment.
-* Debugging and problem solving.
+- Full Stack application architecture.
+- Responsive interface development with React.
+- REST API design and consumption.
+- Authentication and role-based authorization.
+- Relational data modeling and persistence.
+- React state management.
+- Protected routes and application flows.
+- Forms and data validation.
+- Third-party API integrations.
+- Artificial intelligence integrations.
+- Image processing and optimization.
+- Full Stack application deployment.
+- Debugging and problem solving.
 
 ---
 
 ## 🏗️ Portfolio Architecture
+
+The portfolio follows a component-based structure with separation between UI components, pages, routing, project data and visual assets.
 
 ```text
 src/
@@ -148,70 +153,88 @@ src/
 └── main.jsx
 ```
 
-Project and case study data are separated from visual components to improve maintainability and reusability.
+Project information and technical case study content are separated from the visual components, making the application easier to maintain and extend.
+
+---
+
+## 📚 Technical Case Studies
+
+The three featured projects include detailed case studies covering:
+
+- The problem being solved.
+- The proposed solution.
+- My responsibilities.
+- Application architecture.
+- Technical decisions.
+- Development challenges.
+- Lessons learned.
+- Future improvements and roadmap.
+
+The goal is to show not only **what I built**, but also **how I approached the technical decisions behind each project**.
+
+➡️ **[Explore all projects](https://portafolio-alexis-chi.vercel.app/projects)**
 
 ---
 
 ## ⚙️ Local Setup
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/alexisrrh/porfolio.git
 ```
 
-Enter the project:
+### 2. Enter the project
 
 ```bash
 cd porfolio
 ```
 
-Install dependencies:
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the development server:
+### 4. Start the development server
 
 ```bash
 npm run dev
 ```
+
+Vite will display the local development URL in the terminal.
 
 ---
 
-## 📜 Scripts
+## 📜 Available Scripts
 
-```bash
-npm run dev
-npm run build
-npm run lint
-npm run preview
-```
-
-| Command           | Description                        |
-| ----------------- | ---------------------------------- |
-| `npm run dev`     | Starts the development environment |
-| `npm run build`   | Creates the production build       |
-| `npm run lint`    | Runs ESLint                        |
-| `npm run preview` | Previews the production build      |
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates the production build |
+| `npm run lint` | Runs ESLint |
+| `npm run preview` | Previews the production build locally |
 
 ---
 
 ## 🎯 Career Focus
 
-I'm currently continuing to develop Full Stack projects while deepening my knowledge of **architecture, testing, security, performance and software development best practices**.
+I'm currently focused on continuing to grow as a **Full Stack Developer**, strengthening my knowledge of software architecture, testing, security, performance and development best practices.
 
-I'm looking for opportunities where I can contribute my skills in **React and Full Stack development**, continue growing within a professional engineering team and participate in building real products.
+I'm looking for opportunities where I can contribute my skills in **React and Full Stack development**, learn from an experienced engineering team and participate in building real-world products.
 
 ---
 
 ## 📬 Contact
 
-🌐 **Portfolio:** [portafolio-alexis-chi.vercel.app](https://portafolio-alexis-chi.vercel.app/)
+🌐 **Portfolio**  
+[portafolio-alexis-chi.vercel.app](https://portafolio-alexis-chi.vercel.app/)
 
-💻 **GitHub:** [github.com/alexisrrh](https://github.com/alexisrrh)
+💻 **GitHub**  
+[github.com/alexisrrh](https://github.com/alexisrrh)
 
 ---
 
-Built with **React + Vite** and deployed on **Vercel**.
+<p align="center">
+  Built with React + Vite · Deployed on Vercel
+</p>
