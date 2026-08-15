@@ -11,15 +11,19 @@ const randomDirection = () => (Math.random() > 0.5 ? 1 : -1);
 const getUniverseProfile = (width) => {
   if (width < 768) {
     return {
-      density: 0.000016,
-      minCount: 38,
-      maxCount: 90,
-      connectionDistance: 78,
+      density: 0.000028,
+      minCount: 35,
+      maxCount: 55,
+      connectionDistance: 86,
       maxConnections: 2,
       dpr: 1.25,
-      glowScale: 4.7,
-      glowAlpha: 0.72,
-      lineAlpha: 0.045,
+      glowScale: 5.2,
+      glowAlpha: 0.92,
+      lineAlpha: 0.075,
+      coreAlpha: 0.58,
+      radiusBoost: 0.22,
+      starAlphaMin: 0.6,
+      starAlphaRange: 0.3,
     };
   }
 
@@ -34,6 +38,10 @@ const getUniverseProfile = (width) => {
       glowScale: 5.4,
       glowAlpha: 0.85,
       lineAlpha: 0.06,
+      coreAlpha: 0.34,
+      radiusBoost: 0.1,
+      starAlphaMin: 0.58,
+      starAlphaRange: 0.3,
     };
   }
 
@@ -47,6 +55,10 @@ const getUniverseProfile = (width) => {
     glowScale: 6.3,
     glowAlpha: 1,
     lineAlpha: 0.08,
+    coreAlpha: 0,
+    radiusBoost: 0,
+    starAlphaMin: 0.54,
+    starAlphaRange: 0.28,
   };
 };
 
@@ -79,8 +91,11 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() > 0.82 ? Math.random() * 1.6 + 1.4 : Math.random() * 1 + 0.65,
-        alpha: Math.random() * 0.28 + 0.54,
+        r:
+          Math.random() > 0.82
+            ? Math.random() * 1.6 + 1.4 + profile.radiusBoost
+            : Math.random() * 1 + 0.65 + profile.radiusBoost,
+        alpha: Math.random() * profile.starAlphaRange + profile.starAlphaMin,
         phase: Math.random() * Math.PI * 2,
         vx: randomDirection() * (Math.random() * 4 + 5),
         vy: randomDirection() * (Math.random() * 3 + 3),
@@ -146,6 +161,13 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
         ctx.arc(star.x, star.y, star.r * 2.4, 0, Math.PI * 2);
         ctx.fill();
 
+        if (profile.coreAlpha > 0) {
+          ctx.fillStyle = `rgba(226,252,255,${profile.coreAlpha * star.alpha})`;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, Math.max(0.75, star.r * 0.55), 0, Math.PI * 2);
+          ctx.fill();
+        }
+
         let connections = 0;
         for (let j = index + 1; j < stars.length; j += 1) {
           const other = stars[j];
@@ -208,7 +230,7 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+      className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
     />
   );
 }

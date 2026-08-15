@@ -565,6 +565,11 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         recoilLife: 0.1,
         shakeTtl: 0,
         shakeLife: 0.1,
+        visible: false,
+        appearStart: 0,
+        visibleUntil: 0,
+        fadeDuration: 0.2,
+        opacity: 0,
       };
 
       const setCanvasSize = () => {
@@ -659,6 +664,57 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         ship.y = ship.baseY;
       };
 
+      const getMobileEnergyBands = () => {
+        const sections = Array.from(container.children).filter(
+          (node) => node.tagName?.toLowerCase() === "section",
+        );
+        const fallback = [
+          { x: [0.14, 0.34], y: [height * 0.08, height * 0.18] },
+          { x: [0.64, 0.86], y: [height * 0.14, height * 0.26] },
+          { x: [0.1, 0.32], y: [height * 0.38, height * 0.5] },
+          { x: [0.66, 0.9], y: [height * 0.54, height * 0.66] },
+          { x: [0.34, 0.64], y: [height * 0.76, height * 0.88] },
+        ];
+
+        if (!sections.length) return fallback;
+
+        const baseRect = container.getBoundingClientRect();
+        const bands = [];
+        sections.slice(0, 3).forEach((section, sectionIndex) => {
+          const rect = section.getBoundingClientRect();
+          const top = rect.top - baseRect.top;
+          const bottom = top + rect.height;
+          const usableTop = top + rect.height * 0.16;
+          const usableBottom = bottom - rect.height * 0.14;
+          const sectionBands =
+            sectionIndex === 0
+              ? [
+                  { x: [0.14, 0.34], y: [usableTop, top + rect.height * 0.36] },
+                  { x: [0.66, 0.88], y: [top + rect.height * 0.22, top + rect.height * 0.48] },
+                ]
+              : sectionIndex === 1
+                ? [
+                    { x: [0.12, 0.32], y: [usableTop, top + rect.height * 0.46] },
+                    { x: [0.68, 0.9], y: [top + rect.height * 0.46, usableBottom] },
+                  ]
+                : [
+                    { x: [0.12, 0.34], y: [usableTop, top + rect.height * 0.52] },
+                    { x: [0.62, 0.86], y: [top + rect.height * 0.44, usableBottom] },
+                  ];
+
+          sectionBands.forEach((band) => {
+            if (band.y[1] - band.y[0] > 90) {
+              bands.push({
+                x: band.x,
+                y: [clamp(band.y[0], 0, height), clamp(band.y[1], 0, height)],
+              });
+            }
+          });
+        });
+
+        return bands.length ? bands : fallback;
+      };
+
       const isTooCloseMobileEnergy = (candidate) =>
         energies.some(
           (energy) =>
@@ -668,29 +724,20 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
       const makeMobileEnergy = (index = 0) => {
         const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-        const radius = random(18, width < 768 ? 27 : 31);
-        const bands =
-          width < 768
-            ? [
-                { x: [0.16, 0.34], y: [0.16, 0.28] },
-                { x: [0.66, 0.86], y: [0.2, 0.34] },
-                { x: [0.12, 0.32], y: [0.42, 0.56] },
-                { x: [0.66, 0.88], y: [0.5, 0.64] },
-                { x: [0.36, 0.62], y: [0.64, 0.75] },
-              ]
-            : getEnergySlots(width);
+        const radius = Math.random() > 0.88 ? random(32, 34) : random(22, width < 768 ? 30 : 32);
+        const bands = getMobileEnergyBands();
 
         for (let attempt = 0; attempt < 90; attempt += 1) {
           const band = bands[(attempt + index) % bands.length];
           const x = random(width * band.x[0], width * band.x[1]);
-          const y = random(height * band.y[0], height * band.y[1]);
+          const y = random(band.y[0], band.y[1]);
           const candidate = { x, y, radius };
           const box = getEnergyBox(x, y, radius);
 
           if (
             !isTooCloseMobileEnergy(candidate) &&
-            !pointInZone(x, y, exclusionZones, radius * 3.2 + 42) &&
-            !exclusionZones.some((zone) => rectsOverlap(box, zone, 28))
+            !pointInZone(x, y, exclusionZones, radius * 2.25 + 28) &&
+            !exclusionZones.some((zone) => rectsOverlap(box, zone, 18))
           ) {
             const angle = random(0, Math.PI * 2);
             const speed = random(2, width < 768 ? 4.2 : 5);
@@ -717,6 +764,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
               impactLife: 0.1,
               impactAngle: 0,
               impactAmount: 0,
+              hitPadding: random(22, 28),
             };
           }
         }
@@ -821,12 +869,12 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         explosion.ringTtl += dt;
         const ringProgress = clamp(explosion.ringTtl / explosion.ringLife, 0, 1);
         const ringAlpha = 1 - ringProgress;
-        ctx.strokeStyle = PROJECTILE_COLORS.hot + `${0.46 * ringAlpha})`;
-        ctx.shadowColor = "rgba(0,200,255,0.58)";
-        ctx.shadowBlur = 12;
-        ctx.lineWidth = 1.4;
+        ctx.strokeStyle = PROJECTILE_COLORS.hot + `${0.56 * ringAlpha})`;
+        ctx.shadowColor = "rgba(0,200,255,0.68)";
+        ctx.shadowBlur = 15;
+        ctx.lineWidth = 1.6;
         ctx.beginPath();
-        ctx.arc(explosion.x, explosion.y, 12 + ringProgress * 62, 0, Math.PI * 2);
+        ctx.arc(explosion.x, explosion.y, 14 + ringProgress * 72, 0, Math.PI * 2);
         ctx.stroke();
         ctx.shadowBlur = 0;
 
@@ -841,7 +889,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           ctx.save();
           ctx.translate(fragment.x, fragment.y);
           ctx.rotate(fragment.rotation);
-          ctx.fillStyle = fragment.color + `${0.54 * alpha})`;
+          ctx.fillStyle = fragment.color + `${0.64 * alpha})`;
           ctx.fillRect(-fragment.size * 0.5, -fragment.size * 0.14, fragment.size, fragment.size * 0.28);
           ctx.restore();
         });
@@ -853,9 +901,9 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           particle.vx *= 0.97;
           particle.vy *= 0.97;
           const alpha = clamp(1 - particle.ttl / particle.life, 0, 1);
-          ctx.fillStyle = particle.color + `${0.68 * alpha})`;
-          ctx.shadowColor = "rgba(0,200,255,0.42)";
-          ctx.shadowBlur = 8;
+          ctx.fillStyle = particle.color + `${0.78 * alpha})`;
+          ctx.shadowColor = "rgba(0,200,255,0.56)";
+          ctx.shadowBlur = 10;
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size * alpha, 0, Math.PI * 2);
           ctx.fill();
@@ -869,6 +917,19 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
       };
 
       const drawMobileShip = (now, dt) => {
+        if (!ship.visible) return;
+
+        const sinceAppear = now - ship.appearStart;
+        const fadeProgress = clamp((now - ship.visibleUntil) / (ship.fadeDuration * 1000), 0, 1);
+        const appearProgress = clamp(sinceAppear / 80, 0, 1);
+        ship.opacity = appearProgress * (1 - fadeProgress);
+
+        if (fadeProgress >= 1) {
+          ship.visible = false;
+          ship.opacity = 0;
+          return;
+        }
+
         const idleOffset = Math.sin(now * 0.002) * 2.4;
         const recoilProgress = ship.recoilLife > 0 ? clamp(ship.recoilTtl / ship.recoilLife, 0, 1) : 0;
         const shakeProgress = ship.shakeLife > 0 ? clamp(ship.shakeTtl / ship.shakeLife, 0, 1) : 0;
@@ -900,6 +961,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         ship.y = ship.baseY;
 
         ctx.save();
+        ctx.globalAlpha *= ship.opacity;
         ctx.translate(renderX, renderY);
         ctx.rotate(ship.angle);
 
@@ -960,6 +1022,9 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         if (!visible || projectiles.length >= MOBILE_MAX_PROJECTILES) return;
         if (event.target.closest(INTERACTIVE_SELECTOR)) return;
 
+        exclusionZones = getMobileExclusionZones();
+        placeMobileShip();
+
         const point = getPoint(event);
         if (point.x < 0 || point.y < 0 || point.x > width || point.y > height) return;
 
@@ -987,6 +1052,10 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         ship.rotateDuration = 0.11;
         ship.recoilTtl = ship.recoilLife;
         ship.shakeTtl = ship.shakeLife;
+        ship.visible = true;
+        ship.appearStart = performance.now();
+        ship.visibleUntil = ship.appearStart + 480;
+        ship.fadeDuration = 0.2;
         addMobileShipBurst(angle);
 
         projectiles.push({
@@ -1056,6 +1125,11 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
       };
 
       const scheduleScrollSettled = () => {
+        if (ship.visible) {
+          const now = performance.now();
+          ship.visibleUntil = Math.min(ship.visibleUntil, now);
+          ship.fadeDuration = 0.12;
+        }
         window.clearTimeout(scrollTimeout);
         scrollTimeout = window.setTimeout(() => {
           exclusionZones = getMobileExclusionZones();
@@ -1138,7 +1212,10 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           let hitIndex = -1;
           for (let j = 0; j < energies.length; j += 1) {
             const energy = energies[j];
-            if (Math.hypot(projectile.x - energy.x, projectile.y - energy.y) < energy.radius + projectile.radius) {
+            if (
+              Math.hypot(projectile.x - energy.x, projectile.y - energy.y) <
+              energy.radius + energy.hitPadding + projectile.radius
+            ) {
               hitIndex = j;
               break;
             }
@@ -1916,7 +1993,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-40 h-full w-full"
+      className={`pointer-events-none absolute inset-0 h-full w-full ${isTouchMode ? "z-[2]" : "z-40"}`}
     />
   );
 }
