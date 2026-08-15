@@ -10,6 +10,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { profile } from "../data/profile";
+import RotatingRole from "./RotatingRole";
 
 const SKILLS = [
   "React",
@@ -44,6 +45,15 @@ export default function Hero() {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
+
+    const canvasStyles = window.getComputedStyle(canvas);
+    const canvasIsHidden =
+      canvasStyles.display === "none" ||
+      canvasStyles.visibility === "hidden" ||
+      canvas.offsetWidth === 0 ||
+      canvas.offsetHeight === 0;
+
+    if (canvasIsHidden) return;
 
     let raf;
     let mouse = { x: -9999, y: -9999 };
@@ -174,7 +184,7 @@ export default function Hero() {
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full"
+        className="pointer-events-none absolute inset-0 h-full w-full"
       />
 
       {/* Aurora viva */}
@@ -246,10 +256,11 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 75, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="mx-auto max-w-full text-5xl font-black leading-[1.04] tracking-[-0.02em] sm:text-5xl md:text-8xl md:tracking-[-0.08em] lg:mx-0 xl:text-7xl"
+            aria-label="Full Stack Developer"
           >
-          FULL STACK
+          <RotatingRole shouldReduceMotion={shouldReduceMotion} />
 
             <br />
             <span className="relative inline-block bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_70px_rgba(34,211,238,0.65)] pb-2">

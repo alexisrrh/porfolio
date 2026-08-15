@@ -26,3 +26,36 @@ html {
 body {
   overflow-x: hidden;
 }
+
+.home-continuous-surface > section:not(#hero) {
+  background-color: transparent;
+  background-image: none;
+}
+
+.home-continuous-surface > #hero {
+  background-color: transparent;
+}
+
+.home-continuous-surface > #hero > canvas,
+.home-continuous-surface > #hero > .absolute.inset-0,
+.home-continuous-surface > #hero > .absolute.top-0.h-full {
+  display: none;
+}
+
+.home-continuous-surface > section:not(#hero) > .absolute.inset-0,
+.home-continuous-surface .home-section-backdrop {
+  display: none;
+}
+
+.home-continuous-surface + footer {
+  background-color: #020617;
+  background-image:
+    radial-gradient(circle at 22% 8%, rgba(34, 211, 238, 0.13), transparent 30%),
+    radial-gradient(circle at 78% 86%, rgba(168, 85, 247, 0.13), transparent 34%),
+    linear-gradient(180deg, #020617 0%, #081129 48%, #020617 100%);
+  border-top-width: 0;
+}
+
+.home-continuous-surface + footer > .absolute.inset-0 {
+  display: none;
+}

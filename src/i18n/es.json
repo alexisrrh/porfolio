@@ -79,45 +79,142 @@
     ]
   },
   "experience": {
-    "eyebrow": "Experiencia",
-    "title": "Experiencia práctica y habilidades transferibles.",
-    "technicalTitle": "Desarrollo de proyectos Full Stack",
-    "technicalDescription": "He desarrollado proyectos técnicos donde construí flujos de producto desde la interfaz hasta la persistencia, el backend y el despliegue. Esta experiencia se basa en proyectos propios y no se presenta como empleo profesional.",
-    "technicalItems": [
-      "Interfaces con React y gestión de estado",
-      "APIs REST con Node.js, Express, Python y Flask",
-      "Autenticación, autorización y JWT",
-      "Supabase, PostgreSQL y bases de datos relacionales",
-      "Integración con Google Gemini y consumo de APIs externas",
-      "Despliegue en Vercel y Render, con preparación mobile mediante Capacitor"
-    ],
-    "previousTitle": "Experiencia laboral previa",
-    "previousDescription": "Esta experiencia no se presenta como experiencia tecnológica; se recoge por las habilidades profesionales transferibles al trabajo en equipo, la comunicación y la resolución de problemas.",
-    "previousItems": [
+    "eyebrow": "Experiencia técnica",
+    "title": "Experiencia técnica aplicada",
+    "subtitle": "Experiencia construida a través de proyectos Full Stack donde he trabajado con flujos reales de producto, autenticación, datos, APIs, inteligencia artificial y despliegue.",
+    "disclaimer": "Estos proyectos son proyectos propios y se presentan como experiencia técnica, no como empleo profesional.",
+    "labels": {
+      "appliedCapabilities": "Capacidades aplicadas",
+      "demonstratedIn": "Demostrado en",
+      "evidence": "Evidencia",
+      "productFlows": "Flujos de producto"
+    },
+    "appliedAreas": [
       {
-        "title": "Instalación de paneles solares",
-        "skills": [
-          "trabajo en equipo",
-          "cumplimiento de plazos",
-          "resolución de problemas",
-          "responsabilidad",
-          "trabajo en entornos exigentes"
+        "title": "Desarrollo Full Stack de producto",
+        "description": "He desarrollado aplicaciones completas trabajando desde la interfaz y la experiencia de usuario hasta la lógica de aplicación, persistencia de datos, servicios backend y despliegue.",
+        "capabilities": [
+          "Construcción de interfaces responsive.",
+          "Arquitectura basada en componentes.",
+          "Gestión de estado y flujos de interfaz.",
+          "Comunicación entre frontend y backend.",
+          "Persistencia de información.",
+          "Integración de servicios externos.",
+          "Preparación y despliegue de aplicaciones."
+        ],
+        "projects": [
+          "NutriSmart Coach",
+          "Consultorio Odontológico LAC",
+          "VHSFlix"
         ]
       },
       {
-        "title": "Atención al cliente",
-        "skills": [
-          "comunicación",
-          "resolución de incidencias",
-          "organización",
-          "atención al usuario",
-          "adaptabilidad",
-          "trabajo bajo presión"
+        "title": "Autenticación, autorización y datos",
+        "description": "He implementado sistemas donde la identidad del usuario, sus permisos y sus datos determinan qué información y acciones están disponibles dentro de la aplicación.",
+        "capabilities": [
+          "Registro e inicio de sesión.",
+          "Recuperación y gestión de cuenta.",
+          "Sesiones autenticadas.",
+          "Rutas protegidas.",
+          "Autorización basada en roles.",
+          "Relaciones entre usuarios y datos.",
+          "Persistencia y consulta de información.",
+          "Validación de reglas de acceso."
+        ],
+        "projects": [
+          "NutriSmart Coach",
+          "Consultorio Odontológico LAC",
+          "VHSFlix"
+        ],
+        "evidence": [
+          {
+            "project": "NutriSmart Coach",
+            "text": "Autenticación y datos nutricionales asociados al usuario."
+          },
+          {
+            "project": "Consultorio Odontológico LAC",
+            "text": "Roles de paciente/profesional, rutas protegidas, pacientes, citas e historial clínico."
+          },
+          {
+            "project": "VHSFlix",
+            "text": "Autenticación mediante JWT y favoritos asociados al usuario."
+          }
+        ]
+      },
+      {
+        "title": "Integraciones e inteligencia artificial",
+        "description": "He integrado servicios externos e inteligencia artificial dentro de flujos reales de aplicación, transformando respuestas externas en información utilizable por el producto.",
+        "capabilities": [
+          "Integración de inteligencia artificial.",
+          "Envío y procesamiento de imágenes.",
+          "Interpretación de respuestas generadas por IA.",
+          "Transformación de resultados en datos utilizables.",
+          "Consumo de APIs externas.",
+          "Manejo de respuestas y errores de servicios externos."
+        ],
+        "projects": [
+          "NutriSmart Coach",
+          "VHSFlix"
+        ],
+        "evidence": [
+          {
+            "project": "NutriSmart Coach",
+            "text": "Fotografía del alimento → procesamiento de imagen → análisis con Gemini → información nutricional → persistencia."
+          },
+          {
+            "project": "VHSFlix",
+            "text": "Consulta de TMDB → procesamiento de resultados → catálogo audiovisual → interacción del usuario → favoritos."
+          }
+        ]
+      },
+      {
+        "title": "Lógica de negocio y flujos de producto",
+        "description": "Más allá de implementar interfaces o conectar tecnologías, he trabajado en flujos donde distintas partes del sistema deben coordinarse para resolver una acción completa del usuario.",
+        "capabilities": [],
+        "projects": [
+          "NutriSmart Coach",
+          "Consultorio Odontológico LAC",
+          "VHSFlix"
+        ],
+        "flows": [
+          {
+            "project": "NutriSmart",
+            "steps": [
+              "Fotografía",
+              "Procesamiento",
+              "Análisis con IA",
+              "Datos nutricionales",
+              "Persistencia",
+              "Historial"
+            ]
+          },
+          {
+            "project": "LAC",
+            "steps": [
+              "Autenticación",
+              "Rol",
+              "Disponibilidad",
+              "Cita",
+              "Gestión del paciente",
+              "Historial clínico"
+            ]
+          },
+          {
+            "project": "VHSFlix",
+            "steps": [
+              "Autenticación",
+              "API externa",
+              "Exploración",
+              "Selección",
+              "Favoritos",
+              "Persistencia"
+            ]
+          }
         ]
       }
     ],
-    "currentOpportunity": "Oportunidad actual",
-    "availability": "Disponible para posiciones Full Stack junior, Frontend React y desarrollo web en España o remoto."
+    "projectsCtaText": "Estas capacidades se pueden explorar en detalle en los casos de estudio de cada proyecto.",
+    "projectsCta": "Explorar proyectos"
   },
   "technologies": {
     "eyebrow": "Tecnologías",
@@ -282,8 +379,8 @@
       "description": "Forma de trabajo de Alexis Rodriguez como desarrollador Full Stack: UX, estructura técnica, APIs, datos e inteligencia artificial."
     },
     "experience": {
-      "title": "Experiencia | Alexis Rodríguez",
-      "description": "Experiencia práctica de Alexis Rodriguez mediante proyectos Full Stack y experiencia laboral previa con habilidades transferibles."
+      "title": "Experiencia técnica | Alexis Rodríguez",
+      "description": "Experiencia técnica aplicada en desarrollo Full Stack, autenticación, datos, APIs, inteligencia artificial y lógica de producto."
     },
     "technologies": {
       "title": "Tecnologías | Alexis Rodríguez",

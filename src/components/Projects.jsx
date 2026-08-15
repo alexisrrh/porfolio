@@ -30,7 +30,7 @@ function usePrefersReducedMotion() {
   return prefersReducedMotion;
 }
 
-function ProjectCard({ project, compact = false }) {
+function ProjectCard({ project, compact = false, featuredHover = false }) {
   const { t, i18n } = useTranslation();
   const language = i18n.resolvedLanguage || i18n.language;
   const [currentImage, setCurrentImage] = useState(0);
@@ -104,13 +104,21 @@ function ProjectCard({ project, compact = false }) {
           setIsPaused(false);
         }
       }}
-      className={`group relative flex h-full w-full min-w-0 flex-col overflow-hidden rounded-[1.7rem] border bg-white/[0.07] p-2.5 backdrop-blur-2xl md:rounded-[2rem] ${
+      className={`group relative flex h-full w-full min-w-0 flex-col overflow-hidden rounded-[1.7rem] border bg-white/[0.07] p-2.5 backdrop-blur-2xl transition-[transform,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.99] md:rounded-[2rem] ${
         isMainProject
           ? "border-cyan-300/35 shadow-[0_0_70px_rgba(34,211,238,0.14)]"
           : "border-cyan-300/15 shadow-[0_0_60px_rgba(34,211,238,0.08)]"
+      } ${
+        featuredHover
+          ? "md:hover:z-20 md:hover:-translate-y-1.5 md:hover:scale-[1.02] md:hover:border-cyan-200/35 md:hover:bg-white/[0.095] md:hover:shadow-[0_18px_54px_rgba(34,211,238,0.16),0_10px_38px_rgba(168,85,247,0.10)] md:focus-within:z-20 md:focus-within:-translate-y-1.5 md:focus-within:scale-[1.02] md:focus-within:border-cyan-200/35 md:focus-within:bg-white/[0.095] md:focus-within:shadow-[0_18px_54px_rgba(34,211,238,0.16),0_10px_38px_rgba(168,85,247,0.10)]"
+          : ""
       }`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.14),transparent_30%)] opacity-70" />
+      <div
+        className={`absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.14),transparent_30%)] opacity-70 transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          featuredHover ? "md:group-hover:opacity-100 md:group-focus-within:opacity-100" : ""
+        }`}
+      />
 
       <div className="relative flex h-full min-w-0 flex-col gap-3">
         <div className="relative aspect-[16/9] min-w-0 shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#020617]/80">
@@ -121,7 +129,9 @@ function ProjectCard({ project, compact = false }) {
               t("projects.previewAlt", { title })
             }
             loading="lazy"
-            className="h-full w-full transition duration-500 group-hover:scale-[1.03]"
+            className={`h-full w-full transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              featuredHover ? "md:group-hover:scale-[1.02] md:group-focus-within:scale-[1.02]" : "group-hover:scale-[1.03]"
+            }`}
             style={{
               objectFit: activeImage?.fit ?? "cover",
               objectPosition: activeImage?.position ?? "top",
@@ -206,7 +216,7 @@ function ProjectCard({ project, compact = false }) {
             {title}
           </h3>
 
-          <p className="mx-auto max-w-[42rem] text-sm leading-[1.55] text-cyan-50/72">
+          <p className="mx-auto max-w-[42rem] text-[15px] leading-[1.6] text-cyan-50/72 md:text-base">
             {description}
           </p>
 
@@ -306,14 +316,14 @@ export function FeaturedProjects({ compact = false }) {
           <p className="text-sm font-black uppercase tracking-[0.35em] text-cyan-300">
             {t("home.featuredEyebrow")}
           </p>
-          <h2 className="mt-4 text-4xl font-black leading-tight md:text-6xl">
+          <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
             {t("home.featuredTitle")}
           </h2>
         </div>
 
         <div className="grid min-w-0 items-stretch gap-6 lg:grid-cols-3">
           {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} compact={compact} />
+            <ProjectCard key={project.slug} project={project} compact={compact} featuredHover />
           ))}
         </div>
       </div>
