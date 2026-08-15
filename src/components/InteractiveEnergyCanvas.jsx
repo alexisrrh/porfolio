@@ -8,6 +8,10 @@ const COLORS = [
 
 const MAX_PROJECTILES = 4;
 const MAX_EXPLOSIONS = 2;
+const MOBILE_MAX_PROJECTILES = 2;
+const MOBILE_MAX_EXPLOSIONS = 1;
+const MOBILE_MAX_EXPLOSION_PARTICLES = 14;
+const MOBILE_MAX_EXPLOSION_FRAGMENTS = 3;
 const MAX_SHIP_TRAIL_PARTICLES = 78;
 const MAX_CONTACT_PULSES = 8;
 const MIN_ENERGY_DISTANCE = 132;
@@ -515,8 +519,8 @@ function drawShip(ctx, ship, now) {
 
 export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMotion = false }) {
   const canvasRef = useRef(null);
-  const disabled =
-    shouldReduceMotion || (typeof window !== "undefined" && isTouchDevice());
+  const isTouchMode = typeof window !== "undefined" && isTouchDevice();
+  const disabled = shouldReduceMotion;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -525,6 +529,697 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
     if (!canvas || !container || !ctx || disabled) {
       return undefined;
+    }
+
+    if (isTouchMode) {
+      let raf;
+      let mounted = true;
+      let visible = !document.hidden;
+      let dpr = 1;
+      let lastTime = performance.now();
+      let width = 0;
+      let height = 0;
+      let targetCount = 0;
+      let resizeTimeout;
+      let scrollTimeout;
+      let tapStart = null;
+      let exclusionZones = [];
+
+      const energies = [];
+      const projectiles = [];
+      const explosions = [];
+      const muzzleFlashes = [];
+      const shipBursts = [];
+      const respawns = [];
+      const ship = {
+        x: 0,
+        y: 0,
+        baseX: 0,
+        baseY: 0,
+        angle: -Math.PI / 2,
+        startAngle: -Math.PI / 2,
+        targetAngle: -Math.PI / 2,
+        rotateStart: 0,
+        rotateDuration: 0.12,
+        recoilTtl: 0,
+        recoilLife: 0.1,
+        shakeTtl: 0,
+        shakeLife: 0.1,
+      };
+
+      const setCanvasSize = () => {
+        const rect = container.getBoundingClientRect();
+        width = Math.max(1, rect.width);
+        height = Math.max(1, rect.height);
+        dpr = Math.min(window.devicePixelRatio || 1, width < 768 ? 1.25 : 1.5);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+
+      const getPoint = (event) => {
+        const rect = container.getBoundingClientRect();
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        };
+      };
+
+      const getMobileExclusionZones = () => {
+        const baseRect = container.getBoundingClientRect();
+        const selectors = [
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "p",
+          "a",
+          "button",
+          "img",
+          "article",
+          "input",
+          "select",
+          "textarea",
+          "[role='button']",
+          "[data-energy-safe-zone='true']",
+        ];
+
+        const zones = Array.from(container.querySelectorAll(selectors.join(","))).map((node) => {
+          const rect = node.getBoundingClientRect();
+          return {
+            x: rect.left - baseRect.left,
+            y: rect.top - baseRect.top,
+            width: rect.width,
+            height: rect.height,
+          };
+        });
+
+        const navbar = document.querySelector("header");
+        if (navbar) {
+          const rect = navbar.getBoundingClientRect();
+          zones.push({
+            x: rect.left - baseRect.left,
+            y: rect.top - baseRect.top,
+            width: rect.width,
+            height: rect.height,
+          });
+        }
+
+        return zones;
+      };
+
+      const pointInZone = (x, y, zones, margin = 34) =>
+        zones.some(
+          (zone) =>
+            x > zone.x - margin &&
+            x < zone.x + zone.width + margin &&
+            y > zone.y - margin &&
+            y < zone.y + zone.height + margin,
+        );
+
+      const placeMobileShip = () => {
+        const rect = container.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || height;
+        const viewportY = clamp(viewportHeight * 0.82, 280, viewportHeight - 92);
+        const candidates = [
+          { x: width * 0.5, y: -rect.top + viewportY },
+          { x: width * 0.34, y: -rect.top + viewportY - 24 },
+          { x: width * 0.66, y: -rect.top + viewportY - 24 },
+          { x: width * 0.5, y: -rect.top + viewportY - 72 },
+        ];
+        const chosen =
+          candidates.find((point) => !pointInZone(point.x, point.y, exclusionZones, 56)) ||
+          candidates[candidates.length - 1];
+
+        ship.baseX = clamp(chosen.x, 48, width - 48);
+        ship.baseY = clamp(chosen.y, 72, height - 48);
+        ship.x = ship.baseX;
+        ship.y = ship.baseY;
+      };
+
+      const isTooCloseMobileEnergy = (candidate) =>
+        energies.some(
+          (energy) =>
+            Math.hypot(candidate.x - energy.x, candidate.y - energy.y) <
+            candidate.radius + energy.radius + 84,
+        );
+
+      const makeMobileEnergy = (index = 0) => {
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const radius = random(18, width < 768 ? 27 : 31);
+        const bands =
+          width < 768
+            ? [
+                { x: [0.16, 0.34], y: [0.16, 0.28] },
+                { x: [0.66, 0.86], y: [0.2, 0.34] },
+                { x: [0.12, 0.32], y: [0.42, 0.56] },
+                { x: [0.66, 0.88], y: [0.5, 0.64] },
+                { x: [0.36, 0.62], y: [0.64, 0.75] },
+              ]
+            : getEnergySlots(width);
+
+        for (let attempt = 0; attempt < 90; attempt += 1) {
+          const band = bands[(attempt + index) % bands.length];
+          const x = random(width * band.x[0], width * band.x[1]);
+          const y = random(height * band.y[0], height * band.y[1]);
+          const candidate = { x, y, radius };
+          const box = getEnergyBox(x, y, radius);
+
+          if (
+            !isTooCloseMobileEnergy(candidate) &&
+            !pointInZone(x, y, exclusionZones, radius * 3.2 + 42) &&
+            !exclusionZones.some((zone) => rectsOverlap(box, zone, 28))
+          ) {
+            const angle = random(0, Math.PI * 2);
+            const speed = random(2, width < 768 ? 4.2 : 5);
+            return {
+              x,
+              y,
+              radius,
+              color,
+              phase: random(0, Math.PI * 2),
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              driftAngle: random(0, Math.PI * 2),
+              driftTurn: random(0.08, 0.18),
+              scale: random(0.92, 1.08),
+              alpha: 0,
+              fade: "in",
+              orbitTilt: random(0.52, 0.82),
+              orbitAlpha: random(0.18, 0.34),
+              avoidX: 0,
+              avoidY: 0,
+              impulseVX: 0,
+              impulseVY: 0,
+              impactTtl: 0,
+              impactLife: 0.1,
+              impactAngle: 0,
+              impactAmount: 0,
+            };
+          }
+        }
+
+        return null;
+      };
+
+      const fillMobileEnergies = () => {
+        targetCount = 5;
+        let attempts = 0;
+        while (energies.length < targetCount && attempts < targetCount * 8) {
+          const energy = makeMobileEnergy(energies.length + attempts);
+          if (energy) energies.push(energy);
+          attempts += 1;
+        }
+        if (energies.length > targetCount) energies.splice(targetCount);
+      };
+
+      const makeMobileExplosion = (energy) => {
+        const explosionColors = [
+          "rgba(0,174,239,",
+          "rgba(0,200,255,",
+          "rgba(45,124,255,",
+          "rgba(168,85,247,",
+          "rgba(238,252,255,",
+        ];
+        const particleCount = Math.floor(random(10, MOBILE_MAX_EXPLOSION_PARTICLES + 1));
+        const fragmentCount = Math.floor(random(2, MOBILE_MAX_EXPLOSION_FRAGMENTS + 1));
+
+        return {
+          x: energy.x,
+          y: energy.y,
+          particles: Array.from({ length: particleCount }, () => {
+            const angle = random(0, Math.PI * 2);
+            const speed = random(78, 176);
+            return {
+              x: energy.x,
+              y: energy.y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              size: random(2, 4.6),
+              ttl: 0,
+              life: random(0.45, 0.65),
+              color: explosionColors[Math.floor(Math.random() * explosionColors.length)],
+            };
+          }),
+          fragments: Array.from({ length: fragmentCount }, () => {
+            const angle = random(0, Math.PI * 2);
+            const speed = random(56, 126);
+            return {
+              x: energy.x,
+              y: energy.y,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed,
+              size: random(4.6, 8.2),
+              rotation: random(0, Math.PI * 2),
+              spin: random(-3.2, 3.2),
+              ttl: 0,
+              life: random(0.42, 0.62),
+              color: explosionColors[Math.floor(Math.random() * 4)],
+            };
+          }),
+          ringTtl: 0,
+          ringLife: random(0.45, 0.65),
+        };
+      };
+
+      const drawMobileProjectile = (projectile) => {
+        for (let i = 1; i < projectile.trail.length; i += 1) {
+          const progress = i / (projectile.trail.length - 1 || 1);
+          const previous = projectile.trail[i - 1];
+          const point = projectile.trail[i];
+          const gradient = ctx.createLinearGradient(previous.x, previous.y, point.x, point.y);
+          gradient.addColorStop(0, PROJECTILE_COLORS.electric + `${0.08 + progress * 0.18})`);
+          gradient.addColorStop(0.58, PROJECTILE_COLORS.hot + `${0.22 + progress * 0.34})`);
+          gradient.addColorStop(1, PROJECTILE_COLORS.blue + `${0.34 + progress * 0.38})`);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 1.4 + progress * 2.2;
+          ctx.lineCap = "round";
+          ctx.shadowColor = "rgba(0,200,255,0.72)";
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.moveTo(previous.x, previous.y);
+          ctx.lineTo(point.x, point.y);
+          ctx.stroke();
+        }
+
+        ctx.shadowColor = "rgba(0,200,255,0.95)";
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = PROJECTILE_COLORS.hot + "0.9)";
+        ctx.beginPath();
+        ctx.arc(projectile.x, projectile.y, projectile.radius * 1.45, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = PROJECTILE_COLORS.core;
+        ctx.beginPath();
+        ctx.arc(projectile.x, projectile.y, projectile.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      };
+
+      const drawMobileExplosion = (explosion, dt) => {
+        explosion.ringTtl += dt;
+        const ringProgress = clamp(explosion.ringTtl / explosion.ringLife, 0, 1);
+        const ringAlpha = 1 - ringProgress;
+        ctx.strokeStyle = PROJECTILE_COLORS.hot + `${0.46 * ringAlpha})`;
+        ctx.shadowColor = "rgba(0,200,255,0.58)";
+        ctx.shadowBlur = 12;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(explosion.x, explosion.y, 12 + ringProgress * 62, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        explosion.fragments.forEach((fragment) => {
+          fragment.ttl += dt;
+          fragment.x += fragment.vx * dt;
+          fragment.y += fragment.vy * dt;
+          fragment.vx *= 0.96;
+          fragment.vy *= 0.96;
+          fragment.rotation += fragment.spin * dt;
+          const alpha = clamp(1 - fragment.ttl / fragment.life, 0, 1);
+          ctx.save();
+          ctx.translate(fragment.x, fragment.y);
+          ctx.rotate(fragment.rotation);
+          ctx.fillStyle = fragment.color + `${0.54 * alpha})`;
+          ctx.fillRect(-fragment.size * 0.5, -fragment.size * 0.14, fragment.size, fragment.size * 0.28);
+          ctx.restore();
+        });
+
+        explosion.particles.forEach((particle) => {
+          particle.ttl += dt;
+          particle.x += particle.vx * dt;
+          particle.y += particle.vy * dt;
+          particle.vx *= 0.97;
+          particle.vy *= 0.97;
+          const alpha = clamp(1 - particle.ttl / particle.life, 0, 1);
+          ctx.fillStyle = particle.color + `${0.68 * alpha})`;
+          ctx.shadowColor = "rgba(0,200,255,0.42)";
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size * alpha, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+
+        explosion.fragments = explosion.fragments.filter((fragment) => fragment.ttl < fragment.life);
+        explosion.particles = explosion.particles.filter((particle) => particle.ttl < particle.life);
+
+        return ringProgress < 1 || explosion.fragments.length || explosion.particles.length;
+      };
+
+      const drawMobileShip = (now, dt) => {
+        const idleOffset = Math.sin(now * 0.002) * 2.4;
+        const recoilProgress = ship.recoilLife > 0 ? clamp(ship.recoilTtl / ship.recoilLife, 0, 1) : 0;
+        const shakeProgress = ship.shakeLife > 0 ? clamp(ship.shakeTtl / ship.shakeLife, 0, 1) : 0;
+        const rotationProgress = ship.rotateDuration
+          ? clamp((now - ship.rotateStart) / (ship.rotateDuration * 1000), 0, 1)
+          : 1;
+        const eased = 1 - Math.pow(1 - rotationProgress, 3);
+        const angleDelta = Math.atan2(
+          Math.sin(ship.targetAngle - ship.startAngle),
+          Math.cos(ship.targetAngle - ship.startAngle),
+        );
+        ship.angle = ship.startAngle + angleDelta * eased;
+        ship.recoilTtl = Math.max(0, ship.recoilTtl - dt);
+        ship.shakeTtl = Math.max(0, ship.shakeTtl - dt);
+
+        const recoil = 2.8 * recoilProgress;
+        const shake = Math.sin(now * 0.16) * shakeProgress;
+        const perpendicular = ship.angle + Math.PI / 2;
+        const renderX =
+          ship.baseX -
+          Math.cos(ship.angle) * recoil +
+          Math.cos(perpendicular) * shake;
+        const renderY =
+          ship.baseY +
+          idleOffset -
+          Math.sin(ship.angle) * recoil +
+          Math.sin(perpendicular) * shake;
+        ship.x = ship.baseX;
+        ship.y = ship.baseY;
+
+        ctx.save();
+        ctx.translate(renderX, renderY);
+        ctx.rotate(ship.angle);
+
+        const exhaust = ctx.createLinearGradient(-27, 0, -9, 0);
+        exhaust.addColorStop(0, `rgba(168,85,247,${0.1 + recoilProgress * 0.18})`);
+        exhaust.addColorStop(0.55, `rgba(0,174,239,${0.18 + recoilProgress * 0.22})`);
+        exhaust.addColorStop(1, `rgba(0,200,255,${0.26 + recoilProgress * 0.28})`);
+        ctx.fillStyle = exhaust;
+        ctx.shadowColor = "rgba(0,200,255,0.45)";
+        ctx.shadowBlur = 11;
+        ctx.beginPath();
+        ctx.moveTo(-10, -4);
+        ctx.lineTo(-27 - recoilProgress * 5, 0);
+        ctx.lineTo(-10, 4);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.shadowColor = "rgba(0,200,255,0.5)";
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = "rgba(226,252,255,0.92)";
+        ctx.strokeStyle = "rgba(0,200,255,0.82)";
+        ctx.lineWidth = 1.15;
+        ctx.beginPath();
+        ctx.moveTo(19, 0);
+        ctx.lineTo(-11, -9);
+        ctx.lineTo(-6, 0);
+        ctx.lineTo(-11, 9);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(45,124,255,0.78)";
+        ctx.beginPath();
+        ctx.arc(1, 0, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      };
+
+      const addMobileShipBurst = (angle) => {
+        for (let i = 0; i < 4; i += 1) {
+          const exhaustAngle = angle + Math.PI + random(-0.3, 0.3);
+          shipBursts.push({
+            x: ship.baseX + Math.cos(angle + Math.PI) * random(12, 19),
+            y: ship.baseY + Math.sin(angle + Math.PI) * random(12, 19),
+            vx: Math.cos(exhaustAngle) * random(30, 82),
+            vy: Math.sin(exhaustAngle) * random(30, 82),
+            size: random(1.2, 2.4),
+            ttl: 0,
+            life: random(0.16, 0.26),
+            color: SHIP_TRAIL_COLORS[Math.floor(Math.random() * SHIP_TRAIL_COLORS.length)],
+          });
+        }
+
+        if (shipBursts.length > 10) shipBursts.splice(0, shipBursts.length - 10);
+      };
+
+      const fireMobile = (event) => {
+        if (!visible || projectiles.length >= MOBILE_MAX_PROJECTILES) return;
+        if (event.target.closest(INTERACTIVE_SELECTOR)) return;
+
+        const point = getPoint(event);
+        if (point.x < 0 || point.y < 0 || point.x > width || point.y > height) return;
+
+        let target = null;
+        let nearest = Infinity;
+        const assistRadius = width < 768 ? 64 : 78;
+        energies.forEach((energy) => {
+          const distance = Math.hypot(energy.x - point.x, energy.y - point.y);
+          if (distance < assistRadius && distance < nearest) {
+            nearest = distance;
+            target = energy;
+          }
+        });
+
+        const aimX = target ? point.x * 0.35 + target.x * 0.65 : point.x;
+        const aimY = target ? point.y * 0.35 + target.y * 0.65 : point.y;
+        const angle = Math.atan2(aimY - ship.baseY, aimX - ship.baseX);
+        const originX = ship.baseX + Math.cos(angle) * 20;
+        const originY = ship.baseY + Math.sin(angle) * 20;
+        const speed = target ? 920 : 860;
+
+        ship.startAngle = ship.angle;
+        ship.targetAngle = angle;
+        ship.rotateStart = performance.now();
+        ship.rotateDuration = 0.11;
+        ship.recoilTtl = ship.recoilLife;
+        ship.shakeTtl = ship.shakeLife;
+        addMobileShipBurst(angle);
+
+        projectiles.push({
+          x: originX,
+          y: originY,
+          startX: originX,
+          startY: originY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          radius: 3.8,
+          life: 1.05,
+          maxDistance: Math.max(Math.max(window.innerWidth, window.innerHeight) * 0.85, 360),
+          ttl: 0,
+          trail: [{ x: originX, y: originY }],
+        });
+        muzzleFlashes.push(makeMuzzleFlash(originX, originY, angle));
+        if (muzzleFlashes.length > 3) muzzleFlashes.splice(0, muzzleFlashes.length - 3);
+        start();
+      };
+
+      const handlePointerDown = (event) => {
+        if (event.pointerType === "mouse") return;
+        tapStart = {
+          x: event.clientX,
+          y: event.clientY,
+          time: performance.now(),
+          target: event.target,
+        };
+      };
+
+      const handlePointerUp = (event) => {
+        if (!tapStart || event.pointerType === "mouse") {
+          tapStart = null;
+          return;
+        }
+
+        const distance = Math.hypot(event.clientX - tapStart.x, event.clientY - tapStart.y);
+        const duration = performance.now() - tapStart.time;
+        const originalTarget = tapStart.target;
+        tapStart = null;
+
+        if (distance > 12 || duration > 280) return;
+        if (originalTarget?.closest?.(INTERACTIVE_SELECTOR)) return;
+        fireMobile(event);
+      };
+
+      const handlePointerCancel = () => {
+        tapStart = null;
+      };
+
+      const resize = () => {
+        setCanvasSize();
+        exclusionZones = getMobileExclusionZones();
+        placeMobileShip();
+        energies.length = 0;
+        projectiles.length = 0;
+        explosions.length = 0;
+        muzzleFlashes.length = 0;
+        shipBursts.length = 0;
+        respawns.length = 0;
+        fillMobileEnergies();
+      };
+
+      const scheduleResize = () => {
+        window.clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(resize, 120);
+      };
+
+      const scheduleScrollSettled = () => {
+        window.clearTimeout(scrollTimeout);
+        scrollTimeout = window.setTimeout(() => {
+          exclusionZones = getMobileExclusionZones();
+          placeMobileShip();
+          start();
+        }, 140);
+      };
+
+      const start = () => {
+        if (!mounted || raf || !visible) return;
+        lastTime = performance.now();
+        raf = requestAnimationFrame(draw);
+      };
+
+      const pause = () => {
+        cancelAnimationFrame(raf);
+        raf = undefined;
+      };
+
+      function draw(now) {
+        if (!mounted || !visible) {
+          raf = undefined;
+          return;
+        }
+
+        const dt = Math.min((now - lastTime) / 1000, 0.034);
+        lastTime = now;
+        ctx.clearRect(0, 0, width, height);
+
+        drawShipTrail(ctx, shipBursts, dt);
+
+        for (let i = respawns.length - 1; i >= 0; i -= 1) {
+          respawns[i].remaining -= dt;
+          if (respawns[i].remaining <= 0 && energies.length < targetCount) {
+            const energy = makeMobileEnergy(i + energies.length);
+            if (energy) energies.push(energy);
+            respawns.splice(i, 1);
+          }
+        }
+
+        for (let index = energies.length - 1; index >= 0; index -= 1) {
+          const energy = energies[index];
+          energy.phase += dt * 0.1;
+          energy.driftAngle += energy.driftTurn * dt;
+
+          const zonePush = getExpandedZonePush(energy.x, energy.y, energy.radius, exclusionZones);
+          if (zonePush) {
+            energy.avoidX = clamp(energy.avoidX + zonePush.x * 36 * dt, -24, 24);
+            energy.avoidY = clamp(energy.avoidY + zonePush.y * 36 * dt, -24, 24);
+          } else {
+            energy.avoidX *= 0.94;
+            energy.avoidY *= 0.94;
+          }
+
+          energy.x +=
+            (energy.vx + energy.avoidX + Math.cos(energy.driftAngle + energy.phase) * 0.6) * dt;
+          energy.y +=
+            (energy.vy + energy.avoidY + Math.sin(energy.driftAngle + energy.phase) * 0.6) * dt;
+
+          const margin = energy.radius * 2.5;
+          if (energy.x < margin || energy.x > width - margin) energy.vx *= -1;
+          if (energy.y < margin || energy.y > height - margin) energy.vy *= -1;
+          energy.x = clamp(energy.x, margin, width - margin);
+          energy.y = clamp(energy.y, margin, height - margin);
+          energy.alpha = clamp(energy.alpha + dt * 0.9, 0, 0.78);
+          drawEnergy(ctx, energy, now);
+        }
+
+        for (let i = projectiles.length - 1; i >= 0; i -= 1) {
+          const projectile = projectiles[i];
+          projectile.ttl += dt;
+          projectile.x += projectile.vx * dt;
+          projectile.y += projectile.vy * dt;
+          projectile.trail.push({ x: projectile.x, y: projectile.y });
+          if (projectile.trail.length > 6) {
+            projectile.trail.splice(0, projectile.trail.length - 6);
+          }
+          drawMobileProjectile(projectile);
+
+          let hitIndex = -1;
+          for (let j = 0; j < energies.length; j += 1) {
+            const energy = energies[j];
+            if (Math.hypot(projectile.x - energy.x, projectile.y - energy.y) < energy.radius + projectile.radius) {
+              hitIndex = j;
+              break;
+            }
+          }
+
+          if (hitIndex >= 0) {
+            const [energy] = energies.splice(hitIndex, 1);
+            projectiles.splice(i, 1);
+            if (explosions.length >= MOBILE_MAX_EXPLOSIONS) explosions.shift();
+            explosions.push(makeMobileExplosion(energy));
+            respawns.push({ remaining: random(3, 6) });
+            continue;
+          }
+
+          if (
+            projectile.ttl > projectile.life ||
+            Math.hypot(projectile.x - projectile.startX, projectile.y - projectile.startY) > projectile.maxDistance ||
+            projectile.x < -40 ||
+            projectile.y < -40 ||
+            projectile.x > width + 40 ||
+            projectile.y > height + 40
+          ) {
+            projectiles.splice(i, 1);
+          }
+        }
+
+        for (let i = explosions.length - 1; i >= 0; i -= 1) {
+          if (!drawMobileExplosion(explosions[i], dt)) {
+            explosions.splice(i, 1);
+          }
+        }
+
+        for (let i = muzzleFlashes.length - 1; i >= 0; i -= 1) {
+          if (!drawMuzzleFlash(ctx, muzzleFlashes[i], dt)) {
+            muzzleFlashes.splice(i, 1);
+          }
+        }
+
+        drawMobileShip(now, dt);
+        raf = requestAnimationFrame(draw);
+      }
+
+      resize();
+      window.addEventListener("resize", scheduleResize);
+      window.addEventListener("scroll", scheduleScrollSettled, { passive: true });
+      container.addEventListener("pointerdown", handlePointerDown, { passive: true });
+      container.addEventListener("pointerup", handlePointerUp, { passive: true });
+      container.addEventListener("pointercancel", handlePointerCancel, { passive: true });
+
+      const resizeObserver = window.ResizeObserver
+        ? new ResizeObserver(scheduleResize)
+        : null;
+      resizeObserver?.observe(container);
+
+      const handleVisibility = () => {
+        visible = !document.hidden;
+        if (visible) start();
+        else pause();
+      };
+      document.addEventListener("visibilitychange", handleVisibility);
+      start();
+
+      return () => {
+        mounted = false;
+        pause();
+        window.clearTimeout(resizeTimeout);
+        window.clearTimeout(scrollTimeout);
+        window.removeEventListener("resize", scheduleResize);
+        window.removeEventListener("scroll", scheduleScrollSettled);
+        container.removeEventListener("pointerdown", handlePointerDown);
+        container.removeEventListener("pointerup", handlePointerUp);
+        container.removeEventListener("pointercancel", handlePointerCancel);
+        document.removeEventListener("visibilitychange", handleVisibility);
+        resizeObserver?.disconnect();
+        energies.length = 0;
+        projectiles.length = 0;
+        explosions.length = 0;
+        muzzleFlashes.length = 0;
+        shipBursts.length = 0;
+        respawns.length = 0;
+      };
     }
 
     let raf;
@@ -1213,7 +1908,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
       contactPulses.length = 0;
       respawns.length = 0;
     };
-  }, [containerRef, disabled]);
+  }, [containerRef, disabled, isTouchMode]);
 
   if (disabled) return null;
 
