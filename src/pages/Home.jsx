@@ -11,19 +11,20 @@ const randomDirection = () => (Math.random() > 0.5 ? 1 : -1);
 const getUniverseProfile = (width) => {
   if (width < 768) {
     return {
-      density: 0.000028,
-      minCount: 35,
-      maxCount: 55,
-      connectionDistance: 86,
+      density: 0.000033,
+      minCount: 45,
+      maxCount: 65,
+      connectionDistance: 96,
       maxConnections: 2,
       dpr: 1.25,
-      glowScale: 5.2,
-      glowAlpha: 0.92,
-      lineAlpha: 0.075,
-      coreAlpha: 0.58,
-      radiusBoost: 0.22,
-      starAlphaMin: 0.6,
-      starAlphaRange: 0.3,
+      glowScale: 6.3,
+      glowAlpha: 1.06,
+      lineAlpha: 0.087,
+      coreAlpha: 0.68,
+      radiusBoost: 0,
+      starAlphaMin: 0.66,
+      starAlphaRange: 0.28,
+      mobileEnhanced: true,
     };
   }
 
@@ -42,6 +43,7 @@ const getUniverseProfile = (width) => {
       radiusBoost: 0.1,
       starAlphaMin: 0.58,
       starAlphaRange: 0.3,
+      mobileEnhanced: false,
     };
   }
 
@@ -59,6 +61,7 @@ const getUniverseProfile = (width) => {
     radiusBoost: 0,
     starAlphaMin: 0.54,
     starAlphaRange: 0.28,
+    mobileEnhanced: false,
   };
 };
 
@@ -88,24 +91,34 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
         profile.maxCount,
         Math.max(profile.minCount, Math.floor(width * height * profile.density)),
       );
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        r:
-          Math.random() > 0.82
+      stars = Array.from({ length: count }, () => {
+        const sizeRoll = Math.random();
+        const radius = profile.mobileEnhanced
+          ? sizeRoll > 0.88
+            ? Math.random() * 0.6 + 2.8
+            : sizeRoll > 0.58
+              ? Math.random() * 0.6 + 1.8
+              : Math.random() * 0.5 + 1
+          : Math.random() > 0.82
             ? Math.random() * 1.6 + 1.4 + profile.radiusBoost
-            : Math.random() * 1 + 0.65 + profile.radiusBoost,
-        alpha: Math.random() * profile.starAlphaRange + profile.starAlphaMin,
-        phase: Math.random() * Math.PI * 2,
-        coreColor:
-          Math.random() > 0.86
-            ? "168,85,247"
-            : Math.random() > 0.52
-              ? "59,130,246"
-              : "226,252,255",
-        vx: randomDirection() * (Math.random() * 4 + 5),
-        vy: randomDirection() * (Math.random() * 3 + 3),
-      }));
+            : Math.random() * 1 + 0.65 + profile.radiusBoost;
+
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: radius,
+          alpha: Math.random() * profile.starAlphaRange + profile.starAlphaMin,
+          phase: Math.random() * Math.PI * 2,
+          coreColor:
+            Math.random() > 0.86
+              ? "168,85,247"
+              : Math.random() > 0.52
+                ? "59,130,246"
+                : "226,252,255",
+          vx: randomDirection() * (Math.random() * 4 + 5),
+          vy: randomDirection() * (Math.random() * 3 + 3),
+        };
+      });
     };
 
     const resize = () => {
