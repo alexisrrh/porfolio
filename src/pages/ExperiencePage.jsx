@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const projectPaths = {
   "NutriSmart Coach": "/projects/nutrismart-coach",
-  "Consultorio Odontológico LAC": "/projects/consultorio-lac",
+  "Consultorio OdontolÃ³gico LAC": "/projects/consultorio-lac",
   "LAC Dental Clinic": "/projects/consultorio-lac",
   LAC: "/projects/consultorio-lac",
   VHSFlix: "/projects/vhsflix",
@@ -44,7 +44,7 @@ function FlowSteps({ flow }) {
             </span>
             {index < flow.steps.length - 1 && (
               <span className="hidden text-cyan-300/55 sm:inline" aria-hidden="true">
-                →
+                â†’
               </span>
             )}
           </li>
@@ -159,6 +159,7 @@ export default function ExperiencePage() {
       <Seo
         title={t("seo.experience.title")}
         description={t("seo.experience.description")}
+        canonicalPath="/experience"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(34,211,238,0.17),transparent_30%),radial-gradient(circle_at_82%_32%,rgba(168,85,247,0.14),transparent_32%),radial-gradient(circle_at_50%_90%,rgba(59,130,246,0.12),transparent_36%)]" />

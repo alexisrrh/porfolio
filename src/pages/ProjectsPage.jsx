@@ -10,6 +10,7 @@ export default function ProjectsPage() {
       <Seo
         title={t("seo.projects.title")}
         description={t("seo.projects.description")}
+        canonicalPath="/projects"
       />
       <Projects />
     </>

@@ -10,6 +10,7 @@ export default function ContactPage() {
       <Seo
         title={t("seo.contact.title")}
         description={t("seo.contact.description")}
+        canonicalPath="/contact"
       />
       <Contact />
     </>

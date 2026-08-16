@@ -18,7 +18,6 @@ const SKILLS = [
   "Python",
   "Supabase",
   "APIs REST",
-  "Integración con IA",
 ];
 
 const SOCIAL_LINKS = [
@@ -40,6 +39,7 @@ export default function Hero() {
   const { t } = useTranslation();
   const canvasRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
+  const skillBadges = [...SKILLS, t("hero.aiIntegration")];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -293,7 +293,7 @@ export default function Hero() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="mt-8 flex max-w-full flex-wrap justify-center gap-3 lg:justify-start"
           >
-            {SKILLS.map((skill, index) => (
+            {skillBadges.map((skill, index) => (
               <motion.span
                 key={skill}
                 animate={{ y: [0, -8, 0] }}

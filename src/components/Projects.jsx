@@ -36,7 +36,7 @@ function ProjectCard({ project, compact = false, featuredHover = false }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDocumentVisible, setIsDocumentVisible] = useState(
-    () => document.visibilityState === "visible",
+    document.visibilityState === "visible",
   );
   const prefersReducedMotion = usePrefersReducedMotion();
   const images = project.images ?? [];

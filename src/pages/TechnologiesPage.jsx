@@ -46,7 +46,7 @@ const techGroups = [
         icon: SiJavascript,
         tone: "text-yellow-200",
         description: {
-          es: "Lógica de interfaz, asincronía y consumo de APIs.",
+          es: "LÃ³gica de interfaz, asincronÃ­a y consumo de APIs.",
           en: "Interface logic, async flows, and API consumption.",
         },
       },
@@ -55,7 +55,7 @@ const techGroups = [
         icon: SiHtml5,
         tone: "text-orange-300",
         description: {
-          es: "Estructura semántica y accesible.",
+          es: "Estructura semÃ¡ntica y accesible.",
           en: "Semantic and accessible structure.",
         },
       },
@@ -64,7 +64,7 @@ const techGroups = [
         icon: SiCss,
         tone: "text-blue-300",
         description: {
-          es: "Diseño responsive, layout y estilos de interfaz.",
+          es: "DiseÃ±o responsive, layout y estilos de interfaz.",
           en: "Responsive design, layout, and interface styling.",
         },
       },
@@ -73,7 +73,7 @@ const techGroups = [
         icon: SiTailwindcss,
         tone: "text-cyan-300",
         description: {
-          es: "Construcción rápida de interfaces mediante utilidades.",
+          es: "ConstrucciÃ³n rÃ¡pida de interfaces mediante utilidades.",
           en: "Fast interface construction through utility classes.",
         },
       },
@@ -91,7 +91,7 @@ const techGroups = [
         icon: SiVite,
         tone: "text-violet-300",
         description: {
-          es: "Entorno de desarrollo y construcción para proyectos frontend.",
+          es: "Entorno de desarrollo y construcciÃ³n para proyectos frontend.",
           en: "Development and build environment for frontend projects.",
         },
       },
@@ -100,7 +100,7 @@ const techGroups = [
         icon: SiReact,
         tone: "text-cyan-200",
         description: {
-          es: "Gestión de estado compartido en aplicaciones React.",
+          es: "GestiÃ³n de estado compartido en aplicaciones React.",
           en: "Shared state management in React applications.",
         },
       },
@@ -114,7 +114,7 @@ const techGroups = [
         icon: SiNodedotjs,
         tone: "text-emerald-300",
         description: {
-          es: "APIs y lógica de servidor con JavaScript.",
+          es: "APIs y lÃ³gica de servidor con JavaScript.",
           en: "APIs and server logic with JavaScript.",
         },
       },
@@ -132,7 +132,7 @@ const techGroups = [
         icon: SiPython,
         tone: "text-blue-300",
         description: {
-          es: "Desarrollo backend e integración de servicios.",
+          es: "Desarrollo backend e integraciÃ³n de servicios.",
           en: "Backend development and service integration.",
         },
       },
@@ -141,7 +141,7 @@ const techGroups = [
         icon: SiFlask,
         tone: "text-cyan-50",
         description: {
-          es: "APIs ligeras y autenticación en proyectos Python.",
+          es: "APIs ligeras y autenticaciÃ³n en proyectos Python.",
           en: "Lightweight APIs and authentication in Python projects.",
         },
       },
@@ -150,7 +150,7 @@ const techGroups = [
         icon: SiOpenapiinitiative,
         tone: "text-emerald-300",
         description: {
-          es: "Diseño e integración de servicios entre frontend y backend.",
+          es: "DiseÃ±o e integraciÃ³n de servicios entre frontend y backend.",
           en: "Service design and integration between frontend and backend.",
         },
       },
@@ -159,7 +159,7 @@ const techGroups = [
         icon: SiJsonwebtokens,
         tone: "text-pink-300",
         description: {
-          es: "Autenticación mediante tokens.",
+          es: "AutenticaciÃ³n mediante tokens.",
           en: "Token-based authentication.",
         },
       },
@@ -173,7 +173,7 @@ const techGroups = [
         icon: SiSupabase,
         tone: "text-emerald-300",
         description: {
-          es: "Autenticación, PostgreSQL, almacenamiento y servicios backend.",
+          es: "AutenticaciÃ³n, PostgreSQL, almacenamiento y servicios backend.",
           en: "Authentication, PostgreSQL, storage, and backend services.",
         },
       },
@@ -191,7 +191,7 @@ const techGroups = [
         icon: SiMysql,
         tone: "text-blue-300",
         description: {
-          es: "Gestión de bases de datos relacionales.",
+          es: "GestiÃ³n de bases de datos relacionales.",
           en: "Relational database management.",
         },
       },
@@ -200,7 +200,7 @@ const techGroups = [
         icon: FaDatabase,
         tone: "text-cyan-200",
         description: {
-          es: "Consultas, relaciones y manipulación de datos.",
+          es: "Consultas, relaciones y manipulaciÃ³n de datos.",
           en: "Queries, relationships, and data manipulation.",
         },
       },
@@ -209,7 +209,7 @@ const techGroups = [
         icon: SiGooglegemini,
         tone: "text-purple-300",
         description: {
-          es: "Integración de modelos de IA para automatización y análisis.",
+          es: "IntegraciÃ³n de modelos de IA para automatizaciÃ³n y anÃ¡lisis.",
           en: "AI model integration for automation and analysis.",
         },
       },
@@ -232,7 +232,7 @@ const techGroups = [
         icon: SiGithub,
         tone: "text-cyan-50",
         description: {
-          es: "Repositorios, documentación y colaboración.",
+          es: "Repositorios, documentaciÃ³n y colaboraciÃ³n.",
           en: "Repositories, documentation, and collaboration.",
         },
       },
@@ -241,7 +241,7 @@ const techGroups = [
         icon: SiPostman,
         tone: "text-orange-300",
         description: {
-          es: "Pruebas y validación de APIs.",
+          es: "Pruebas y validaciÃ³n de APIs.",
           en: "API testing and validation.",
         },
       },
@@ -268,7 +268,7 @@ const techGroups = [
         icon: SiCapacitor,
         tone: "text-sky-300",
         description: {
-          es: "Adaptación de aplicaciones web para Android e iOS.",
+          es: "AdaptaciÃ³n de aplicaciones web para Android e iOS.",
           en: "Adapting web applications for Android and iOS.",
         },
       },
@@ -285,6 +285,7 @@ export default function TechnologiesPage() {
       <Seo
         title={t("seo.technologies.title")}
         description={t("seo.technologies.description")}
+        canonicalPath="/technologies"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_90%_80%,rgba(168,85,247,0.16),transparent_30%)]" />

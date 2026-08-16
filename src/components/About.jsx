@@ -57,7 +57,7 @@ export default function About() {
 
                 <div className="absolute bottom-4 left-4 rounded-2xl border border-cyan-300/20 bg-[#020617]/70 px-4 py-3 backdrop-blur">
                   <p className="text-xs font-black uppercase tracking-[0.25em] text-cyan-300">
-                    Open to work
+                    {t("about.availability")}
                   </p>
                   <p className="mt-1 text-sm font-bold text-white">
                     Full Stack Developer
@@ -125,7 +125,7 @@ export default function About() {
                   {workPrinciples.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-/80"
+                      className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-50/80"
                     >
                       {tech}
                     </span>

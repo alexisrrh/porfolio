@@ -164,9 +164,12 @@ export default function NutriSmartCaseStudy() {
           en: "NutriSmart Coach | Full Stack case study",
         }}
         description={{
-          es: "Caso de estudio de NutriSmart Coach, una plataforma Full Stack de nutrición y entrenamiento que integra React, Node.js, Supabase, PostgreSQL, Google Gemini y Capacitor.",
+          es: "Caso de estudio de NutriSmart Coach, una plataforma Full Stack de nutriciÃ³n y entrenamiento que integra React, Node.js, Supabase, PostgreSQL, Google Gemini y Capacitor.",
           en: "Case study for NutriSmart Coach, a Full Stack nutrition and training platform integrating React, Node.js, Supabase, PostgreSQL, Google Gemini, and Capacitor.",
         }}
+        canonicalPath="/projects/nutrismart-coach"
+        image={screenshotPlaceholders.hero.src}
+        type="article"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(34,211,238,0.18),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(168,85,247,0.16),transparent_28%),radial-gradient(circle_at_50%_75%,rgba(59,130,246,0.12),transparent_34%)]" />
@@ -204,7 +207,7 @@ export default function NutriSmartCaseStudy() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={primaryButton}
-                  aria-label="Abrir demo de NutriSmart Coach en una nueva pestaña"
+                  aria-label="Abrir demo de NutriSmart Coach en una nueva pestaÃ±a"
                 >
                   {t("caseStudy.viewDemo")}
                   <ExternalIcon className="ml-2 h-3.5 w-3.5" aria-hidden="true" />
@@ -237,7 +240,7 @@ export default function NutriSmartCaseStudy() {
           </div>
 
           <nav
-            aria-label="Índice del caso de estudio"
+            aria-label="Ãndice del caso de estudio"
             className="mt-12 flex flex-wrap gap-2 rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-3"
           >
             {[
@@ -351,7 +354,7 @@ export default function NutriSmartCaseStudy() {
                 </div>
                 <h3 className="mt-5 text-xl font-black text-white">{localized(layer.title, language)}</h3>
                 <p className="mt-3 text-sm leading-6 text-cyan-50/70">
-                  {layer.items.join(" · ")}
+                  {layer.items.join(" Â· ")}
                 </p>
               </article>
             ))}

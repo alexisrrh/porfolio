@@ -10,11 +10,13 @@ const NutriSmartCaseStudy = lazy(() => import("./NutriSmartCaseStudy"));
 const VHSFlixCaseStudy = lazy(() => import("./VHSFlixCaseStudy"));
 
 function CaseStudyFallback() {
+  const { t } = useTranslation();
+
   return (
     <section className="min-h-screen bg-[#020617] px-6 py-32 text-white">
       <div className="mx-auto flex max-w-7xl items-center gap-3 text-cyan-100/70">
         <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.65)]" />
-        <span className="text-xs font-black uppercase tracking-[0.32em]">Loading</span>
+        <span className="text-xs font-black uppercase tracking-[0.32em]">{t("common.loading")}</span>
       </div>
     </section>
   );
@@ -67,6 +69,9 @@ export default function CaseStudyPage() {
           es: `Caso de estudio inicial de ${projectTitle}, proyecto de Alexis Rodriguez.`,
           en: `Initial case study for ${projectTitle}, a project by Alexis Rodriguez.`,
         }}
+        canonicalPath={`/projects/${slug}`}
+        image={heroImage?.src}
+        type="article"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_80%_70%,rgba(168,85,247,0.2),transparent_32%)]" />

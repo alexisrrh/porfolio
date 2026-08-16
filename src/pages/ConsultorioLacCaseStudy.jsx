@@ -128,13 +128,16 @@ export default function ConsultorioLacCaseStudy() {
     <main className="relative overflow-hidden bg-[#020617] text-white">
       <Seo
         title={{
-          es: "Consultorio Odontológico LAC | Caso de estudio",
-          en: "Consultorio Odontológico LAC | Case study",
+          es: "Consultorio OdontolÃ³gico LAC | Caso de estudio",
+          en: "Consultorio OdontolÃ³gico LAC | Case study",
         }}
         description={{
-          es: "Caso de estudio de Consultorio Odontológico LAC, sistema web de gestión clínica con React, Vite, React Router, Context API, Supabase Auth y Supabase Database.",
-          en: "Case study for Consultorio Odontológico LAC, a clinical management web system with React, Vite, React Router, Context API, Supabase Auth, and Supabase Database.",
+          es: "Caso de estudio de Consultorio OdontolÃ³gico LAC, sistema web de gestiÃ³n clÃ­nica con React, Vite, React Router, Context API, Supabase Auth y Supabase Database.",
+          en: "Case study for Consultorio OdontolÃ³gico LAC, a clinical management web system with React, Vite, React Router, Context API, Supabase Auth, and Supabase Database.",
         }}
+        canonicalPath="/projects/consultorio-lac"
+        image={lacImages.hero.src}
+        type="article"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(16,185,129,0.16),transparent_30%),radial-gradient(circle_at_84%_20%,rgba(20,184,166,0.12),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(6,18,15,0.78)_55%,rgba(2,6,23,1))]" />
@@ -151,7 +154,7 @@ export default function ConsultorioLacCaseStudy() {
                 {t("lac.badge")}
               </p>
               <h1 className="mt-6 text-5xl font-black leading-[0.95] tracking-[-0.05em] md:text-7xl">
-                Consultorio Odontológico LAC
+                Consultorio OdontolÃ³gico LAC
               </h1>
               <p className="mt-6 text-xl font-bold leading-8 text-emerald-50/88">
                 {t("lac.subtitle")}
@@ -170,7 +173,7 @@ export default function ConsultorioLacCaseStudy() {
                   rel="noopener noreferrer"
                   className={primaryButton}
                   aria-label={t("caseStudy.openDemo", {
-                    title: "Consultorio Odontológico LAC",
+                    title: "Consultorio OdontolÃ³gico LAC",
                   })}
                 >
                   {t("caseStudy.viewDemo")}
@@ -183,7 +186,7 @@ export default function ConsultorioLacCaseStudy() {
                     rel="noopener noreferrer"
                     className={secondaryButton}
                     aria-label={t("caseStudy.openRepository", {
-                      title: "Consultorio Odontológico LAC",
+                      title: "Consultorio OdontolÃ³gico LAC",
                     })}
                   >
                     {t("caseStudy.viewCode")}

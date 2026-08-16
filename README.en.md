@@ -1,6 +1,6 @@
 # Alexis Rodríguez — Full Stack Developer
 
-[🇪🇸 Versión en español](./README.es.md)
+[🇪🇸 Versión en español](./README.md)
 
 Full Stack Developer focused on building complete web applications with **React, Node.js, Python and PostgreSQL**.
 
@@ -250,7 +250,7 @@ git clone https://github.com/alexisrrh/portafolio.git
 ### 2. Enter the project
 
 ```bash
-cd portfolio
+cd portafolio
 ```
 
 ### 3. Install dependencies

@@ -16,7 +16,8 @@
     "contact": "Contact",
     "viewCv": "View CV",
     "openCv": "Open Alexis Rodriguez's CV as a PDF",
-    "codeFocus": "web and mobile product"
+    "codeFocus": "web and mobile product",
+    "aiIntegration": "AI Integration"
   },
   "home": {
     "featuredEyebrow": "Featured projects",
@@ -76,7 +77,8 @@
       "Separate responsibilities",
       "Care for user experience",
       "Maintain technical order"
-    ]
+    ],
+    "availability": "Open to work"
   },
   "experience": {
     "eyebrow": "Technical Experience",
@@ -362,7 +364,8 @@
     "projects": "View projects"
   },
   "common": {
-    "demo": "Demo"
+    "demo": "Demo",
+    "loading": "Loading"
   },
   "seo": {
     "defaultDescription": "Portfolio of Alexis Rodriguez, Full Stack Developer with projects in React, Node.js, Python, Supabase, PostgreSQL, REST APIs, and AI integration.",

@@ -146,6 +146,9 @@ export default function VHSFlixCaseStudy() {
           es: "Caso de estudio de VHSFlix, aplicacion Full Stack con React, Flask, JWT, SQLAlchemy, TMDB, YouTube, Vercel y Render.",
           en: "Case study for VHSFlix, a Full Stack application with React, Flask, JWT, SQLAlchemy, TMDB, YouTube, Vercel, and Render.",
         }}
+        canonicalPath="/projects/vhsflix"
+        image={vhsflixImages.hero.src}
+        type="article"
       />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_10%,rgba(217,70,239,0.16),transparent_30%),radial-gradient(circle_at_84%_20%,rgba(34,211,238,0.12),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(24,5,29,0.76)_55%,rgba(2,6,23,1))]" />
@@ -334,7 +337,7 @@ export default function VHSFlixCaseStudy() {
                   <p className="mt-3 text-sm leading-6 text-slate-200/70">
                     {layer.items
                       .map((item) => localized(item, language))
-                      .join(" · ")}
+                      .join(" Â· ")}
                   </p>
                 </article>
               );
@@ -453,7 +456,7 @@ export default function VHSFlixCaseStudy() {
                 key={localized(item, language)}
                 className="rounded-2xl border border-white/10 bg-white/[0.055] px-5 py-4"
               >
-                <p className="text-sm font-black text-slate-100/88">✓ {localized(item, language)}</p>
+                <p className="text-sm font-black text-slate-100/88">âœ“ {localized(item, language)}</p>
               </article>
             ))}
           </div>

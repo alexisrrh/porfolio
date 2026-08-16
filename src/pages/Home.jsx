@@ -298,6 +298,7 @@ export default function Home() {
       <Seo
         title={t("seo.home.title")}
         description={t("seo.home.description")}
+        canonicalPath="/"
       />
       <div ref={homeRef} className="home-continuous-surface relative bg-[#020617]">
         <div

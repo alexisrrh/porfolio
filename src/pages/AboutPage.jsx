@@ -10,6 +10,7 @@ export default function AboutPage() {
       <Seo
         title={t("seo.about.title")}
         description={t("seo.about.description")}
+        canonicalPath="/about"
       />
       <About />
     </>
