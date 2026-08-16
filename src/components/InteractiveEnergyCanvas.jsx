@@ -16,6 +16,7 @@ const MOBILE_ENERGY_SIZE_PLAN = ["large", "medium", "small", "medium", "small"];
 const MOBILE_MIN_ENERGIES = 3;
 const MAX_SHIP_TRAIL_PARTICLES = 78;
 const MAX_CONTACT_PULSES = 8;
+const PROJECTILE_CULL_MARGIN = 160;
 const MIN_ENERGY_DISTANCE = 132;
 const MAX_ENERGY_PLACEMENT_ATTEMPTS = 140;
 const ENERGY_SAFE_MARGIN = 32;
@@ -1670,6 +1671,8 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
       const angle = target ? Math.atan2(target.y - originY, target.x - originX) : originAngle;
       const speed = target ? 980 : 860;
+      const viewportDiagonal = Math.hypot(window.innerWidth, window.innerHeight);
+      const maxDistance = viewportDiagonal * (isTouchMode ? 1.3 : 1.5);
 
       projectiles.push({
         x: originX,
@@ -1679,8 +1682,8 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         radius: 5.6,
-        life: target ? 1.15 : 1,
-        maxDistance: Math.max(window.innerWidth * 1.05, 760),
+        life: maxDistance / speed + 0.12,
+        maxDistance,
         ttl: 0,
         target,
         trail: [{ x: originX, y: originY }],
@@ -2013,10 +2016,10 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         if (
           projectile.ttl > projectile.life ||
           Math.hypot(projectile.x - projectile.startX, projectile.y - projectile.startY) > projectile.maxDistance ||
-          projectile.x < -40 ||
-          projectile.y < -40 ||
-          projectile.x > width + 40 ||
-          projectile.y > height + 40
+          projectile.x < -PROJECTILE_CULL_MARGIN ||
+          projectile.y < -PROJECTILE_CULL_MARGIN ||
+          projectile.x > width + PROJECTILE_CULL_MARGIN ||
+          projectile.y > height + PROJECTILE_CULL_MARGIN
         ) {
           projectiles.splice(i, 1);
         }

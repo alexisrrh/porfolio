@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { featuredProjects, projects } from "../data/projects";
 import { localized } from "../utils/localized";
@@ -162,6 +162,7 @@ function ProjectCard({ project, compact = false, featuredHover = false }) {
 
               <div
                 className="absolute bottom-3 left-3 right-3 flex items-center justify-center gap-2 rounded-full border border-white/10 bg-[#020617]/75 px-2.5 py-2 backdrop-blur sm:bottom-4 sm:left-auto sm:right-4"
+                role="group"
                 aria-label={t("projects.imagesOf", { title })}
               >
                 <button
@@ -334,6 +335,7 @@ export function FeaturedProjects({ compact = false }) {
 
 export default function Projects() {
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
   const sortedProjects = [
     ...featuredProjects,
     ...projects.filter((project) => !project.featured),
@@ -344,8 +346,14 @@ export default function Projects() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(34,211,238,0.25),transparent_30%),radial-gradient(circle_at_85%_45%,rgba(168,85,247,0.22),transparent_32%),radial-gradient(circle_at_50%_100%,rgba(59,130,246,0.18),transparent_35%)]" />
 
       <motion.div
-        animate={{ backgroundPosition: ["0px 0px", "140px 140px"] }}
-        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+        animate={
+          shouldReduceMotion
+            ? undefined
+            : { backgroundPosition: ["0px 0px", "140px 140px"] }
+        }
+        transition={
+          shouldReduceMotion ? undefined : { duration: 24, repeat: Infinity, ease: "linear" }
+        }
         className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:140px_140px]"
       />
 

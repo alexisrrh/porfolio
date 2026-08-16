@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import {
   FaExternalLinkAlt,
@@ -34,6 +34,7 @@ const languageToggleClass =
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
   const currentLanguage = (i18n.resolvedLanguage || i18n.language)?.startsWith(
     "en",
   )
@@ -70,28 +71,40 @@ export default function Navbar() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(34,211,238,0.22),transparent_28%),radial-gradient(circle_at_90%_100%,rgba(168,85,247,0.22),transparent_32%)]" />
 
         <motion.div
-          animate={{ x: ["-100%", "100%"] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={shouldReduceMotion ? undefined : { x: ["-100%", "100%"] }}
+          transition={
+            shouldReduceMotion
+              ? undefined
+              : { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+          }
           className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-cyan-300 to-transparent"
         />
 
         <motion.span
-          animate={{ x: ["-140%", "140%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          animate={shouldReduceMotion ? undefined : { x: ["-140%", "140%"] }}
+          transition={
+            shouldReduceMotion
+              ? undefined
+              : { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }
           className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent blur-lg"
         />
 
         <Link to="/" className="relative z-10 flex items-center gap-3">
           <motion.div
-            animate={{
-              rotate: [0, 2, -2, 0],
-              boxShadow: [
-                "0 0 22px rgba(34,211,238,0.25)",
-                "0 0 45px rgba(168,85,247,0.45)",
-                "0 0 22px rgba(34,211,238,0.25)",
-              ],
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : {
+                    rotate: [0, 2, -2, 0],
+                    boxShadow: [
+                      "0 0 22px rgba(34,211,238,0.25)",
+                      "0 0 45px rgba(168,85,247,0.45)",
+                      "0 0 22px rgba(34,211,238,0.25)",
+                    ],
+                  }
+            }
+            transition={shouldReduceMotion ? undefined : { duration: 4, repeat: Infinity }}
             className="relative rounded-2xl border border-cyan-300/25 bg-white/10 p-1"
           >
             <span className="absolute inset-0 rounded-2xl bg-cyan-300/20 blur-md" />
@@ -175,6 +188,7 @@ export default function Navbar() {
         </div>
 
         <button
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
           onKeyDown={(event) => {
             if (event.key === "Escape") closeMenu();

@@ -195,7 +195,9 @@ export default function Hero() {
             ? undefined
             : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }
         }
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        transition={
+          shouldReduceMotion ? undefined : { duration: 22, repeat: Infinity, ease: "linear" }
+        }
         className="absolute inset-0 bg-[linear-gradient(120deg,#020617,#0f172a,#312e81,#0891b2,#7c3aed,#020617)] bg-[length:500%_500%] opacity-30"
       />
 
@@ -213,7 +215,9 @@ export default function Hero() {
             ? undefined
             : { backgroundPosition: ["0px 0px", "130px 130px"] }
         }
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={
+          shouldReduceMotion ? undefined : { duration: 28, repeat: Infinity, ease: "linear" }
+        }
         className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff18_1px,transparent_1px),linear-gradient(to_bottom,#ffffff18_1px,transparent_1px)] bg-[size:130px_130px]"
       />
 
@@ -221,14 +225,18 @@ export default function Hero() {
       <motion.div
         aria-hidden="true"
         animate={shouldReduceMotion ? undefined : { rotate: 360 }}
-        transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
+        transition={
+          shouldReduceMotion ? undefined : { duration: 48, repeat: Infinity, ease: "linear" }
+        }
         className="absolute h-[900px] w-[900px] rounded-full border border-cyan-300/8"
       />
 
       <motion.div
         aria-hidden="true"
         animate={shouldReduceMotion ? undefined : { rotate: -360 }}
-        transition={{ duration: 68, repeat: Infinity, ease: "linear" }}
+        transition={
+          shouldReduceMotion ? undefined : { duration: 68, repeat: Infinity, ease: "linear" }
+        }
         className="absolute h-[620px] w-[620px] rounded-full border border-purple-300/8"
       />
 
@@ -236,7 +244,9 @@ export default function Hero() {
       <motion.div
         aria-hidden="true"
         animate={shouldReduceMotion ? undefined : { x: ["-140%", "140%"] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        transition={
+          shouldReduceMotion ? undefined : { duration: 8, repeat: Infinity, ease: "easeInOut" }
+        }
         className="absolute top-0 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/6 to-transparent blur-xl"
       />
 
@@ -266,11 +276,17 @@ export default function Hero() {
             <span className="relative inline-block bg-gradient-to-r from-cyan-200 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_70px_rgba(34,211,238,0.65)] pb-2">
           DEVELOPER
               <motion.span
-                animate={{
-                  scaleX: [0.15, 1, 0.15],
-                  opacity: [0.25, 1, 0.25],
-                }}
-                transition={{ duration: 2.4, repeat: Infinity }}
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : {
+                        scaleX: [0.15, 1, 0.15],
+                        opacity: [0.25, 1, 0.25],
+                      }
+                }
+                transition={
+                  shouldReduceMotion ? undefined : { duration: 2.4, repeat: Infinity }
+                }
                 className="absolute -bottom-0 left-0 h-1 w-full origin-left rounded-full bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 "
               />
             </span>
@@ -296,12 +312,16 @@ export default function Hero() {
             {skillBadges.map((skill, index) => (
               <motion.span
                 key={skill}
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 3 + index * 0.25,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
+                transition={
+                  shouldReduceMotion
+                    ? undefined
+                    : {
+                        duration: 3 + index * 0.25,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                }
                 className="rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold text-cyan-50/85 backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/10 sm:px-5 md:text-sm"
               >
                 {skill}
@@ -375,8 +395,16 @@ export default function Hero() {
           className="relative hidden lg:block"
         >
           <motion.div
-            animate={{ y: [0, -22, 0], rotate: [0, 1.5, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            animate={
+              shouldReduceMotion
+                ? undefined
+                : { y: [0, -22, 0], rotate: [0, 1.5, 0] }
+            }
+            transition={
+              shouldReduceMotion
+                ? undefined
+                : { duration: 5, repeat: Infinity, ease: "easeInOut" }
+            }
             className="relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-white/10 p-5 shadow-[0_35px_130px_rgba(34,211,238,0.18)] backdrop-blur-2xl"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-300/10 via-transparent to-purple-500/10" />
