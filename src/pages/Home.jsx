@@ -97,6 +97,12 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
             : Math.random() * 1 + 0.65 + profile.radiusBoost,
         alpha: Math.random() * profile.starAlphaRange + profile.starAlphaMin,
         phase: Math.random() * Math.PI * 2,
+        coreColor:
+          Math.random() > 0.86
+            ? "168,85,247"
+            : Math.random() > 0.52
+              ? "59,130,246"
+              : "226,252,255",
         vx: randomDirection() * (Math.random() * 4 + 5),
         vy: randomDirection() * (Math.random() * 3 + 3),
       }));
@@ -162,7 +168,7 @@ function HomeUniverseCanvas({ containerRef, shouldReduceMotion = false }) {
         ctx.fill();
 
         if (profile.coreAlpha > 0) {
-          ctx.fillStyle = `rgba(226,252,255,${profile.coreAlpha * star.alpha})`;
+          ctx.fillStyle = `rgba(${star.coreColor},${profile.coreAlpha * star.alpha})`;
           ctx.beginPath();
           ctx.arc(star.x, star.y, Math.max(0.75, star.r * 0.55), 0, Math.PI * 2);
           ctx.fill();

@@ -10,8 +10,8 @@ const MAX_PROJECTILES = 4;
 const MAX_EXPLOSIONS = 2;
 const MOBILE_MAX_PROJECTILES = 2;
 const MOBILE_MAX_EXPLOSIONS = 1;
-const MOBILE_MAX_EXPLOSION_PARTICLES = 14;
-const MOBILE_MAX_EXPLOSION_FRAGMENTS = 3;
+const MOBILE_MAX_EXPLOSION_PARTICLES = 16;
+const MOBILE_MAX_EXPLOSION_FRAGMENTS = 4;
 const MAX_SHIP_TRAIL_PARTICLES = 78;
 const MAX_CONTACT_PULSES = 8;
 const MIN_ENERGY_DISTANCE = 132;
@@ -724,7 +724,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
       const makeMobileEnergy = (index = 0) => {
         const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-        const radius = Math.random() > 0.88 ? random(32, 34) : random(22, width < 768 ? 30 : 32);
+        const radius = Math.random() > 0.88 ? random(34, 36) : random(24, width < 768 ? 32 : 34);
         const bands = getMobileEnergyBands();
 
         for (let attempt = 0; attempt < 90; attempt += 1) {
@@ -732,12 +732,18 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           const x = random(width * band.x[0], width * band.x[1]);
           const y = random(band.y[0], band.y[1]);
           const candidate = { x, y, radius };
-          const box = getEnergyBox(x, y, radius);
+          const boxReach = radius * 2.1 + 24;
+          const box = {
+            x: x - boxReach,
+            y: y - boxReach,
+            width: boxReach * 2,
+            height: boxReach * 2,
+          };
 
           if (
             !isTooCloseMobileEnergy(candidate) &&
-            !pointInZone(x, y, exclusionZones, radius * 2.25 + 28) &&
-            !exclusionZones.some((zone) => rectsOverlap(box, zone, 18))
+            !pointInZone(x, y, exclusionZones, radius + 26) &&
+            !exclusionZones.some((zone) => rectsOverlap(box, zone, 20))
           ) {
             const angle = random(0, Math.PI * 2);
             const speed = random(2, width < 768 ? 4.2 : 5);
@@ -755,7 +761,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
               alpha: 0,
               fade: "in",
               orbitTilt: random(0.52, 0.82),
-              orbitAlpha: random(0.18, 0.34),
+              orbitAlpha: random(0.26, 0.46),
               avoidX: 0,
               avoidY: 0,
               impulseVX: 0,
@@ -791,7 +797,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           "rgba(168,85,247,",
           "rgba(238,252,255,",
         ];
-        const particleCount = Math.floor(random(10, MOBILE_MAX_EXPLOSION_PARTICLES + 1));
+        const particleCount = Math.floor(random(12, MOBILE_MAX_EXPLOSION_PARTICLES + 1));
         const fragmentCount = Math.floor(random(2, MOBILE_MAX_EXPLOSION_FRAGMENTS + 1));
 
         return {
@@ -799,7 +805,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           y: energy.y,
           particles: Array.from({ length: particleCount }, () => {
             const angle = random(0, Math.PI * 2);
-            const speed = random(78, 176);
+            const speed = random(96, 212);
             return {
               x: energy.x,
               y: energy.y,
@@ -813,7 +819,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           }),
           fragments: Array.from({ length: fragmentCount }, () => {
             const angle = random(0, Math.PI * 2);
-            const speed = random(56, 126);
+            const speed = random(68, 148);
             return {
               x: energy.x,
               y: energy.y,
@@ -1030,7 +1036,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
         let target = null;
         let nearest = Infinity;
-        const assistRadius = width < 768 ? 64 : 78;
+        const assistRadius = width < 768 ? 78 : 90;
         energies.forEach((energy) => {
           const distance = Math.hypot(energy.x - point.x, energy.y - point.y);
           if (distance < assistRadius && distance < nearest) {
@@ -1194,7 +1200,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           if (energy.y < margin || energy.y > height - margin) energy.vy *= -1;
           energy.x = clamp(energy.x, margin, width - margin);
           energy.y = clamp(energy.y, margin, height - margin);
-          energy.alpha = clamp(energy.alpha + dt * 0.9, 0, 0.78);
+          energy.alpha = clamp(energy.alpha + dt * 1.05, 0, 0.9);
           drawEnergy(ctx, energy, now);
         }
 
