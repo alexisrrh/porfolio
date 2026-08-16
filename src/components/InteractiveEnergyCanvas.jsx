@@ -12,6 +12,7 @@ const MOBILE_MAX_PROJECTILES = 2;
 const MOBILE_MAX_EXPLOSIONS = 1;
 const MOBILE_MAX_EXPLOSION_PARTICLES = 16;
 const MOBILE_MAX_EXPLOSION_FRAGMENTS = 4;
+const MOBILE_ENERGY_SIZE_PLAN = ["large", "medium", "small", "medium", "small"];
 const MAX_SHIP_TRAIL_PARTICLES = 78;
 const MAX_CONTACT_PULSES = 8;
 const MIN_ENERGY_DISTANCE = 132;
@@ -719,20 +720,56 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         energies.some(
           (energy) =>
             Math.hypot(candidate.x - energy.x, candidate.y - energy.y) <
-            candidate.radius + energy.radius + 84,
+            candidate.radius + energy.radius + (candidate.sizeKind === "large" ? 62 : 72),
         );
 
-      const makeMobileEnergy = (index = 0) => {
+      const getMobileEnergySize = (sizeKind) => {
+        if (sizeKind === "large") {
+          return {
+            radius: random(40, 52),
+            speed: random(1.5, 3),
+            attempts: 60,
+            orbitAlpha: random(0.36, 0.56),
+            scale: random(0.96, 1.06),
+            alphaMax: 0.96,
+          };
+        }
+
+        if (sizeKind === "medium") {
+          return {
+            radius: random(26, 34),
+            speed: random(2, 4),
+            attempts: 30,
+            orbitAlpha: random(0.3, 0.48),
+            scale: random(0.94, 1.08),
+            alphaMax: 0.9,
+          };
+        }
+
+        return {
+          radius: random(18, 24),
+          speed: random(3, 5),
+          attempts: 30,
+          orbitAlpha: random(0.24, 0.4),
+          scale: random(0.92, 1.08),
+          alphaMax: 0.86,
+        };
+      };
+
+      const makeMobileEnergy = (index = 0, sizeKind = "small") => {
         const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-        const radius = Math.random() > 0.88 ? random(34, 36) : random(24, width < 768 ? 32 : 34);
+        const size = getMobileEnergySize(sizeKind);
+        const radius = size.radius;
         const bands = getMobileEnergyBands();
 
-        for (let attempt = 0; attempt < 90; attempt += 1) {
-          const band = bands[(attempt + index) % bands.length];
+        for (let attempt = 0; attempt < size.attempts; attempt += 1) {
+          const bandOffset = sizeKind === "large" ? 1 : 0;
+          const band = bands[(attempt + index * 2 + bandOffset) % bands.length];
           const x = random(width * band.x[0], width * band.x[1]);
           const y = random(band.y[0], band.y[1]);
-          const candidate = { x, y, radius };
-          const boxReach = radius * 2.1 + 24;
+          const candidate = { x, y, radius, sizeKind };
+          const safeMargin = sizeKind === "large" ? 22 : 26;
+          const boxReach = radius * (sizeKind === "large" ? 1.65 : 2.1) + safeMargin;
           const box = {
             x: x - boxReach,
             y: y - boxReach,
@@ -742,26 +779,29 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
           if (
             !isTooCloseMobileEnergy(candidate) &&
-            !pointInZone(x, y, exclusionZones, radius + 26) &&
-            !exclusionZones.some((zone) => rectsOverlap(box, zone, 20))
+            !pointInZone(x, y, exclusionZones, radius + safeMargin) &&
+            !exclusionZones.some((zone) => rectsOverlap(box, zone, safeMargin))
           ) {
             const angle = random(0, Math.PI * 2);
-            const speed = random(2, width < 768 ? 4.2 : 5);
+            const speed = size.speed;
             return {
               x,
               y,
               radius,
+              sizeKind,
               color,
               phase: random(0, Math.PI * 2),
               vx: Math.cos(angle) * speed,
               vy: Math.sin(angle) * speed,
+              speed,
               driftAngle: random(0, Math.PI * 2),
               driftTurn: random(0.08, 0.18),
-              scale: random(0.92, 1.08),
+              scale: size.scale,
               alpha: 0,
+              alphaMax: size.alphaMax,
               fade: "in",
               orbitTilt: random(0.52, 0.82),
-              orbitAlpha: random(0.26, 0.46),
+              orbitAlpha: size.orbitAlpha,
               avoidX: 0,
               avoidY: 0,
               impulseVX: 0,
@@ -780,12 +820,11 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
 
       const fillMobileEnergies = () => {
         targetCount = 5;
-        let attempts = 0;
-        while (energies.length < targetCount && attempts < targetCount * 8) {
-          const energy = makeMobileEnergy(energies.length + attempts);
+        MOBILE_ENERGY_SIZE_PLAN.forEach((sizeKind, index) => {
+          if (energies.length >= targetCount) return;
+          const energy = makeMobileEnergy(index, sizeKind);
           if (energy) energies.push(energy);
-          attempts += 1;
-        }
+        });
         if (energies.length > targetCount) energies.splice(targetCount);
       };
 
@@ -1170,9 +1209,13 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         for (let i = respawns.length - 1; i >= 0; i -= 1) {
           respawns[i].remaining -= dt;
           if (respawns[i].remaining <= 0 && energies.length < targetCount) {
-            const energy = makeMobileEnergy(i + energies.length);
-            if (energy) energies.push(energy);
-            respawns.splice(i, 1);
+            const energy = makeMobileEnergy(i + energies.length, respawns[i].sizeKind);
+            if (energy) {
+              energies.push(energy);
+              respawns.splice(i, 1);
+            } else {
+              respawns[i].remaining = 1.5;
+            }
           }
         }
 
@@ -1195,12 +1238,18 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           energy.y +=
             (energy.vy + energy.avoidY + Math.sin(energy.driftAngle + energy.phase) * 0.6) * dt;
 
+          const currentSpeed = Math.hypot(energy.vx, energy.vy) || energy.speed;
+          if (currentSpeed > energy.speed) {
+            energy.vx = (energy.vx / currentSpeed) * energy.speed;
+            energy.vy = (energy.vy / currentSpeed) * energy.speed;
+          }
+
           const margin = energy.radius * 2.5;
           if (energy.x < margin || energy.x > width - margin) energy.vx *= -1;
           if (energy.y < margin || energy.y > height - margin) energy.vy *= -1;
           energy.x = clamp(energy.x, margin, width - margin);
           energy.y = clamp(energy.y, margin, height - margin);
-          energy.alpha = clamp(energy.alpha + dt * 1.05, 0, 0.9);
+          energy.alpha = clamp(energy.alpha + dt * 1.05, 0, energy.alphaMax);
           drawEnergy(ctx, energy, now);
         }
 
@@ -1232,7 +1281,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
             projectiles.splice(i, 1);
             if (explosions.length >= MOBILE_MAX_EXPLOSIONS) explosions.shift();
             explosions.push(makeMobileExplosion(energy));
-            respawns.push({ remaining: random(3, 6) });
+            respawns.push({ remaining: random(3, 6), sizeKind: energy.sizeKind });
             continue;
           }
 
