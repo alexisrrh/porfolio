@@ -13,6 +13,7 @@ const MOBILE_MAX_EXPLOSIONS = 1;
 const MOBILE_MAX_EXPLOSION_PARTICLES = 16;
 const MOBILE_MAX_EXPLOSION_FRAGMENTS = 4;
 const MOBILE_ENERGY_SIZE_PLAN = ["large", "medium", "small", "medium", "small"];
+const MOBILE_MIN_ENERGIES = 3;
 const MAX_SHIP_TRAIL_PARTICLES = 78;
 const MAX_CONTACT_PULSES = 8;
 const MIN_ENERGY_DISTANCE = 132;
@@ -39,7 +40,10 @@ const random = (min, max) => min + Math.random() * (max - min);
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 function isTouchDevice() {
-  return window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  return (
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+    (navigator.maxTouchPoints > 0 && window.matchMedia("(max-width: 1024px)").matches)
+  );
 }
 
 function rectsOverlap(a, b, margin) {
@@ -456,7 +460,7 @@ function drawImpactCollapse(ctx, impact, dt) {
 function getShipRenderPosition(ship, now) {
   const recoilProgress = ship.recoilLife > 0 ? clamp(ship.recoilTtl / ship.recoilLife, 0, 1) : 0;
   const shakeProgress = ship.shakeLife > 0 ? clamp(ship.shakeTtl / ship.shakeLife, 0, 1) : 0;
-  const recoilDistance = clamp(ship.recoilKick * recoilProgress, 0, 4);
+  const recoilDistance = clamp(ship.recoilKick * recoilProgress, 0, 6);
   const shakeDistance = Math.sin(now * 0.11) * ship.shakeStrength * shakeProgress;
   const perpendicular = ship.angle + Math.PI / 2;
 
@@ -665,62 +669,53 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         ship.y = ship.baseY;
       };
 
+      const getMobileViewportBounds = () => {
+        const rect = container.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || height;
+        const navbar = document.querySelector("header");
+        const navbarBottom = navbar?.getBoundingClientRect().bottom ?? 0;
+        const topSafe = Math.max(92, navbarBottom + 22);
+        const bottomSafe = 86;
+        const top = clamp(-rect.top + topSafe, 0, height);
+        const bottom = clamp(-rect.top + viewportHeight - bottomSafe, top + 180, height);
+
+        return {
+          top,
+          bottom,
+          height: Math.max(1, bottom - top),
+        };
+      };
+
+      const getMobileEnergyBounds = (radius = 0) => {
+        const viewport = getMobileViewportBounds();
+        const sideSafe = radius + 18;
+
+        return {
+          left: sideSafe,
+          right: Math.max(sideSafe, width - sideSafe),
+          top: viewport.top + radius + 16,
+          bottom: Math.max(viewport.top + radius + 16, viewport.bottom - radius - 16),
+        };
+      };
+
       const getMobileEnergyBands = () => {
-        const sections = Array.from(container.children).filter(
-          (node) => node.tagName?.toLowerCase() === "section",
-        );
-        const fallback = [
-          { x: [0.14, 0.34], y: [height * 0.08, height * 0.18] },
-          { x: [0.64, 0.86], y: [height * 0.14, height * 0.26] },
-          { x: [0.1, 0.32], y: [height * 0.38, height * 0.5] },
-          { x: [0.66, 0.9], y: [height * 0.54, height * 0.66] },
-          { x: [0.34, 0.64], y: [height * 0.76, height * 0.88] },
+        const viewport = getMobileViewportBounds();
+        return [
+          { x: [0.12, 0.34], y: [viewport.top + viewport.height * 0.08, viewport.top + viewport.height * 0.24] },
+          { x: [0.66, 0.88], y: [viewport.top + viewport.height * 0.1, viewport.top + viewport.height * 0.28] },
+          { x: [0.08, 0.3], y: [viewport.top + viewport.height * 0.34, viewport.top + viewport.height * 0.52] },
+          { x: [0.7, 0.92], y: [viewport.top + viewport.height * 0.42, viewport.top + viewport.height * 0.62] },
+          { x: [0.16, 0.38], y: [viewport.top + viewport.height * 0.66, viewport.top + viewport.height * 0.84] },
+          { x: [0.62, 0.86], y: [viewport.top + viewport.height * 0.66, viewport.top + viewport.height * 0.86] },
+          { x: [0.38, 0.62], y: [viewport.top + viewport.height * 0.26, viewport.top + viewport.height * 0.46] },
         ];
-
-        if (!sections.length) return fallback;
-
-        const baseRect = container.getBoundingClientRect();
-        const bands = [];
-        sections.slice(0, 3).forEach((section, sectionIndex) => {
-          const rect = section.getBoundingClientRect();
-          const top = rect.top - baseRect.top;
-          const bottom = top + rect.height;
-          const usableTop = top + rect.height * 0.16;
-          const usableBottom = bottom - rect.height * 0.14;
-          const sectionBands =
-            sectionIndex === 0
-              ? [
-                  { x: [0.14, 0.34], y: [usableTop, top + rect.height * 0.36] },
-                  { x: [0.66, 0.88], y: [top + rect.height * 0.22, top + rect.height * 0.48] },
-                ]
-              : sectionIndex === 1
-                ? [
-                    { x: [0.12, 0.32], y: [usableTop, top + rect.height * 0.46] },
-                    { x: [0.68, 0.9], y: [top + rect.height * 0.46, usableBottom] },
-                  ]
-                : [
-                    { x: [0.12, 0.34], y: [usableTop, top + rect.height * 0.52] },
-                    { x: [0.62, 0.86], y: [top + rect.height * 0.44, usableBottom] },
-                  ];
-
-          sectionBands.forEach((band) => {
-            if (band.y[1] - band.y[0] > 90) {
-              bands.push({
-                x: band.x,
-                y: [clamp(band.y[0], 0, height), clamp(band.y[1], 0, height)],
-              });
-            }
-          });
-        });
-
-        return bands.length ? bands : fallback;
       };
 
       const isTooCloseMobileEnergy = (candidate) =>
         energies.some(
           (energy) =>
             Math.hypot(candidate.x - energy.x, candidate.y - energy.y) <
-            candidate.radius + energy.radius + (candidate.sizeKind === "large" ? 62 : 72),
+            candidate.radius + energy.radius + (candidate.sizeKind === "large" ? 24 : 32),
         );
 
       const getMobileEnergySize = (sizeKind) => {
@@ -761,14 +756,15 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         const size = getMobileEnergySize(sizeKind);
         const radius = size.radius;
         const bands = getMobileEnergyBands();
+        const bounds = getMobileEnergyBounds(radius);
 
         for (let attempt = 0; attempt < size.attempts; attempt += 1) {
           const bandOffset = sizeKind === "large" ? 1 : 0;
           const band = bands[(attempt + index * 2 + bandOffset) % bands.length];
-          const x = random(width * band.x[0], width * band.x[1]);
-          const y = random(band.y[0], band.y[1]);
+          const x = clamp(random(width * band.x[0], width * band.x[1]), bounds.left, bounds.right);
+          const y = clamp(random(band.y[0], band.y[1]), bounds.top, bounds.bottom);
           const candidate = { x, y, radius, sizeKind };
-          const safeMargin = sizeKind === "large" ? 22 : 26;
+          const safeMargin = sizeKind === "large" ? 18 : 20;
           const boxReach = radius * (sizeKind === "large" ? 1.65 : 2.1) + safeMargin;
           const box = {
             x: x - boxReach,
@@ -825,6 +821,60 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
           const energy = makeMobileEnergy(index, sizeKind);
           if (energy) energies.push(energy);
         });
+        if (energies.length > targetCount) energies.splice(targetCount);
+      };
+
+      const energyNeedsReposition = (energy) => {
+        const bounds = getMobileEnergyBounds(energy.radius);
+        const boxReach = energy.radius * 1.6 + 18;
+        const box = {
+          x: energy.x - boxReach,
+          y: energy.y - boxReach,
+          width: boxReach * 2,
+          height: boxReach * 2,
+        };
+
+        return (
+          energy.x < bounds.left ||
+          energy.x > bounds.right ||
+          energy.y < bounds.top ||
+          energy.y > bounds.bottom ||
+          pointInZone(energy.x, energy.y, exclusionZones, energy.radius + 18) ||
+          exclusionZones.some((zone) => rectsOverlap(box, zone, 18))
+        );
+      };
+
+      const maintainMobileEnergies = () => {
+        targetCount = 5;
+
+        for (let index = energies.length - 1; index >= 0; index -= 1) {
+          const energy = energies[index];
+          if (!energyNeedsReposition(energy)) continue;
+
+          const replacement = makeMobileEnergy(index, energy.sizeKind);
+          if (replacement) {
+            energies[index] = replacement;
+          } else {
+            const bounds = getMobileEnergyBounds(energy.radius);
+            const outsideViewport =
+              energy.x < bounds.left ||
+              energy.x > bounds.right ||
+              energy.y < bounds.top ||
+              energy.y > bounds.bottom;
+            if (outsideViewport) energies.splice(index, 1);
+          }
+        }
+
+        MOBILE_ENERGY_SIZE_PLAN.forEach((sizeKind, index) => {
+          if (energies.length >= targetCount) return;
+          if (energies.length >= MOBILE_MIN_ENERGIES && index >= MOBILE_MIN_ENERGIES) return;
+          const alreadyHasKind = energies.some((energy) => energy.sizeKind === sizeKind);
+          if (index < MOBILE_MIN_ENERGIES && alreadyHasKind) return;
+
+          const energy = makeMobileEnergy(index + energies.length, sizeKind);
+          if (energy) energies.push(energy);
+        });
+
         if (energies.length > targetCount) energies.splice(targetCount);
       };
 
@@ -1179,6 +1229,7 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         scrollTimeout = window.setTimeout(() => {
           exclusionZones = getMobileExclusionZones();
           placeMobileShip();
+          maintainMobileEnergies();
           start();
         }, 140);
       };
@@ -1244,11 +1295,11 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
             energy.vy = (energy.vy / currentSpeed) * energy.speed;
           }
 
-          const margin = energy.radius * 2.5;
-          if (energy.x < margin || energy.x > width - margin) energy.vx *= -1;
-          if (energy.y < margin || energy.y > height - margin) energy.vy *= -1;
-          energy.x = clamp(energy.x, margin, width - margin);
-          energy.y = clamp(energy.y, margin, height - margin);
+          const bounds = getMobileEnergyBounds(energy.radius);
+          if (energy.x < bounds.left || energy.x > bounds.right) energy.vx *= -0.9;
+          if (energy.y < bounds.top || energy.y > bounds.bottom) energy.vy *= -0.9;
+          energy.x = clamp(energy.x, bounds.left, bounds.right);
+          energy.y = clamp(energy.y, bounds.top, bounds.bottom);
           energy.alpha = clamp(energy.alpha + dt * 1.05, 0, energy.alphaMax);
           drawEnergy(ctx, energy, now);
         }
@@ -1391,10 +1442,10 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
       overInteractive: false,
       recoilKick: 0,
       recoilTtl: 0,
-      recoilLife: 0.12,
+      recoilLife: 0.14,
       shakeStrength: 0,
       shakeTtl: 0,
-      shakeLife: 0.12,
+      shakeLife: 0.14,
     };
 
     const setCanvasSize = () => {
@@ -1635,9 +1686,9 @@ export default function InteractiveEnergyCanvas({ containerRef, shouldReduceMoti
         trail: [{ x: originX, y: originY }],
       });
       muzzleFlashes.push(makeMuzzleFlash(originX, originY, angle));
-      ship.recoilKick = clamp(Math.max(ship.recoilKick * 0.45, 3.1) + 0.35, 0, 4);
+      ship.recoilKick = clamp(Math.max(ship.recoilKick * 0.45, 4.8) + 0.45, 0, 6);
       ship.recoilTtl = ship.recoilLife;
-      ship.shakeStrength = clamp(Math.max(ship.shakeStrength * 0.4, 1.45) + 0.25, 0, 2);
+      ship.shakeStrength = clamp(Math.max(ship.shakeStrength * 0.4, 1.6) + 0.3, 0, 2);
       ship.shakeTtl = ship.shakeLife;
 
       start();

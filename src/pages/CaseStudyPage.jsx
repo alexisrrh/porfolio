@@ -1,11 +1,24 @@
+import { lazy, Suspense } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Seo from "../components/Seo";
 import { getProjectBySlug } from "../data/projects";
 import { localized } from "../utils/localized";
-import ConsultorioLacCaseStudy from "./ConsultorioLacCaseStudy";
-import NutriSmartCaseStudy from "./NutriSmartCaseStudy";
-import VHSFlixCaseStudy from "./VHSFlixCaseStudy";
+
+const ConsultorioLacCaseStudy = lazy(() => import("./ConsultorioLacCaseStudy"));
+const NutriSmartCaseStudy = lazy(() => import("./NutriSmartCaseStudy"));
+const VHSFlixCaseStudy = lazy(() => import("./VHSFlixCaseStudy"));
+
+function CaseStudyFallback() {
+  return (
+    <section className="min-h-screen bg-[#020617] px-6 py-32 text-white">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 text-cyan-100/70">
+        <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.65)]" />
+        <span className="text-xs font-black uppercase tracking-[0.32em]">Loading</span>
+      </div>
+    </section>
+  );
+}
 
 export default function CaseStudyPage() {
   const { t, i18n } = useTranslation();
@@ -16,15 +29,27 @@ export default function CaseStudyPage() {
   const projectTitle = localized(project?.title, language);
 
   if (slug === "nutrismart-coach") {
-    return <NutriSmartCaseStudy />;
+    return (
+      <Suspense fallback={<CaseStudyFallback />}>
+        <NutriSmartCaseStudy />
+      </Suspense>
+    );
   }
 
   if (slug === "consultorio-lac") {
-    return <ConsultorioLacCaseStudy />;
+    return (
+      <Suspense fallback={<CaseStudyFallback />}>
+        <ConsultorioLacCaseStudy />
+      </Suspense>
+    );
   }
 
   if (slug === "vhsflix") {
-    return <VHSFlixCaseStudy />;
+    return (
+      <Suspense fallback={<CaseStudyFallback />}>
+        <VHSFlixCaseStudy />
+      </Suspense>
+    );
   }
 
   if (!project?.caseStudyPath) {

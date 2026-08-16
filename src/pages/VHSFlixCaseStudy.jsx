@@ -90,6 +90,9 @@ function StudyImage({
         src={image.src}
         alt={localized(image.alt, language)}
         loading={loading}
+        decoding={loading === "lazy" ? "async" : undefined}
+        width={image.width}
+        height={image.height}
      className={`block w-full rounded-[1.1rem] ${
   fixedFrame ? "h-full" : "h-auto"
 }`}

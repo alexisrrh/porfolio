@@ -129,6 +129,7 @@ function ProjectCard({ project, compact = false, featuredHover = false }) {
               t("projects.previewAlt", { title })
             }
             loading="lazy"
+            decoding="async"
             className={`h-full w-full transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
               featuredHover ? "md:group-hover:scale-[1.02] md:group-focus-within:scale-[1.02]" : "group-hover:scale-[1.03]"
             }`}

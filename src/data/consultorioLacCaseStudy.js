@@ -20,14 +20,14 @@ import {
 } from "react-icons/si";
 
 import agendarImage from "../assets/odontologia/agendarImg.png";
-import calendarioImage from "../assets/odontologia/calendario-citas.png";
+import calendarioImage from "../assets/odontologia/calendario-citas.webp";
 import dashboardImage from "../assets/odontologia/dashboard.png";
 import homeImage from "../assets/odontologia/home2.png";
-import loginImage from "../assets/odontologia/login.png";
+import loginImage from "../assets/odontologia/login.webp";
 import misCitasImage from "../assets/odontologia/mis-citas.png";
 import presupuestoImage from "../assets/odontologia/presupuesto.png";
-import lacFlowOneImage from "../assets/case-studies/lac/lac-1.png";
-import lacFlowTwoImage from "../assets/case-studies/lac/lac-2.png";
+import lacFlowOneImage from "../assets/case-studies/lac/lac-1.webp";
+import lacFlowTwoImage from "../assets/case-studies/lac/lac-2.webp";
 import lacFlowThreeImage from "../assets/case-studies/lac/lac-3.png";
 
 const tr = (es, en) => ({ es, en });

@@ -29,8 +29,8 @@ import {
 } from "react-icons/si";
 
 import searchImage from "../assets/busqueda.png";
-import favoritesImage from "../assets/favoritos.png";
-import homeImage from "../assets/home.png";
+import favoritesImage from "../assets/favoritos.webp";
+import homeImage from "../assets/home.webp";
 import trailerImage from "../assets/trailer.png";
 
 const tr = (es, en) => ({ es, en });
@@ -39,24 +39,32 @@ export const vhsflixImages = {
   hero: {
     src: homeImage,
     alt: tr("Pantalla principal de VHSFlix con carriles de peliculas", "Main VHSFlix screen with movie rows"),
+    width: 1901,
+    height: 926,
     fit: "cover",
     position: "top",
   },
   problem: {
     src: searchImage,
     alt: tr("Busqueda de peliculas en VHSFlix", "Movie search in VHSFlix"),
+    width: 1912,
+    height: 892,
     fit: "cover",
     position: "top",
   },
   solution: {
     src: trailerImage,
     alt: tr("Modal de pelicula con trailer en VHSFlix", "Movie modal with trailer in VHSFlix"),
+    width: 1900,
+    height: 870,
     fit: "cover",
     position: "top",
   },
   favorites: {
     src: favoritesImage,
     alt: tr("Vista de favoritos guardados en VHSFlix", "Saved favorites view in VHSFlix"),
+    width: 1911,
+    height: 907,
     fit: "cover",
     position: "top",
   },

@@ -44,6 +44,8 @@ export default function Footer() {
                   <img
                     src={logo}
                     alt="Alexis.dev"
+                    width="192"
+                    height="186"
                     className="relative h-10 w-10 rounded-xl object-cover"
                   />
                 </div>

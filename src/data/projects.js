@@ -1,25 +1,25 @@
-import homeImg from "../assets/home.png";
-import favoritosImg from "../assets/favoritos.png";
-import imagenImg from "../assets/imagen.png";
+import homeImg from "../assets/home.webp";
+import favoritosImg from "../assets/favoritos.webp";
+import imagenImg from "../assets/imagen.webp";
 import trailerImg from "../assets/trailer.png";
 
 import agendarImg from "../assets/odontologia/agendarImg.png";
-import calendarioImg from "../assets/odontologia/calendario-citas.png";
+import calendarioImg from "../assets/odontologia/calendario-citas.webp";
 import dashboardImg from "../assets/odontologia/dashboard.png";
 import home4 from "../assets/odontologia/home4.png";
 import home1 from "../assets/odontologia/home1.png";
 import home3 from "../assets/odontologia/home3.png";
 import homeHorariosImg from "../assets/odontologia/home-horarios.png";
-import loginImg from "../assets/odontologia/login.png";
+import loginImg from "../assets/odontologia/login.webp";
 import home2 from "../assets/odontologia/home2.png";
 
-import priteca1Img from "../assets/priteca/priteca.png";
+import priteca1Img from "../assets/priteca/priteca.webp";
 import priteca2Img from "../assets/priteca/priteca1.png";
-import priteca3Img from "../assets/priteca/priteca2.png";
+import priteca3Img from "../assets/priteca/priteca2.webp";
 import priteca4Img from "../assets/priteca/priteca3.png";
-import priteca5Img from "../assets/priteca/priteca4.png";
+import priteca5Img from "../assets/priteca/priteca4.webp";
 
-import panaderiaImg from "../assets/panaderia/panaderia1.png";
+import panaderiaImg from "../assets/panaderia/panaderia1.webp";
 import panaderia2Img from "../assets/panaderia/panaderia2.png";
 import panaderia3Img from "../assets/panaderia/panaderia3.png";
 import panaderia4Img from "../assets/panaderia/panaderia4.png";
@@ -35,11 +35,11 @@ import groom7 from "../assets/groom/groom7.png";
 import groom8 from "../assets/groom/groom8.png";
 import groom9 from "../assets/groom/groom9.png";
 
-import imagen1 from "../assets/nutrismartcoach/imagen1.png";
-import imagen2 from "../assets/nutrismartcoach/imagen2.png";
-import imagen3 from "../assets/nutrismartcoach/imagen3.png";
-import imagen4 from "../assets/nutrismartcoach/imagen4.png";
-import imagen5 from "../assets/nutrismartcoach/imagen5.png";
+import imagen1 from "../assets/nutrismartcoach/imagen1.webp";
+import imagen2 from "../assets/nutrismartcoach/imagen2.webp";
+import imagen3 from "../assets/nutrismartcoach/imagen3.webp";
+import imagen4 from "../assets/nutrismartcoach/imagen4.webp";
+import imagen5 from "../assets/nutrismartcoach/imagen5.webp";
 
 const projectImage = (src, alt, options = {}) => ({
   src,

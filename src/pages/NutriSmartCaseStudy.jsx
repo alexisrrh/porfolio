@@ -77,6 +77,9 @@ function CaseStudyMedia({ media, loading = "lazy", className = "" }) {
           src={media.src}
           alt={mediaAlt}
           loading={loading}
+          decoding={loading === "lazy" ? "async" : undefined}
+          width={media.width}
+          height={media.height}
           className="h-full w-full rounded-[1.25rem]"
           style={{
             objectFit: media.fit ?? "cover",
